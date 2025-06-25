@@ -1,114 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anuveshana Technologies</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="font-sans bg-gray-100 text-gray-900">
-  <!-- Navigation -->
-  <nav class="bg-blue-900 text-white p-4 sticky top-0 z-10">
-    <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Anuveshana Technologies</h1>
-      <ul class="flex space-x-6">
-        <li><a href="#home" class="hover:text-blue-300">Home</a></li>
-        <li><a href="#services" class="hover:text-blue-300">Services</a></li>
-        <li><a href="#clients" class="hover:text-blue-300">Clients</a></li>
-        <li><a href="#contact" class="hover:text-blue-300">Contact</a></li>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuveshana Technologies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+      body { 
+        background: linear-gradient(180deg, #0a0e1a, #1c2b45);
+        font-family: 'Exo', sans-serif;
+        color: #e0e6f0;
+        overflow-x: hidden;
+      }
+      /* Metallic Text */
+      .metallic {
+        font-family: 'Orbitron', sans-serif;
+        background: linear-gradient(45deg, #b0c4de, #ffffff, #b0c4de);
+        -webkit-background-clip: text;
+        color: transparent;
+        letter-spacing: 0.05em;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+      /* Circuit Background */
+      .bg-circuit { 
+        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" stroke="%231e3a50" stroke-width="0.8"%3E%3Cpath d="M10 10h60v60H10zM20 20h40v40H20z"/%3E%3Ccircle cx="15" cy="15" r="3"/%3E%3Ccircle cx="65" cy="65" r="3"/%3E%3Cline x1="15" y1="15" x2="30" y2="30" stroke-width="0.8"/%3E%3C/svg%3E');
+        opacity: 0.1;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      .scroll-reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-in-out; }
+      .scroll-reveal.active { opacity: 1; transform: translateY(0); }
+      /* Holographic Robot Graphic */
+      @keyframes hologramSpin {
+        0% { transform: rotateY(0deg) scale(1); }
+        50% { transform: rotateY(180deg) scale(1.1); }
+        100% { transform: rotateY(360deg) scale(1); }
+      }
+      .robot-graphic {
+        width: 50px;
+        height: 50px;
+        background: radial-gradient(circle, #00ccff, #1e3a50);
+        clip-path: polygon(50% 0%, 85% 25%, 100% 50%, 85% 75%, 50% 100%, 15% 75%, 0% 50%, 15% 25%);
+        animation: hologramSpin 12s linear infinite;
+        box-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
+      }
+      /* Neon Hover */
+      .neon-hover:hover {
+        color: #00ccff;
+        text-shadow: 0 0 10px rgba(0, 204, 255, 0.8);
+      }
+      /* Particle Background */
+      #particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+      }
+      /* Mobile Menu */
+      .mobile-menu { display: none; }
+      @media (max-width: 640px) {
+        .desktop-menu { display: none; }
+        .mobile-menu { display: block; }
+        .mobile-menu-items { transition: max-height 0.3s ease-in-out; }
+        .mobile-menu-items.hidden { max-height: 0; overflow: hidden; }
+        .mobile-menu-items:not(.hidden) { max-height: 200px; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Particle Background -->
+    <canvas id="particles"></canvas>
+    <div class="bg-circuit"></div>
+
+    <!-- Navigation -->
+    <nav class="bg-black bg-opacity-90 text-white p-4 sticky top-0 z-30 backdrop-blur-md">
+      <div class="container mx-auto flex justify-between items-center px-4">
+        <div class="flex items-center space-x-2">
+          <div class="robot-graphic"></div>
+          <h1 class="text-xl sm:text-2xl font-bold metallic">Anuveshana Technologies</h1>
+        </div>
+        <!-- Desktop Menu -->
+        <ul class="desktop-menu flex space-x-4">
+          <li><a href="#home" class="text-sm sm:text-base neon-hover transition">Home</a></li>
+          <li><a href="#services" class="text-sm sm:text-base neon-hover transition">Services</a></li>
+          <li><a href="#clients" class="text-sm sm:text-base neon-hover transition">Clients</a></li>
+          <li><a href="#contact" class="text-sm sm:text-base neon-hover transition">Contact</a></li>
+        </ul>
+        <!-- Mobile Menu Toggle -->
+        <div class="mobile-menu">
+          <button id="mobile-menu-toggle" class="text-cyan-400 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu Items -->
+      <ul id="mobile-menu-items" class="mobile-menu-items hidden bg-black bg-opacity-90 mt-2 flex flex-col space-y-2 p-4 container mx-auto px-4">
+        <li><a href="#home" class="neon-hover transition">Home</a></li>
+        <li><a href="#services" class="neon-hover transition">Services</a></li>
+        <li><a href="#clients" class="neon-hover transition">Clients</a></li>
+        <li><a href="#contact" class="neon-hover transition">Contact</a></li>
       </ul>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Hero Section -->
-  <section id="home" class="bg-blue-800 text-white py-20">
-    <div class="container mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-4">Innovate. Design. Build.</h2>
-      <p class="text-lg mb-6">Anuveshana Technologies delivers cutting-edge engineering and digital solutions to transform your ideas into reality.</p>
-      <a href="#contact" class="bg-yellow-500 text-blue-900 px-6 py-3 rounded-full font-semibold hover:bg-yellow-400">Get in Touch</a>
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section id="home" class="relative py-16 sm:py-24 text-center text-white">
+      <div class="container mx-auto px-4 scroll-reveal">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold metallic mb-4">Pioneering Robotic Futures</h2>
+        <p class="text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-6 leading-relaxed">Anuveshana Technologies engineers cutting-edge robotics and technology to shape a smarter tomorrow.</p>
+        <a href="#contact" class="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-2 sm:px-8 sm:py-3 rounded-full font-semibold text-sm sm:text-base hover:from-cyan-400 hover:to-blue-500 transition neon-hover">Launch Project</a>
+      </div>
+      <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600"></div>
+    </section>
 
-  <!-- Services Section -->
-  <section id="services" class="py-16">
-    <div class="container mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-10">Our Services</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">3D Printing</h3>
-          <p>High-precision rapid prototyping and production using advanced additive manufacturing.</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">Prototype & Product Design</h3>
-          <p>End-to-end product engineering from concept to market-ready solutions.</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">Industrial Design</h3>
-          <p>Aesthetically engineered designs blending form and function.</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">Embedded Systems & Electronics</h3>
-          <p>Smart, cost-effective hardware for automation and IoT applications.</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">Robotics & Automation</h3>
-          <p>Intelligent systems to enhance efficiency and solve real-world challenges.</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">App & Software Development</h3>
-          <p>Robust, scalable digital platforms for seamless connectivity.</p>
+    <!-- Services Section -->
+    <section id="services" class="py-16 sm:py-20 px-4">
+      <div class="container mx-auto">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold metallic text-center mb-8 sm:mb-12 scroll-reveal">Our Cybernetic Expertise</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
+            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">3D Printing</h3>
+            <p class="text-sm sm:text-base leading-relaxed">Precision-crafted robotic components using advanced additive manufacturing.</p>
+          </div>
+          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
+            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">Prototype & Product Design</h3>
+            <p class="text-sm sm:text-base leading-relaxed">End-to-end engineering for innovative robotic solutions.</p>
+          </div>
+          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
+            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">Industrial Design</h3>
+            <p class="text-sm sm:text-base leading-relaxed">Sleek, functional designs for next-gen robotic systems.</p>
+          </div>
+          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
+            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">Embedded Systems & Electronics</h3>
+            <p class="text-sm sm:text-base leading-relaxed">Smart hardware for robotics and IoT applications.</p>
+          </div>
+          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
+            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">Robotics & Automation</h3>
+            <p class="text-sm sm:text-base leading-relaxed">Intelligent systems for industrial and real-world automation.</p>
+          </div>
+          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
+            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">App & Software Development</h3>
+            <p class="text-sm sm:text-base leading-relaxed">Scalable platforms for robot control and IoT integration.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Clients Section -->
-  <section id="clients" class="bg-gray-200 py-16">
-    <div class="container mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-10">Trusted by Industry Leaders</h2>
-      <div class="flex flex-wrap justify-center gap-8">
-        <div class="text-lg font-semibold">Samsung</div>
-        <div class="text-lg font-semibold">Toyota</div>
-        <div class="text-lg font-semibold">Ausa Medical Devices</div>
-        <div class="text-lg font-semibold">Carclo</div>
-        <div class="text-lg font-semibold">Phoenix Projects</div>
+    <!-- Clients Section -->
+    <section id="clients" class="bg-black bg-opacity-90 py-16 sm:py-20 px-4">
+      <div class="container mx-auto">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold metallic text-center mb-8 sm:mb-12 scroll-reveal">Our Trusted Partners</h2>
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-6 scroll-reveal">
+          <div class="text-base sm:text-lg font-semibold text-cyan-400 neon-hover">Samsung</div>
+          <div class="text-base sm:text-lg font-semibold text-cyan-400 neon-hover">Toyota</div>
+          <div class="text-base sm:text-lg font-semibold text-cyan-400 neon-hover">Ausa Medical Devices</div>
+          <div class="text-base sm:text-lg font-semibold text-cyan-400 neon-hover">Carclo</div>
+          <div class="text-base sm:text-lg font-semibold text-cyan-400 neon-hover">Phoenix Projects</div>
+        </div>
+        <div class="text-center mt-6 sm:mt-8 scroll-reveal">
+          <p class="text-base sm:text-lg">Explore our reputation: <a href="[Insert Google Reviews Link Here]" class="text-cyan-400 hover:underline neon-hover" target="_blank">Google Reviews</a></p>
+        </div>
       </div>
-      <div class="text-center mt-8">
-        <p class="text-lg">Check out our <a href="[Insert Google Reviews Link Here]" class="text-blue-600 hover:underline" target="_blank">Google Reviews</a> to see what our clients say!</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 sm:py-20 px-4 relative">
+      <div class="container mx-auto text-center">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold metallic mb-6 sm:mb-8 scroll-reveal">Connect with Us</h2>
+        <p class="text-base sm:text-lg mb-6 sm:mb-8 max-w-xl mx-auto scroll-reveal leading-relaxed">Ready to innovate with robotics and advanced tech? Let’s collaborate!</p>
+        <div class="max-w-md mx-auto scroll-reveal">
+          <input type="text" placeholder="Your Name" class="w-full p-3 sm:p-4 mb-4 bg-gray-900 bg-opacity-80 border border-cyan-600 rounded-lg text-white focus:border-cyan-400 text-sm sm:text-base">
+          <input type="email" placeholder="Your Email" class="w-full p-3 sm:p-4 mb-4 bg-gray-900 bg-opacity-80 border border-cyan-600 rounded-lg text-white focus:border-cyan-400 text-sm sm:text-base">
+          <textarea placeholder="Your Message" class="w-full p-3 sm:p-4 mb-4 bg-gray-900 bg-opacity-80 border border-cyan-600 rounded-lg text-white focus:border-cyan-400 h-24 sm:h-32 text-sm sm:text-base"></textarea>
+          <button onclick="alert('Form submission disabled in demo. Configure a backend for production.')" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base hover:from-cyan-400 hover:to-blue-500 transition neon-hover">Send Transmission</button>
+        </div>
+        <p class="mt-4 sm:mt-6 text-sm sm:text-base scroll-reveal">[Insert Email Here] | [Insert Phone Here] | [Insert Website URL Here]</p>
       </div>
-    </div>
-  </section>
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent to-cyan-500"></div>
+    </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="py-16">
-    <div class="container mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
-      <p class="text-lg mb-8">Ready to transform your ideas into reality? Contact us today!</p>
-      <div class="max-w-md mx-auto">
-        <input type="text" placeholder="Your Name" class="w-full p-3 mb-4 border rounded-lg">
-        <input type="email" placeholder="Your Email" class="w-full p-3 mb-4 border rounded-lg">
-        <textarea placeholder="Your Message" class="w-full p-3 mb-4 border rounded-lg h-32"></textarea>
-        <button onclick="alert('Form submission is disabled in this demo. Please configure a backend to handle form data.')" class="bg-blue-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-800">Send Message</button>
-      </div>
-      <p class="mt-6">Email: [Insert Email Here] | Phone: [Insert Phone Here] | Website: [Insert Website URL Here]</p>
-    </div>
-  </section>
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-90 text-white py-6 text-center">
+      <p class="text-sm sm:text-base">© 2025 Anuveshana Technologies. All rights reserved.</p>
+    </footer>
 
-  <!-- Footer -->
-  <footer class="bg-blue-900 text-white py-4 text-center">
-    <p>&copy; 2025 Anuveshana Technologies. All rights reserved.</p>
-  </footer>
-
-  <!-- Smooth Scroll Script -->
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
+    <!-- Scripts -->
+    <script>
+      // Smooth Scroll
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', e => {
+          e.preventDefault();
+          document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
         });
       });
-    });
-  </script>
-</body>
+
+      // Mobile Menu Toggle
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+      const menuItems = document.getElementById('mobile-menu-items');
+      menuToggle.addEventListener('click', () => {
+        menuItems.classList.toggle('hidden');
+      });
+
+      // Scroll Reveal Animation
+      const revealElements = document.querySelectorAll('.scroll-reveal');
+      const revealOnScroll = () => {
+        revealElements.forEach(el => {
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.85) {
+            el.classList.add('active');
+          }
+        });
+      };
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll();
+
+      // Particle Background
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const particles = [];
+      const particleCount = window.innerWidth < 640 ? 30 : 60;
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 1.5 + 0.5;
+          this.speedX = Math.random() * 0.2 - 0.1;
+          this.speedY = Math.random() * 0.2 - 0.1;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        }
+        draw() {
+          ctx.fillStyle = 'rgba(0, 204, 255, 0.5)';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
+  </body>
 </html>

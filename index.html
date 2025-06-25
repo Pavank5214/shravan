@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anuveshana Technologies</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-gray-100 text-gray-900">
+  <!-- Navigation -->
+  <nav class="bg-blue-900 text-white p-4 sticky top-0 z-10">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Anuveshana Technologies</h1>
+      <ul class="flex space-x-6">
+        <li><a href="#home" class="hover:text-blue-300">Home</a></li>
+        <li><a href="#services" class="hover:text-blue-300">Services</a></li>
+        <li><a href="#clients" class="hover:text-blue-300">Clients</a></li>
+        <li><a href="#contact" class="hover:text-blue-300">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="bg-blue-800 text-white py-20">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-4">Innovate. Design. Build.</h2>
+      <p class="text-lg mb-6">Anuveshana Technologies delivers cutting-edge engineering and digital solutions to transform your ideas into reality.</p>
+      <a href="#contact" class="bg-yellow-500 text-blue-900 px-6 py-3 rounded-full font-semibold hover:bg-yellow-400">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-16">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-10">Our Services</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">3D Printing</h3>
+          <p>High-precision rapid prototyping and production using advanced additive manufacturing.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Prototype & Product Design</h3>
+          <p>End-to-end product engineering from concept to market-ready solutions.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Industrial Design</h3>
+          <p>Aesthetically engineered designs blending form and function.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Embedded Systems & Electronics</h3>
+          <p>Smart, cost-effective hardware for automation and IoT applications.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Robotics & Automation</h3>
+          <p>Intelligent systems to enhance efficiency and solve real-world challenges.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">App & Software Development</h3>
+          <p>Robust, scalable digital platforms for seamless connectivity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clients Section -->
+  <section id="clients" class="bg-gray-200 py-16">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-10">Trusted by Industry Leaders</h2>
+      <div class="flex flex-wrap justify-center gap-8">
+        <div class="text-lg font-semibold">Samsung</div>
+        <div class="text-lg font-semibold">Toyota</div>
+        <div class="text-lg font-semibold">Ausa Medical Devices</div>
+        <div class="text-lg font-semibold">Carclo</div>
+        <div class="text-lg font-semibold">Phoenix Projects</div>
+      </div>
+      <div class="text-center mt-8">
+        <p class="text-lg">Check out our <a href="[Insert Google Reviews Link Here]" class="text-blue-600 hover:underline" target="_blank">Google Reviews</a> to see what our clients say!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
+      <p class="text-lg mb-8">Ready to transform your ideas into reality? Contact us today!</p>
+      <div class="max-w-md mx-auto">
+        <input type="text" placeholder="Your Name" class="w-full p-3 mb-4 border rounded-lg">
+        <input type="email" placeholder="Your Email" class="w-full p-3 mb-4 border rounded-lg">
+        <textarea placeholder="Your Message" class="w-full p-3 mb-4 border rounded-lg h-32"></textarea>
+        <button onclick="alert('Form submission is disabled in this demo. Please configure a backend to handle form data.')" class="bg-blue-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-800">Send Message</button>
+      </div>
+      <p class="mt-6">Email: [Insert Email Here] | Phone: [Insert Phone Here] | Website: [Insert Website URL Here]</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-900 text-white py-4 text-center">
+    <p>&copy; 2025 Anuveshana Technologies. All rights reserved.</p>
+  </footer>
+
+  <!-- Smooth Scroll Script -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -17,13 +17,22 @@
             background: #f5f5f7;
             color: #1d1d1f;
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        body.dark {
+            background: #1d1d1f;
+            color: #ffffff;
         }
         .apple-block {
             background: #ffffff;
             border-radius: 18px;
             padding: 24px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+        .dark .apple-block {
+            background: #2c2c2e;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         .apple-block:hover {
             transform: translateY(-4px);
@@ -44,8 +53,14 @@
             font-weight: 600;
             transition: background 0.2s ease;
         }
+        .dark .apple-btn {
+            background: #0a84ff;
+        }
         .apple-btn:hover {
             background: #005bb5;
+        }
+        .dark .apple-btn:hover {
+            background: #0066cc;
         }
         .carousel-item {
             transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
@@ -78,113 +93,188 @@
             font-weight: 500;
             transition: background 0.2s ease;
         }
+        .dark .tech-badge {
+            background: #3a3a3c;
+            color: #ffffff;
+        }
         .tech-badge:hover {
             background: #e0e0e2;
+        }
+        .dark .tech-badge:hover {
+            background: #4a4a4c;
         }
         .section-border {
             border-radius: 18px;
             background: #ffffff;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
+        .dark .section-border {
+            background: #2c2c2e;
+        }
         .header-sticky {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+        .dark .header-sticky {
+            background: rgba(29, 29, 31, 0.8);
+        }
+        #mobileMenu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobileMenu.open {
+            max-height: 500px;
+            opacity: 1;
+        }
+        #menuBtn {
+            z-index: 1010;
+        }
+        .dark #mobileMenu {
+            background: #2c2c2e;
+            border-color: #3a3a3c;
+        }
+        .dark a.text-[#1d1d1f] {
+            color: #ffffff;
+        }
+        .dark .text-[#86868b] {
+            color: #d2d2d7;
+        }
+        .filter-btn {
+            background: #f1f1f3;
+            color: #1d1d1f;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+        .dark .filter-btn {
+            background: #3a3a3c;
+            color: #ffffff;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #0071e3;
+            color: #ffffff;
+        }
+        .dark .filter-btn.active, .dark .filter-btn:hover {
+            background: #0a84ff;
+        }
+        .random-image img {
+            transition: opacity 0.5s ease;
         }
     </style>
     <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
-    <header class="p-4 sticky top-0 z-10 header-sticky">
+    <header class="header-sticky p-4 sticky top-0">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl md:text-2xl font-semibold text-[#1d1d1f]" aria-label="Anuveshana Technologies Logo">Anuveshana Technologies</h1>
-            <nav class="hidden md:flex space-x-8 text-base" aria-label="Main navigation">
-                <a href="#services" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Services</a>
-                <a href="#projects" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Projects</a>
-                <a href="#tech-stack" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Tech Stack</a>
-                <a href="#clients" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Clients</a>
-                <a href="#reviews" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Reviews</a>
-                <a href="#contact" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Contact</a>
+            <a href="/" class="text-xl md:text-2xl font-semibold text-[#1d1d1f] dark:text-[#ffffff]" aria-label="Anuveshana Technologies Logo">Anuveshana Technologies</a>
+            <nav class="hidden md:flex space-x-8 text-base mx-auto" aria-label="Main navigation">
+                <a href="#services" class="text-[#1d1d1f] hover:text-[#0071e3] dark:text-[#ffffff] dark:hover:text-[#0a84ff] transition-colors">Services</a>
+                <a href="#projects" class="text-[#1d1d1f] hover:text-[#0071e3] dark:text-[#ffffff] dark:hover:text-[#0a84ff] transition-colors">Projects</a>
+                <a href="#tech-stack" class="text-[#1d1d1f] hover:text-[#0071e3] dark:text-[#ffffff] dark:hover:text-[#0a84ff] transition-colors">Tech Stack</a>
+                <a href="#clients" class="text-[#1d1d1f] hover:text-[#0071e3] dark:text-[#ffffff] dark:hover:text-[#0a84ff] transition-colors">Clients</a>
+                <a href="#reviews" class="text-[#1d1d1f] hover:text-[#0071e3] dark:text-[#ffffff] dark:hover:text-[#0a84ff] transition-colors">Reviews</a>
+                <a href="#contact" class="text-[#1d1d1f] hover:text-[#0071e3] dark:text-[#ffffff] dark:hover:text-[#0a84ff] transition-colors">Contact</a>
             </nav>
-            <!-- Mobile Menu Icon -->
-            <button id="menuBtn" class="md:hidden text-xl text-[#1d1d1f] focus:outline-none focus:ring-2 focus:ring-[#0071e3]" aria-label="Toggle mobile menu">
-                ☰
-            </button>
+            <div class="flex items-center space-x-4">
+                <button id="darkModeToggle" class="apple-btn p-2 text-sm" aria-label="Toggle dark mode">
+                    <svg id="darkModeIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                </button>
+                <button id="menuBtn" class="md:hidden text-2xl text-[#1d1d1f] dark:text-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#0071e3] p-2" aria-label="Toggle mobile menu">
+                    <span id="menuIcon">☰</span>
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden bg-[#ffffff] border-b border-[#e0e0e2] p-4 flex flex-col space-y-3 md:hidden">
-        <a href="#services" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Services</a>
-        <a href="#projects" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Projects</a>
-        <a href="#tech-stack" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Tech Stack</a>
-        <a href="#clients" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Clients</a>
-        <a href="#reviews" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Reviews</a>
-        <a href="#contact" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Contact</a>
+    <div id="mobileMenu" class="bg-[#ffffff] dark:bg-[#2c2c2e] border-b border-[#e0e0e2] dark:border-[#3a3a3c] p-4 flex flex-col space-y-3 md:hidden">
+        <a href="#services" class="text-[#1d1d1f] dark:text-[#ffffff] hover:text-[#0071e3] dark:hover:text-[#0a84ff] transition-colors">Services</a>
+        <a href="#projects" class="text-[#1d1d1f] dark:text-[#ffffff] hover:text-[#0071e3] dark:hover:text-[#0a84ff] transition-colors">Projects</a>
+        <a href="#tech-stack" class="text-[#1d1d1f] dark:text-[#ffffff] hover:text-[#0071e3] dark:hover:text-[#0a84ff] transition-colors">Tech Stack</a>
+        <a href="#clients" class="text-[#1d1d1f] dark:text-[#ffffff] hover:text-[#0071e3] dark:hover:text-[#0a84ff] transition-colors">Clients</a>
+        <a href="#reviews" class="text-[#1d1d1f] dark:text-[#ffffff] hover:text-[#0071e3] dark:hover:text-[#0a84ff] transition-colors">Reviews</a>
+        <a href="#contact" class="text-[#1d1d1f] dark:text-[#ffffff] hover:text-[#0071e3] dark:hover:text-[#0a84ff] transition-colors">Contact</a>
     </div>
 
     <!-- Hero Section -->
-    <section class="text-center py-20 bg-gradient-to-b from-[#f5f5f7] to-[#ffffff] px-4">
-        <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in text-[#1d1d1f]">Innovation in Robotics</h2>
-        <p class="max-w-2xl mx-auto mb-8 text-lg text-[#86868b] animate-fade-in">Transforming industries with advanced robotics, electronics, 3D printing, and automation solutions.</p>
+    <section class="text-center py-20 bg-gradient-to-b from-[#f5f5f7] to-[#ffffff] dark:from-[#1d1d1f] dark:to-[#2c2c2e] px-4">
+        <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in text-[#1d1d1f] dark:text-[#ffffff]">Innovation in Robotics</h2>
+        <p class="max-w-2xl mx-auto mb-8 text-lg text-[#86868b] dark:text-[#d2d2d7] animate-fade-in">Transforming industries with advanced robotics, electronics, 3D printing, and automation solutions.</p>
         <a href="#contact" class="inline-block apple-btn text-base font-medium shadow-md">Start Your Project</a>
     </section>
 
+    <!-- Random Project Image Section -->
+    <section id="random-image" class="py-16 px-4 max-w-7xl mx-auto section-border animate-on-scroll">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] dark:text-[#ffffff] animate-fade-in">Project Spotlight</h3>
+        <div class="apple-block p-6 text-center">
+            <img id="randomImage" src="robotics-project.jpg" alt="Random Project Image" class="h-64 mx-auto mb-4 object-cover rounded-lg random-image" loading="lazy">
+            <p id="randomImageCaption" class="text-[#86868b] dark:text-[#d2d2d7]">Explore our latest innovation in robotics.</p>
+        </div>
+    </section>
+
     <!-- Services Section -->
-    <section id="services" class="py-16 px-4 max-w-7xl mx-auto">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] animate-fade-in">Our Services</h3>
+    <section id="services" class="py-16 px-4 max-w-7xl mx-auto animate-on-scroll">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] dark:text-[#ffffff] animate-fade-in">Our Services</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">3D Printing</h4>
-                <p class="text-[#86868b]">High-precision prototyping and production using cutting-edge 3D printing technologies.</p>
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f] dark:text-[#ffffff]">3D Printing</h4>
+                <p class="text-[#86868b] dark:text-[#d2d2d7]">High-precision prototyping and production using cutting-edge 3D printing technologies.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">Product Design</h4>
-                <p class="text-[#86868b]">Comprehensive engineering from concept to market-ready solutions.</p>
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f] dark:text-[#ffffff]">Product Design</h4>
+                <p class="text-[#86868b] dark:text-[#d2d2d7]">Comprehensive engineering from concept to market-ready solutions.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">Industrial Design</h4>
-                <p class="text-[#86868b]">Functional and aesthetic designs for next-generation products.</p>
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f] dark:text-[#ffffff]">Industrial Design</h4>
+                <p class="text-[#86868b] dark:text-[#d2d2d7]">Functional and aesthetic designs for next-generation products.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">Electronics</h4>
-                <p class="text-[#86868b]">Smart, efficient embedded systems customized for your needs.</p>
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f] dark:text-[#ffffff]">Electronics</h4>
+                <p class="text-[#86868b] dark:text-[#d2d2d7]">Smart, efficient embedded systems customized for your needs.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">Robotics</h4>
-                <p class="text-[#86868b]">Intelligent automation tackling complex industrial challenges.</p>
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f] dark:text-[#ffffff]">Robotics</h4>
+                <p class="text-[#86868b] dark:text-[#d2d2d7]">Intelligent automation tackling complex industrial challenges.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">Software</h4>
-                <p class="text-[#86868b]">Scalable platforms for web, mobile, and enterprise applications.</p>
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f] dark:text-[#ffffff]">Software</h4>
+                <p class="text-[#86868b] dark:text-[#d2d2d7]">Scalable platforms for web, mobile, and enterprise applications.</p>
             </div>
         </div>
     </section>
 
     <!-- Project Showcase Section -->
-    <section id="projects" class="py-16 px-4 max-w-7xl mx-auto section-border">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] animate-fade-in">Featured Projects</h3>
+    <section id="projects" class="py-16 px-4 max-w-7xl mx-auto section-border animate-on-scroll">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] dark:text-[#ffffff] animate-fade-in">Featured Projects</h3>
         <div class="relative overflow-hidden">
             <div id="carousel" class="flex">
                 <div class="carousel-item active min-w-full">
                     <div class="apple-block p-6 text-center">
                         <img src="robotics-project.jpg" alt="Robotics Arm Project" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
-                        <h4 class="text-xl font-semibold mb-2 text-[#1d1d1f]">Robotic Arm</h4>
-                        <p class="text-[#86868b]">Precision automation boosting manufacturing efficiency.</p>
+                        <h4 class="text-xl font-semibold mb-2 text-[#1d1d1f] dark:text-[#ffffff]">Robotic Arm</h4>
+                        <p class="text-[#86868b] dark:text-[#d2d2d7]">Precision automation boosting manufacturing efficiency.</p>
                     </div>
                 </div>
                 <div class="carousel-item min-w-full">
                     <div class="apple-block p-6 text-center">
                         <img src="3d-printing-project.jpg" alt="3D Printed Prototype" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
-                        <h4 class="text-xl font-semibold mb-2 text-[#1d1d1f]">3D Printed Device</h4>
-                        <p class="text-[#86868b]">High-precision prototype for medical applications.</p>
+                        <h4 class="text-xl font-semibold mb-2 text-[#1d1d1f] dark:text-[#ffffff]">3D Printed Device</h4>
+                        <p class="text-[#86868b] dark:text-[#d2d2d7]">High-precision prototype for medical applications.</p>
                     </div>
                 </div>
                 <div class="carousel-item min-w-full">
                     <div class="apple-block p-6 text-center">
                         <img src="electronics-project.jpg" alt="Embedded System" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
-                        <h4 class="text-xl font-semibold mb-2 text-[#1d1d1f]">Smart Embedded</h4>
-                        <p class="text-[#86868b]">IoT system for real-time factory monitoring.</p>
+                        <h4 class="text-xl font-semibold mb-2 text-[#1d1d1f] dark:text-[#ffffff]">Smart Embedded</h4>
+                        <p class="text-[#86868b] dark:text-[#d2d2d7]">IoT system for real-time factory monitoring.</p>
                     </div>
                 </div>
             </div>
@@ -198,25 +288,31 @@
     </section>
 
     <!-- Tech Stack Section -->
-    <section id="tech-stack" class="py-16 px-4 max-w-7xl mx-auto section-border">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] animate-fade-in">Our Tech Stack</h3>
-        <div class="flex flex-wrap justify-center gap-4">
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">C++</span>
-            <span class="tech-badge">ROS</span>
-            <span class="tech-badge">Arduino</span>
-            <span class="tech-badge">Raspberry Pi</span>
-            <span class="tech-badge">SolidWorks</span>
-            <span class="tech-badge">Fusion 360</span>
-            <span class="tech-badge">React</span>
-            <span class="tech-badge">Node.js</span>
-            <span class="tech-badge">TensorFlow</span>
+    <section id="tech-stack" class="py-16 px-4 max-w-7xl mx-auto section-border animate-on-scroll">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] dark:text-[#ffffff] animate-fade-in">Our Tech Stack</h3>
+        <div class="flex justify-center gap-4 mb-8">
+            <button class="filter-btn" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="programming">Programming</button>
+            <button class="filter-btn" data-filter="hardware">Hardware</button>
+            <button class="filter-btn" data-filter="software">Software</button>
+        </div>
+        <div id="techList" class="flex flex-wrap justify-center gap-4">
+            <span class="tech-badge" data-category="programming">Python</span>
+            <span class="tech-badge" data-category="programming">C++</span>
+            <span class="tech-badge" data-category="software">ROS</span>
+            <span class="tech-badge" data-category="hardware">Arduino</span>
+            <span class="tech-badge" data-category="hardware">Raspberry Pi</span>
+            <span class="tech-badge" data-category="software">SolidWorks</span>
+            <span class="tech-badge" data-category="software">Fusion 360</span>
+            <span class="tech-badge" data-category="software">React</span>
+            <span class="tech-badge" data-category="software">Node.js</span>
+            <span class="tech-badge" data-category="software">TensorFlow</span>
         </div>
     </section>
 
     <!-- Clients Section -->
-    <section id="clients" class="bg-[#f5f5f7] py-16 px-4 section-border">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] animate-fade-in">Our Partners</h3>
+    <section id="clients" class="bg-[#f5f5f7] dark:bg-[#1d1d1f] py-16 px-4 section-border animate-on-scroll">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] dark:text-[#ffffff] animate-fade-in">Our Partners</h3>
         <div class="flex flex-wrap justify-center items-center gap-8">
             <img src="samsung-logo.png" alt="Samsung logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
             <img src="toyota-logo.png" alt="Toyota logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
@@ -227,37 +323,37 @@
     </section>
 
     <!-- Reviews Section -->
-    <section id="reviews" class="py-16 px-4 max-w-5xl mx-auto">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] animate-fade-in">Testimonials</h3>
+    <section id="reviews" class="py-16 px-4 max-w-5xl mx-auto animate-on-scroll">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] dark:text-[#ffffff] animate-fade-in">Testimonials</h3>
         <div class="space-y-8">
             <div class="apple-block p-8 animate-fade-in">
-                <p class="text-[#86868b] italic">“Anuveshana’s 3D printing expertise significantly reduced our prototyping time.”</p>
-                <p class="text-right mt-3 font-semibold text-[#1d1d1f]">– Engineering Manager, Samsung</p>
+                <p class="text-[#86868b] dark:text-[#d2d2d7] italic">“Anuveshana’s 3D printing expertise significantly reduced our prototyping time.”</p>
+                <p class="text-right mt-3 font-semibold text-[#1d1d1f] dark:text-[#ffffff]">– Engineering Manager, Samsung</p>
             </div>
             <div class="apple-block p-8 animate-fade-in">
-                <p class="text-[#86868b] italic">“Their embedded systems greatly improved our operational efficiency.”</p>
-                <p class="text-right mt-3 font-semibold text-[#1d1d1f]">– Project Lead, Toyota</p>
+                <p class="text-[#86868b] dark:text-[#d2d2d7] italic">“Their embedded systems greatly improved our operational efficiency.”</p>
+                <p class="text-right mt-3 font-semibold text-[#1d1d1f] dark:text-[#ffffff]">– Project Lead, Toyota</p>
             </div>
             <div class="apple-block p-8 animate-fade-in">
-                <p class="text-[#86868b] italic">“A reliable partner for our robotics and automation projects.”</p>
-                <p class="text-right mt-3 font-semibold text-[#1d1d1f]">– Operations Head, Phoenix Projects</p>
+                <p class="text-[#86868b] dark:text-[#d2d2d7] italic">“A reliable partner for our robotics and automation projects.”</p>
+                <p class="text-right mt-3 font-semibold text-[#1d1d1f] dark:text-[#ffffff]">– Operations Head, Phoenix Projects</p>
             </div>
         </div>
         <div class="text-center mt-10">
-            <a href="https://www.google.com/search?q=Anuveshana+Technologies+reviews" target="_blank" rel="noopener noreferrer" class="text-[#0071e3] hover:underline transition-colors">More Reviews on Google</a>
+            <a href="https://www.google.com/search?q=Anuveshana+Technologies+reviews" target="_blank" rel="noopener noreferrer" class="text-[#0071e3] dark:text-[#0a84ff] hover:underline transition-colors">More Reviews on Google</a>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="bg-[#f5f5f7] py-16 px-4 section-border">
+    <section id="contact" class="bg-[#f5f5f7] dark:bg-[#1d1d1f] py-16 px-4 section-border animate-on-scroll">
         <div class="max-w-2xl mx-auto text-center">
-            <h3 class="text-3xl md:text-4xl font-bold mb-8 text-[#1d1d1f] animate-fade-in">Let’s Innovate Together</h3>
-            <p class="mb-8 text-[#86868b] text-lg">Ready to advance with robotics, electronics, or automation? Contact us today.</p>
+            <h3 class="text-3xl md:text-4xl font-bold mb-8 text-[#1d1d1f] dark:text-[#ffffff] animate-fade-in">Let’s Innovate Together</h3>
+            <p class="mb-8 text-[#86868b] dark:text-[#d2d2d7] text-lg">Ready to advance with robotics, electronics, or automation? Contact us today.</p>
             <div class="apple-block p-8">
                 <div class="space-y-4">
-                    <input type="text" id="name" placeholder="Your Name" class="w-full p-3 bg-[#f5f5f7] border border-[#d2d2d7] rounded-md text-[#1d1d1f] focus:outline-none focus:ring-2 focus:ring-[#0071e3]" required aria-label="Your Name">
-                    <input type="email" id="email" placeholder="Your Email" class="w-full p-3 bg-[#f5f5f7] border border-[#d2d2d7] rounded-md text-[#1d1d1f] focus:outline-none focus:ring-2 focus:ring-[#0071e3]" required aria-label="Your Email">
-                    <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 bg-[#f5f5f7] border border-[#d2d2d7] rounded-md text-[#1d1d1f] focus:outline-none focus:ring-2 focus:ring-[#0071e3]" required aria-label="Your Message"></textarea>
+                    <input type="text" id="name" placeholder="Your Name" class="w-full p-3 bg-[#f5f5f7] dark:bg-[#3a3a3c] border border-[#d2d2d7] dark:border-[#4a4a4c] rounded-md text-[#1d1d1f] dark:text-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#0071e3] dark:focus:ring-[#0a84ff]" required aria-label="Your Name">
+                    <input type="email" id="email" placeholder="Your Email" class="w-full p-3 bg-[#f5f5f7] dark:bg-[#3a3a3c] border border-[#d2d2d7] dark:border-[#4a4a4c] rounded-md text-[#1d1d1f] dark:text-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#0071e3] dark:focus:ring-[#0a84ff]" required aria-label="Your Email">
+                    <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 bg-[#f5f5f7] dark:bg-[#3a3a3c] border border-[#d2d2d7] dark:border-[#4a4a4c] rounded-md text-[#1d1d1f] dark:text-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#0071e3] dark:focus:ring-[#0a84ff]" required aria-label="Your Message"></textarea>
                     <button id="contactSubmit" class="w-full apple-btn p-3 font-medium flex items-center justify-center" disabled aria-label="Send Message">
                         <span id="buttonText">Send Message</span>
                         <svg id="loadingSpinner" class="hidden animate-spin h-5 w-5 ml-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -265,11 +361,11 @@
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
                         </svg>
                     </button>
-                    <p id="formMessage" class="text-sm text-[#86868b] hidden"></p>
+                    <p id="formMessage" class="text-sm text-[#86868b] dark:text-[#d2d2d7] hidden"></p>
                 </div>
             </div>
-            <p class="font-medium mt-6 text-[#1d1d1f]">Email: <a href="mailto:contact@anuveshana.tech" class="text-[#0071e3] hover:underline">contact@anuveshana.tech</a></p>
-            <p class="font-medium text-[#1d1d1f]">Phone: +91-XXXXXXXXXX</p>
+            <p class="font-medium mt-6 text-[#1d1d1f] dark:text-[#ffffff]">Email: <a href="mailto:contact@anuveshana.tech" class="text-[#0071e3] dark:text-[#0a84ff] hover:underline">contact@anuveshana.tech</a></p>
+            <p class="font-medium text-[#1d1d1f] dark:text-[#ffffff]">Phone: +91-XXXXXXXXXX</p>
         </div>
     </section>
 
@@ -281,19 +377,114 @@
     </button>
 
     <!-- Footer -->
-    <footer class="bg-[#f5f5f7] border-t border-[#d2d2d7] text-[#86868b] text-center p-6 text-sm">
+    <footer class="bg-[#f5f5f7] dark:bg-[#1d1d1f] border-t border-[#d2d2d7] dark:border-[#4a4a4c] text-[#86868b] dark:text-[#d2d2d7] text-center p-6 text-sm">
         <p>© 2025 Anuveshana Technologies. All rights reserved.</p>
     </footer>
 
     <!-- Scripts -->
     <script>
         // Mobile Menu Toggle
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            menuBtn.textContent = mobileMenu.classList.contains('hidden') ? '☰' : '✕';
-            menuBtn.setAttribute('aria-label', mobileMenu.classList.contains('hidden') ? 'Open mobile menu' : 'Close mobile menu');
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menuBtn');
+            const menuIcon = document.getElementById('menuIcon');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (!menuBtn || !menuIcon || !mobileMenu) {
+                console.error('Mobile menu elements not found:', { menuBtn: !!menuBtn, menuIcon: !!menuIcon, mobileMenu: !!mobileMenu });
+                return;
+            }
+
+            menuBtn.addEventListener('click', () => {
+                try {
+                    const isOpen = mobileMenu.classList.contains('open');
+                    mobileMenu.classList.toggle('open', !isOpen);
+                    menuIcon.textContent = isOpen ? '☰' : '✕';
+                    menuBtn.setAttribute('aria-label', isOpen ? 'Open mobile menu' : 'Close mobile menu');
+                    console.log('Mobile menu toggled:', { isOpen: !isOpen });
+                } catch (error) {
+                    console.error('Error toggling mobile menu:', error);
+                }
+            });
+
+            menuBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const isOpen = mobileMenu.classList.contains('open');
+                mobileMenu.classList.toggle('open', !isOpen);
+                menuIcon.textContent = isOpen ? '☰' : '✕';
+                menuBtn.setAttribute('aria-label', isOpen ? 'Open mobile menu' : 'Close mobile menu');
+            });
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    menuIcon.textContent = '☰';
+                    menuBtn.setAttribute('aria-label', 'Open mobile menu');
+                });
+            });
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            darkModeIcon.innerHTML = isDark
+                ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>`
+                : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>`;
+            darkModeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+            darkModeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>`;
+            darkModeToggle.setAttribute('aria-label', 'Switch to light mode');
+        }
+
+        // Random Image Section
+        const projectImages = [
+            { src: 'robotics-project.jpg', caption: 'Precision robotics for industrial automation.' },
+            { src: '3d-printing-project.jpg', caption: 'High-precision 3D printed medical prototype.' },
+            { src: 'electronics-project.jpg', caption: 'Smart IoT system for real-time monitoring.' },
+        ];
+        function setRandomImage() {
+            const randomIndex = Math.floor(Math.random() * projectImages.length);
+            const randomImage = document.getElementById('randomImage');
+            const randomImageCaption = document.getElementById('randomImageCaption');
+            randomImage.src = projectImages[randomIndex].src;
+            randomImage.alt = projectImages[randomIndex].caption;
+            randomImageCaption.textContent = projectImages[randomIndex].caption;
+        }
+        setRandomImage();
+        setInterval(setRandomImage, 10000);
+
+        // Scroll-Triggered Animations
+        const animateSections = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animateSections.forEach(section => observer.observe(section));
+
+        // Tech Stack Filter
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const techBadges = document.querySelectorAll('.tech-badge');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                techBadges.forEach(badge => {
+                    const category = badge.getAttribute('data-category');
+                    badge.style.display = (filter === 'all' || category === filter) ? 'inline-block' : 'none';
+                });
+            });
         });
 
         // Back to Top Button

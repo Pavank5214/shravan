@@ -3,270 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anuveshana Technologies</title>
+    <meta name="description" content="Anuveshana Technologies pioneers robotics, electronics, 3D printing, and automation solutions for cutting-edge industries.">
+    <meta name="keywords" content="robotics, 3D printing, electronics, embedded systems, automation, software development">
+    <meta name="author" content="Anuveshana Technologies">
+    <title>Anuveshana Technologies | Innovation in Robotics</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
-      body { 
-        background: linear-gradient(180deg, #0a0e1a, #1c2b45);
-        font-family: 'Exo', sans-serif;
-        color: #e0e6f0;
-        overflow-x: hidden;
-      }
-      /* Metallic Text */
-      .metallic {
-        font-family: 'Orbitron', sans-serif;
-        background: linear-gradient(45deg, #b0c4de, #ffffff, #b0c4de);
-        -webkit-background-clip: text;
-        color: transparent;
-        letter-spacing: 0.05em;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-      }
-      /* Circuit Background */
-      .bg-circuit { 
-        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" stroke="%231e3a50" stroke-width="0.8"%3E%3Cpath d="M10 10h60v60H10zM20 20h40v40H20z"/%3E%3Ccircle cx="15" cy="15" r="3"/%3E%3Ccircle cx="65" cy="65" r="3"/%3E%3Cline x1="15" y1="15" x2="30" y2="30" stroke-width="0.8"/%3E%3C/svg%3E');
-        opacity: 0.1;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-      }
-      .scroll-reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-in-out; }
-      .scroll-reveal.active { opacity: 1; transform: translateY(0); }
-      /* Holographic Robot Graphic */
-      @keyframes hologramSpin {
-        0% { transform: rotateY(0deg) scale(1); }
-        50% { transform: rotateY(180deg) scale(1.1); }
-        100% { transform: rotateY(360deg) scale(1); }
-      }
-      .robot-graphic {
-        width: 50px;
-        height: 50px;
-        background: radial-gradient(circle, #00ccff, #1e3a50);
-        clip-path: polygon(50% 0%, 85% 25%, 100% 50%, 85% 75%, 50% 100%, 15% 75%, 0% 50%, 15% 25%);
-        animation: hologramSpin 12s linear infinite;
-        box-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
-      }
-      /* Neon Hover */
-      .neon-hover:hover {
-        color: #00ccff;
-        text-shadow: 0 0 10px rgba(0, 204, 255, 0.8);
-      }
-      /* Particle Background */
-      #particles {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -2;
-      }
-      /* Mobile Menu */
-      .mobile-menu { display: none; }
-      @media (max-width: 640px) {
-        .desktop-menu { display: none; }
-        .mobile-menu { display: block; }
-        .mobile-menu-items { transition: max-height 0.3s ease-in-out; }
-        .mobile-menu-items.hidden { max-height: 0; overflow: hidden; }
-        .mobile-menu-items:not(.hidden) { max-height: 200px; }
-      }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background: #f5f5f7;
+            color: #1d1d1f;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        .apple-block {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .apple-block:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .apple-btn {
+            background: #0071e3;
+            color: #ffffff;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+        .apple-btn:hover {
+            background: #005bb5;
+        }
+        .carousel-item {
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+        }
+        .carousel-item:not(.active) {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        .carousel-item.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .carousel-item:hover img {
+            transform: scale(1.03);
+            filter: brightness(1.05);
+        }
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 1000;
+        }
+        .tech-badge {
+            background: #f1f1f3;
+            color: #1d1d1f;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+        .tech-badge:hover {
+            background: #e0e0e2;
+        }
+        .section-border {
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .header-sticky {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
     </style>
-  </head>
-  <body>
-    <!-- Particle Background -->
-    <canvas id="particles"></canvas>
-    <div class="bg-circuit"></div>
+    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="p-4 sticky top-0 z-10 header-sticky">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-semibold text-[#1d1d1f]" aria-label="Anuveshana Technologies Logo">Anuveshana Technologies</h1>
+            <nav class="hidden md:flex space-x-8 text-base" aria-label="Main navigation">
+                <a href="#services" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Services</a>
+                <a href="#projects" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Projects</a>
+                <a href="#tech-stack" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Tech Stack</a>
+                <a href="#clients" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Clients</a>
+                <a href="#reviews" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Reviews</a>
+                <a href="#contact" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Contact</a>
+            </nav>
+            <!-- Mobile Menu Icon -->
+            <button id="menuBtn" class="md:hidden text-xl text-[#1d1d1f] focus:outline-none focus:ring-2 focus:ring-[#0071e3]" aria-label="Toggle mobile menu">
+                ☰
+            </button>
+        </div>
+    </header>
 
-    <!-- Navigation -->
-    <nav class="bg-black bg-opacity-90 text-white p-4 sticky top-0 z-30 backdrop-blur-md">
-      <div class="container mx-auto flex justify-between items-center px-4">
-        <div class="flex items-center space-x-2">
-          <div class="robot-graphic"></div>
-          <h1 class="text-xl sm:text-2xl font-bold metallic">Anuveshana Technologies</h1>
-        </div>
-        <!-- Desktop Menu -->
-        <ul class="desktop-menu flex space-x-4">
-          <li><a href="#home" class="text-sm sm:text-base neon-hover transition">Home</a></li>
-          <li><a href="#services" class="text-sm sm:text-base neon-hover transition">Services</a></li>
-          <li><a href="#clients" class="text-sm sm:text-base neon-hover transition">Clients</a></li>
-          <li><a href="#contact" class="text-sm sm:text-base neon-hover transition">Contact</a></li>
-        </ul>
-        <!-- Mobile Menu Toggle -->
-        <div class="mobile-menu">
-          <button id="mobile-menu-toggle" class="text-cyan-400 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-      <!-- Mobile Menu Items -->
-      <ul id="mobile-menu-items" class="mobile-menu-items hidden bg-black bg-opacity-90 mt-2 flex flex-col space-y-2 p-4 container mx-auto px-4">
-        <li><a href="#home" class="neon-hover transition">Home</a></li>
-        <li><a href="#services" class="neon-hover transition">Services</a></li>
-        <li><a href="#clients" class="neon-hover transition">Clients</a></li>
-        <li><a href="#contact" class="neon-hover transition">Contact</a></li>
-      </ul>
-    </nav>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden bg-[#ffffff] border-b border-[#e0e0e2] p-4 flex flex-col space-y-3 md:hidden">
+        <a href="#services" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Services</a>
+        <a href="#projects" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Projects</a>
+        <a href="#tech-stack" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Tech Stack</a>
+        <a href="#clients" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Clients</a>
+        <a href="#reviews" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Reviews</a>
+        <a href="#contact" class="text-[#1d1d1f] hover:text-[#0071e3] transition-colors">Contact</a>
+    </div>
 
     <!-- Hero Section -->
-    <section id="home" class="relative py-16 sm:py-24 text-center text-white">
-      <div class="container mx-auto px-4 scroll-reveal">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold metallic mb-4">Pioneering Robotic Futures</h2>
-        <p class="text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-6 leading-relaxed">Anuveshana Technologies engineers cutting-edge robotics and technology to shape a smarter tomorrow.</p>
-        <a href="#contact" class="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-2 sm:px-8 sm:py-3 rounded-full font-semibold text-sm sm:text-base hover:from-cyan-400 hover:to-blue-500 transition neon-hover">Launch Project</a>
-      </div>
-      <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600"></div>
+    <section class="text-center py-20 bg-gradient-to-b from-[#f5f5f7] to-[#ffffff] px-4">
+        <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in text-[#1d1d1f]">Innovation in Robotics</h2>
+        <p class="max-w-2xl mx-auto mb-8 text-lg text-[#86868b] animate-fade-in">Transforming industries with advanced robotics, electronics, 3D printing, and automation solutions.</p>
+        <a href="#contact" class="inline-block apple-btn text-base font-medium shadow-md">Start Your Project</a>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 sm:py-20 px-4">
-      <div class="container mx-auto">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold metallic text-center mb-8 sm:mb-12 scroll-reveal">Our Cybernetic Expertise</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
-            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">3D Printing</h3>
-            <p class="text-sm sm:text-base leading-relaxed">Precision-crafted robotic components using advanced additive manufacturing.</p>
-          </div>
-          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
-            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">Prototype & Product Design</h3>
-            <p class="text-sm sm:text-base leading-relaxed">End-to-end engineering for innovative robotic solutions.</p>
-          </div>
-          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
-            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">Industrial Design</h3>
-            <p class="text-sm sm:text-base leading-relaxed">Sleek, functional designs for next-gen robotic systems.</p>
-          </div>
-          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
-            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">Embedded Systems & Electronics</h3>
-            <p class="text-sm sm:text-base leading-relaxed">Smart hardware for robotics and IoT applications.</p>
-          </div>
-          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
-            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">Robotics & Automation</h3>
-            <p class="text-sm sm:text-base leading-relaxed">Intelligent systems for industrial and real-world automation.</p>
-          </div>
-          <div class="bg-gray-900 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg border border-cyan-600 hover:border-cyan-400 transition scroll-reveal">
-            <h3 class="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">App & Software Development</h3>
-            <p class="text-sm sm:text-base leading-relaxed">Scalable platforms for robot control and IoT integration.</p>
-          </div>
+    <section id="services" class="py-16 px-4 max-w-7xl mx-auto">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] animate-fade-in">Our Services</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="apple-block p-6 animate-fade-in">
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">3D Printing</h4>
+                <p class="text-[#86868b]">High-precision prototyping and production using cutting-edge 3D printing technologies.</p>
+            </div>
+            <div class="apple-block p-6 animate-fade-in">
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">Product Design</h4>
+                <p class="text-[#86868b]">Comprehensive engineering from concept to market-ready solutions.</p>
+            </div>
+            <div class="apple-block p-6 animate-fade-in">
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">Industrial Design</h4>
+                <p class="text-[#86868b]">Functional and aesthetic designs for next-generation products.</p>
+            </div>
+            <div class="apple-block p-6 animate-fade-in">
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">Electronics</h4>
+                <p class="text-[#86868b]">Smart, efficient embedded systems customized for your needs.</p>
+            </div>
+            <div class="apple-block p-6 animate-fade-in">
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">Robotics</h4>
+                <p class="text-[#86868b]">Intelligent automation tackling complex industrial challenges.</p>
+            </div>
+            <div class="apple-block p-6 animate-fade-in">
+                <h4 class="text-xl font-semibold mb-3 text-[#1d1d1f]">Software</h4>
+                <p class="text-[#86868b]">Scalable platforms for web, mobile, and enterprise applications.</p>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Project Showcase Section -->
+    <section id="projects" class="py-16 px-4 max-w-7xl mx-auto section-border">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] animate-fade-in">Featured Projects</h3>
+        <div class="relative overflow-hidden">
+            <div id="carousel" class="flex">
+                <div class="carousel-item active min-w-full">
+                    <div class="apple-block p-6 text-center">
+                        <img src="robotics-project.jpg" alt="Robotics Arm Project" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
+                        <h4 class="text-xl font-semibold mb-2 text-[#1d1d1f]">Robotic Arm</h4>
+                        <p class="text-[#86868b]">Precision automation boosting manufacturing efficiency.</p>
+                    </div>
+                </div>
+                <div class="carousel-item min-w-full">
+                    <div class="apple-block p-6 text-center">
+                        <img src="3d-printing-project.jpg" alt="3D Printed Prototype" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
+                        <h4 class="text-xl font-semibold mb-2 text-[#1d1d1f]">3D Printed Device</h4>
+                        <p class="text-[#86868b]">High-precision prototype for medical applications.</p>
+                    </div>
+                </div>
+                <div class="carousel-item min-w-full">
+                    <div class="apple-block p-6 text-center">
+                        <img src="electronics-project.jpg" alt="Embedded System" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
+                        <h4 class="text-xl font-semibold mb-2 text-[#1d1d1f]">Smart Embedded</h4>
+                        <p class="text-[#86868b]">IoT system for real-time factory monitoring.</p>
+                    </div>
+                </div>
+            </div>
+            <button id="prevBtn" class="absolute top-1/2 left-4 transform -translate-y-1/2 apple-btn p-2" aria-label="Previous project">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button id="nextBtn" class="absolute top-1/2 right-4 transform -translate-y-1/2 apple-btn p-2" aria-label="Next project">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech-stack" class="py-16 px-4 max-w-7xl mx-auto section-border">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] animate-fade-in">Our Tech Stack</h3>
+        <div class="flex flex-wrap justify-center gap-4">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">C++</span>
+            <span class="tech-badge">ROS</span>
+            <span class="tech-badge">Arduino</span>
+            <span class="tech-badge">Raspberry Pi</span>
+            <span class="tech-badge">SolidWorks</span>
+            <span class="tech-badge">Fusion 360</span>
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">Node.js</span>
+            <span class="tech-badge">TensorFlow</span>
+        </div>
     </section>
 
     <!-- Clients Section -->
-    <section id="clients" class="bg-black bg-opacity-90 py-16 sm:py-20 px-4">
-      <div class="container mx-auto">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold metallic text-center mb-8 sm:mb-12 scroll-reveal">Our Trusted Partners</h2>
-        <div class="flex flex-wrap justify-center gap-4 sm:gap-6 scroll-reveal">
-          <div class="text-base sm:text-lg font-semibold text-cyan-400 neon-hover">Samsung</div>
-          <div class="text-base sm:text-lg font-semibold text-cyan-400 neon-hover">Toyota</div>
-          <div class="text-base sm:text-lg font-semibold text-cyan-400 neon-hover">Ausa Medical Devices</div>
-          <div class="text-base sm:text-lg font-semibold text-cyan-400 neon-hover">Carclo</div>
-          <div class="text-base sm:text-lg font-semibold text-cyan-400 neon-hover">Phoenix Projects</div>
+    <section id="clients" class="bg-[#f5f5f7] py-16 px-4 section-border">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] animate-fade-in">Our Partners</h3>
+        <div class="flex flex-wrap justify-center items-center gap-8">
+            <img src="samsung-logo.png" alt="Samsung logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
+            <img src="toyota-logo.png" alt="Toyota logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
+            <img src="ausa-logo.png" alt="AUSA Medical Devices logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
+            <img src="carclo-logo.png" alt="Carclo logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
+            <img src="phoenix-logo.png" alt="Phoenix Projects logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
         </div>
-        <div class="text-center mt-6 sm:mt-8 scroll-reveal">
-          <p class="text-base sm:text-lg">Explore our reputation: <a href="[Insert Google Reviews Link Here]" class="text-cyan-400 hover:underline neon-hover" target="_blank">Google Reviews</a></p>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-16 px-4 max-w-5xl mx-auto">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1d1d1f] animate-fade-in">Testimonials</h3>
+        <div class="space-y-8">
+            <div class="apple-block p-8 animate-fade-in">
+                <p class="text-[#86868b] italic">“Anuveshana’s 3D printing expertise significantly reduced our prototyping time.”</p>
+                <p class="text-right mt-3 font-semibold text-[#1d1d1f]">– Engineering Manager, Samsung</p>
+            </div>
+            <div class="apple-block p-8 animate-fade-in">
+                <p class="text-[#86868b] italic">“Their embedded systems greatly improved our operational efficiency.”</p>
+                <p class="text-right mt-3 font-semibold text-[#1d1d1f]">– Project Lead, Toyota</p>
+            </div>
+            <div class="apple-block p-8 animate-fade-in">
+                <p class="text-[#86868b] italic">“A reliable partner for our robotics and automation projects.”</p>
+                <p class="text-right mt-3 font-semibold text-[#1d1d1f]">– Operations Head, Phoenix Projects</p>
+            </div>
         </div>
-      </div>
+        <div class="text-center mt-10">
+            <a href="https://www.google.com/search?q=Anuveshana+Technologies+reviews" target="_blank" rel="noopener noreferrer" class="text-[#0071e3] hover:underline transition-colors">More Reviews on Google</a>
+        </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 sm:py-20 px-4 relative">
-      <div class="container mx-auto text-center">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold metallic mb-6 sm:mb-8 scroll-reveal">Connect with Us</h2>
-        <p class="text-base sm:text-lg mb-6 sm:mb-8 max-w-xl mx-auto scroll-reveal leading-relaxed">Ready to innovate with robotics and advanced tech? Let’s collaborate!</p>
-        <div class="max-w-md mx-auto scroll-reveal">
-          <input type="text" placeholder="Your Name" class="w-full p-3 sm:p-4 mb-4 bg-gray-900 bg-opacity-80 border border-cyan-600 rounded-lg text-white focus:border-cyan-400 text-sm sm:text-base">
-          <input type="email" placeholder="Your Email" class="w-full p-3 sm:p-4 mb-4 bg-gray-900 bg-opacity-80 border border-cyan-600 rounded-lg text-white focus:border-cyan-400 text-sm sm:text-base">
-          <textarea placeholder="Your Message" class="w-full p-3 sm:p-4 mb-4 bg-gray-900 bg-opacity-80 border border-cyan-600 rounded-lg text-white focus:border-cyan-400 h-24 sm:h-32 text-sm sm:text-base"></textarea>
-          <button onclick="alert('Form submission disabled in demo. Configure a backend for production.')" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base hover:from-cyan-400 hover:to-blue-500 transition neon-hover">Send Transmission</button>
+    <section id="contact" class="bg-[#f5f5f7] py-16 px-4 section-border">
+        <div class="max-w-2xl mx-auto text-center">
+            <h3 class="text-3xl md:text-4xl font-bold mb-8 text-[#1d1d1f] animate-fade-in">Let’s Innovate Together</h3>
+            <p class="mb-8 text-[#86868b] text-lg">Ready to advance with robotics, electronics, or automation? Contact us today.</p>
+            <div class="apple-block p-8">
+                <div class="space-y-4">
+                    <input type="text" id="name" placeholder="Your Name" class="w-full p-3 bg-[#f5f5f7] border border-[#d2d2d7] rounded-md text-[#1d1d1f] focus:outline-none focus:ring-2 focus:ring-[#0071e3]" required aria-label="Your Name">
+                    <input type="email" id="email" placeholder="Your Email" class="w-full p-3 bg-[#f5f5f7] border border-[#d2d2d7] rounded-md text-[#1d1d1f] focus:outline-none focus:ring-2 focus:ring-[#0071e3]" required aria-label="Your Email">
+                    <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 bg-[#f5f5f7] border border-[#d2d2d7] rounded-md text-[#1d1d1f] focus:outline-none focus:ring-2 focus:ring-[#0071e3]" required aria-label="Your Message"></textarea>
+                    <button id="contactSubmit" class="w-full apple-btn p-3 font-medium flex items-center justify-center" disabled aria-label="Send Message">
+                        <span id="buttonText">Send Message</span>
+                        <svg id="loadingSpinner" class="hidden animate-spin h-5 w-5 ml-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                        </svg>
+                    </button>
+                    <p id="formMessage" class="text-sm text-[#86868b] hidden"></p>
+                </div>
+            </div>
+            <p class="font-medium mt-6 text-[#1d1d1f]">Email: <a href="mailto:contact@anuveshana.tech" class="text-[#0071e3] hover:underline">contact@anuveshana.tech</a></p>
+            <p class="font-medium text-[#1d1d1f]">Phone: +91-XXXXXXXXXX</p>
         </div>
-        <p class="mt-4 sm:mt-6 text-sm sm:text-base scroll-reveal">[Insert Email Here] | [Insert Phone Here] | [Insert Website URL Here]</p>
-      </div>
-      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent to-cyan-500"></div>
     </section>
 
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="apple-btn p-3 shadow-md" aria-label="Back to top">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+        </svg>
+    </button>
+
     <!-- Footer -->
-    <footer class="bg-black bg-opacity-90 text-white py-6 text-center">
-      <p class="text-sm sm:text-base">© 2025 Anuveshana Technologies. All rights reserved.</p>
+    <footer class="bg-[#f5f5f7] border-t border-[#d2d2d7] text-[#86868b] text-center p-6 text-sm">
+        <p>© 2025 Anuveshana Technologies. All rights reserved.</p>
     </footer>
 
     <!-- Scripts -->
     <script>
-      // Smooth Scroll
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', e => {
-          e.preventDefault();
-          document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.textContent = mobileMenu.classList.contains('hidden') ? '☰' : '✕';
+            menuBtn.setAttribute('aria-label', mobileMenu.classList.contains('hidden') ? 'Open mobile menu' : 'Close mobile menu');
         });
-      });
 
-      // Mobile Menu Toggle
-      const menuToggle = document.getElementById('mobile-menu-toggle');
-      const menuItems = document.getElementById('mobile-menu-items');
-      menuToggle.addEventListener('click', () => {
-        menuItems.classList.toggle('hidden');
-      });
-
-      // Scroll Reveal Animation
-      const revealElements = document.querySelectorAll('.scroll-reveal');
-      const revealOnScroll = () => {
-        revealElements.forEach(el => {
-          if (el.getBoundingClientRect().top < window.innerHeight * 0.85) {
-            el.classList.add('active');
-          }
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
         });
-      };
-      window.addEventListener('scroll', revealOnScroll);
-      revealOnScroll();
-
-      // Particle Background
-      const canvas = document.getElementById('particles');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const particles = [];
-      const particleCount = window.innerWidth < 640 ? 30 : 60;
-
-      class Particle {
-        constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 1.5 + 0.5;
-          this.speedX = Math.random() * 0.2 - 0.1;
-          this.speedY = Math.random() * 0.2 - 0.1;
-        }
-        update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-        }
-        draw() {
-          ctx.fillStyle = 'rgba(0, 204, 255, 0.5)';
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
-
-      function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-          p.update();
-          p.draw();
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-        requestAnimationFrame(animateParticles);
-      }
-      animateParticles();
 
-      window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      });
+        // Carousel Functionality
+        const carousel = document.getElementById('carousel');
+        const items = carousel.querySelectorAll('.carousel-item');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            items.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            showSlide(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % items.length;
+            showSlide(currentIndex);
+        });
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % items.length;
+            showSlide(currentIndex);
+        }, 5000);
+
+        // Contact Form Handling
+        const contactSubmit = document.getElementById('contactSubmit');
+        const buttonText = document.getElementById('buttonText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const formMessage = document.getElementById('formMessage');
+        const inputs = [document.getElementById('name'), document.getElementById('email'), document.getElementById('message')];
+
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                const allFilled = inputs.every(input => input.value.trim() !== '');
+                contactSubmit.disabled = !allFilled;
+                contactSubmit.classList.toggle('opacity-50', !allFilled);
+            });
+        });
+
+        contactSubmit.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (name && email && message) {
+                if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    buttonText.textContent = 'Sending...';
+                    loadingSpinner.classList.remove('hidden');
+                    contactSubmit.disabled = true;
+                    contactSubmit.classList.add('opacity-50');
+
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+
+                    formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
+                    formMessage.classList.remove('hidden', 'text-red-600');
+                    formMessage.classList.add('text-green-600');
+                    inputs.forEach(input => (input.value = ''));
+
+                    buttonText.textContent = 'Send Message';
+                    loadingSpinner.classList.add('hidden');
+                    contactSubmit.disabled = false;
+                    contactSubmit.classList.remove('opacity-50');
+                } else {
+                    formMessage.textContent = 'Please enter a valid email address.';
+                    formMessage.classList.remove('hidden', 'text-green-600');
+                    formMessage.classList.add('text-red-600');
+                }
+            } else {
+                formMessage.textContent = 'Please fill out all fields.';
+                formMessage.classList.remove('hidden', 'text-green-600');
+                formMessage.classList.add('text-red-600');
+            }
+
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 5000);
+        });
     </script>
-  </body>
-</html>

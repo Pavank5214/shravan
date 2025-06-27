@@ -9,17 +9,162 @@
     <title>Anuveshana Technologies | Innovation in Robotics</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
     <style>
         html {
             scroll-behavior: smooth;
         }
         body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
             background: #1d1d1f;
             color: #ffffff;
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background 0.3s ease, color 0.3s ease;
         }
-        .apple-block {
+        body.light-mode {
+            background: #ffffff;
+            color: #1d1d1f;
+        }
+
+        /* Background with Stars and Mountains */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(to bottom, #0a1a3b, #1d1d1f);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%232c2c2e" fill-opacity="1" d="M0,192L48,176C96,160,192,128,288,138.7C384,149,480,203,576,213.3C672,224,768,192,864,181.3C960,171,1056,181,1152,192C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        body.light-mode::before {
+            background: linear-gradient(to bottom, #87ceeb, #e0f7fa);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23808080" fill-opacity="1" d="M0,192L48,176C96,160,192,128,288,138.7C384,149,480,203,576,213.3C672,224,768,192,864,181.3C960,171,1056,181,1152,192C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+
+        /* Falling Star Animation (Dark Mode Only) */
+        .shooting-star, .shooting-star2, .shooting-star3 {
+            position: fixed;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+            width: 2px;
+            height: 50px;
+            transform: rotate(-45deg);
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0;
+        }
+        body.dark-mode .shooting-star {
+            animation: shootingStar 2.5s ease-in infinite;
+            left: 15%;
+            animation-delay: 0.3s;
+        }
+        body.dark-mode .shooting-star2 {
+            animation: shootingStar 3s ease-in infinite;
+            left: 50%;
+            animation-delay: 1s;
+        }
+        body.dark-mode .shooting-star3 {
+            animation: shootingStar 2.8s ease-in infinite;
+            left: 85%;
+            animation-delay: 1.5s;
+        }
+        @keyframes shootingStar {
+            0% {
+                opacity: 0;
+                transform: translate(0, -100vh) rotate(-45deg);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(70vw, 100vh) rotate(-45deg);
+            }
+        }
+
+        /* Theme-Specific Styles */
+        body.dark-mode .apple-block,
+        body.dark-mode .section-border {
             background: #2c2c2e;
+        }
+        body.light-mode .apple-block,
+        body.light-mode .section-border {
+            background: #f5f5f7;
+        }
+        body.dark-mode .nav-link,
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode h4,
+        body.dark-mode p:not(.text-[#d2d2d7]) {
+            color: #ffffff;
+        }
+        body.light-mode .nav-link,
+        body.light-mode h2,
+        body.light-mode h3,
+        body.light-mode h4,
+        body.light-mode p:not(.text-[#d2d2d7]) {
+            color: #1d1d1f;
+        }
+        body.dark-mode .tech-badge,
+        body.dark-mode .filter-btn {
+            background: #3a3a3c;
+        }
+        body.light-mode .tech-badge,
+        body.light-mode .filter-btn {
+            background: #e0e0e0;
+            color: #1d1d1f;
+        }
+        body.dark-mode .tech-badge:hover,
+        body.dark-mode .filter-btn:hover {
+            background: #4a4a4c;
+        }
+        body.light-mode .tech-badge:hover,
+        body.light-mode .filter-btn:hover {
+            background: #d0d0d0;
+        }
+        body.dark-mode #mobileMenu {
+            background: #2c2c2e;
+            border-color: #3a3a3c;
+        }
+        body.light-mode #mobileMenu {
+            background: #f5f5f7;
+            border-color: #d0d0d0;
+        }
+        body.dark-mode input,
+        body.dark-mode textarea {
+            background: #3a3a3c;
+            border-color: #4a4a4c;
+            color: #ffffff;
+        }
+        body.light-mode input,
+        body.light-mode textarea {
+            background: #ffffff;
+            border-color: #d0d0d0;
+            color: #1d1d1f;
+        }
+        body.dark-mode .header-sticky {
+            background: rgba(29, 29, 31, 0.8);
+        }
+        body.light-mode .header-sticky {
+            background: rgba(255, 255, 255, 0.8);
+        }
+        body.dark-mode #menuBtn,
+        body.dark-mode #menuIcon {
+            color: #ffffff;
+        }
+        body.light-mode #menuBtn,
+        body.light-mode #menuIcon {
+            color: #1d1d1f;
+        }
+
+        .apple-block {
             border-radius: 18px;
             padding: 24px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -71,8 +216,6 @@
             z-index: 1000;
         }
         .tech-badge {
-            background: #3a3a3c;
-            color: #ffffff;
             border-radius: 20px;
             padding: 6px 14px;
             font-size: 0.9rem;
@@ -80,16 +223,11 @@
             transition: background 0.2s ease;
             margin: 4px;
         }
-        .tech-badge:hover {
-            background: #4a4a4c;
-        }
         .section-border {
             border-radius: 18px;
-            background: #2c2c2e;
             padding: 24px;
         }
         .header-sticky {
-            background: rgba(29, 29, 31, 0.8);
             backdrop-filter: blur(10px);
             z-index: 1000;
         }
@@ -98,8 +236,6 @@
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            background: #2c2c2e;
-            border-color: #3a3a3c;
         }
         #mobileMenu.open {
             max-height: 500px;
@@ -109,15 +245,12 @@
             z-index: 1010;
         }
         .nav-link {
-            color: #ffffff;
             transition: color 0.2s ease;
         }
         .nav-link:hover {
             color: #0a84ff;
         }
         .filter-btn {
-            background: #3a3a3c;
-            color: #ffffff;
             border-radius: 20px;
             padding: 6px 14px;
             font-size: 0.9rem;
@@ -132,14 +265,22 @@
         .random-image img {
             transition: opacity 0.5s ease;
         }
+        #theme-toggle svg {
+            width: 24px;
+            height: 24px;
+        }
     </style>
-    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 </head>
-<body>
+<body class="dark-mode">
+    <!-- Falling Stars -->
+    <div class="shooting-star"></div>
+    <div class="shooting-star2"></div>
+    <div class="shooting-star3"></div>
+
     <!-- Header -->
     <header class="header-sticky p-4 sticky top-0">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="/" class="text-xl md:text-2xl font-semibold text-[#ffffff]" aria-label="Anuveshana Technologies Logo">Anuveshana Technologies</a>
+            <a href="/" class="text-xl md:text-2xl font-semibold" aria-label="Anuveshana Technologies Logo">Anuveshana Technologies</a>
             <nav class="hidden md:flex space-x-8 text-base mx-auto" aria-label="Main navigation">
                 <a href="#services" class="nav-link" aria-label="Services">Services</a>
                 <a href="#projects" class="nav-link" aria-label="Projects">Projects</a>
@@ -148,9 +289,16 @@
                 <a href="#reviews" class="nav-link" aria-label="Reviews">Reviews</a>
                 <a href="#contact" class="nav-link" aria-label="Contact">Contact</a>
             </nav>
-            <button id="menuBtn" class="md:hidden text-2xl text-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#0a84ff] p-2" aria-label="Toggle mobile menu">
-                <span id="menuIcon">☰</span>
-            </button>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="apple-btn p-2" aria-label="Toggle theme">
+                    <svg id="theme-icon" class="moon-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path>
+                    </svg>
+                </button>
+                <button id="menuBtn" class="md:hidden text-2xl focus:outline-none focus:ring-2 focus:ring-[#0a84ff] p-2" aria-label="Toggle mobile menu">
+                    <span id="menuIcon">☰</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -165,47 +313,47 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="text-center py-20 bg-gradient-to-b from-[#1d1d1f] to-[#2c2c2e] px-6">
-        <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in text-[#ffffff]">Innovation in Robotics</h2>
+    <section class="text-center py-20 bg-gradient-to-b from-transparent to-[#2c2c2e] px-6">
+        <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Innovation in Robotics</h2>
         <p class="max-w-2xl mx-auto mb-8 text-lg text-[#d2d2d7] animate-fade-in">Transforming industries with advanced robotics, electronics, 3D printing, and automation solutions.</p>
         <a href="#contact" class="inline-block apple-btn text-base font-medium shadow-md">Start Your Project</a>
     </section>
 
     <!-- Random Project Image Section (Project Spotlight) -->
     <section id="random-image" class="py-16 px-6 max-w-7xl mx-auto section-border animate-on-scroll mt-10">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#ffffff] animate-fade-in">Project Spotlight</h3>
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Project Spotlight</h3>
         <div class="apple-block p-6 text-center">
-            <img id="randomImage" src="robotics-project.jpg" alt="Random Project Image" class="h-64 mx-auto mb-4 object-cover rounded-lg random-image" loading="lazy">
+            <img id="randomImage" src="https://via.placeholder.com/600x400?text=Robotics+Project" alt="Random Project Image" class="h-64 mx-auto mb-4 object-cover rounded-lg random-image" loading="lazy">
             <p id="randomImageCaption" class="text-[#d2d2d7]">Explore our latest innovation in robotics.</p>
         </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="py-16 px-6 max-w-7xl mx-auto animate-on-scroll">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#ffffff] animate-fade-in">Our Services</h3>
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Services</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#ffffff]">3D Printing</h4>
+                <h4 class="text-xl font-semibold mb-3">3D Printing</h4>
                 <p class="text-[#d2d2d7]">High-precision prototyping and production using cutting-edge 3D printing technologies.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#ffffff]">Product Design</h4>
+                <h4 class="text-xl font-semibold mb-3">Product Design</h4>
                 <p class="text-[#d2d2d7]">Comprehensive engineering from concept to market-ready solutions.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#ffffff]">Industrial Design</h4>
+                <h4 class="text-xl font-semibold mb-3">Industrial Design</h4>
                 <p class="text-[#d2d2d7]">Functional and aesthetic designs for next-generation products.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#ffffff]">Electronics</h4>
+                <h4 class="text-xl font-semibold mb-3">Electronics</h4>
                 <p class="text-[#d2d2d7]">Smart, efficient embedded systems customized for your needs.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#ffffff]">Robotics</h4>
+                <h4 class="text-xl font-semibold mb-3">Robotics</h4>
                 <p class="text-[#d2d2d7]">Intelligent automation tackling complex industrial challenges.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3 text-[#ffffff]">Software</h4>
+                <h4 class="text-xl font-semibold mb-3">Software</h4>
                 <p class="text-[#d2d2d7]">Scalable platforms for web, mobile, and enterprise applications.</p>
             </div>
         </div>
@@ -213,27 +361,27 @@
 
     <!-- Project Showcase Section (Featured Projects) -->
     <section id="projects" class="py-16 px-6 max-w-7xl mx-auto section-border animate-on-scroll">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#ffffff] animate-fade-in">Featured Projects</h3>
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Featured Projects</h3>
         <div class="relative overflow-hidden">
-            <div id="carousel" class="flex">
+            <div id="carousel" class="flex" role="region" aria-label="Project carousel">
                 <div class="carousel-item active min-w-full">
                     <div class="apple-block p-6 text-center">
-                        <img src="robotics-project.jpg" alt="Robotics Arm Project" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
-                        <h4 class="text-xl font-semibold mb-2 text-[#ffffff]">Robotic Arm</h4>
+                        <img src="https://via.placeholder.com/600x400?text=Robotics+Arm" alt="Robotics Arm Project" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
+                        <h4 class="text-xl font-semibold mb-2">Robotic Arm</h4>
                         <p class="text-[#d2d2d7]">Precision automation boosting manufacturing efficiency.</p>
                     </div>
                 </div>
                 <div class="carousel-item min-w-full">
                     <div class="apple-block p-6 text-center">
-                        <img src="3d-printing-project.jpg" alt="3D Printed Prototype" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
-                        <h4 class="text-xl font-semibold mb-2 text-[#ffffff]">3D Printed Device</h4>
+                        <img src="https://via.placeholder.com/600x400?text=3D+Printed+Device" alt="3D Printed Prototype" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
+                        <h4 class="text-xl font-semibold mb-2">3D Printed Device</h4>
                         <p class="text-[#d2d2d7]">High-precision prototype for medical applications.</p>
                     </div>
                 </div>
                 <div class="carousel-item min-w-full">
                     <div class="apple-block p-6 text-center">
-                        <img src="electronics-project.jpg" alt="Embedded System" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
-                        <h4 class="text-xl font-semibold mb-2 text-[#ffffff]">Smart Embedded</h4>
+                        <img src="https://via.placeholder.com/600x400?text=Smart+Embedded" alt="Embedded System" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
+                        <h4 class="text-xl font-semibold mb-2">Smart Embedded</h4>
                         <p class="text-[#d2d2d7]">IoT system for real-time factory monitoring.</p>
                     </div>
                 </div>
@@ -249,12 +397,12 @@
 
     <!-- Tech Stack Section -->
     <section id="tech-stack" class="py-16 px-6 max-w-7xl mx-auto section-border animate-on-scroll mt-10">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#ffffff] animate-fade-in">Our Tech Stack</h3>
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Tech Stack</h3>
         <div class="flex justify-center gap-6 mb-8">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="programming">Programming</button>
-            <button class="filter-btn" data-filter="hardware">Hardware</button>
-            <button class="filter-btn" data-filter="software">Software</button>
+            <button class="filter-btn active" data-filter="all" aria-label="Show all technologies">All</button>
+            <button class="filter-btn" data-filter="programming" aria-label="Show programming technologies">Programming</button>
+            <button class="filter-btn" data-filter="hardware" aria-label="Show hardware technologies">Hardware</button>
+            <button class="filter-btn" data-filter="software" aria-label="Show software technologies">Software</button>
         </div>
         <div id="techList" class="flex flex-wrap justify-center gap-6">
             <span class="tech-badge" data-category="programming">Python</span>
@@ -271,32 +419,32 @@
     </section>
 
     <!-- Clients Section -->
-    <section id="clients" class="bg-[#1d1d1f] py-16 px-6 section-border animate-on-scroll">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#ffffff] animate-fade-in">Our Partners</h3>
+    <section id="clients" class="py-16 px-6 section-border animate-on-scroll">
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Partners</h3>
         <div class="flex flex-wrap justify-center items-center gap-12">
-            <img src="samsung-logo.png" alt="Samsung logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
-            <img src="toyota-logo.png" alt="Toyota logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
-            <img src="ausa-logo.png" alt="AUSA Medical Devices logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
-            <img src="carclo-logo.png" alt="Carclo logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
-            <img src="phoenix-logo.png" alt="Phoenix Projects logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
+            <img src="https://via.placeholder.com/150x50?text=Samsung" alt="Samsung logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
+            <img src="https://via.placeholder.com/150x50?text=Toyota" alt="Toyota logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
+            <img src="https://via.placeholder.com/150x50?text=AUSA" alt="AUSA Medical Devices logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
+            <img src="https://via.placeholder.com/150x50?text=Carclo" alt="Carclo logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
+            <img src="https://via.placeholder.com/150x50?text=Phoenix" alt="Phoenix Projects logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
         </div>
     </section>
 
     <!-- Reviews Section -->
     <section id="reviews" class="py-16 px-6 max-w-5xl mx-auto animate-on-scroll">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#ffffff] animate-fade-in">Testimonials</h3>
+        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Testimonials</h3>
         <div class="space-y-10">
             <div class="apple-block p-8 animate-fade-in">
                 <p class="text-[#d2d2d7] italic">“Anuveshana’s 3D printing expertise significantly reduced our prototyping time.”</p>
-                <p class="text-right mt-3 font-semibold text-[#ffffff]">– Engineering Manager, Samsung</p>
+                <p class="text-right mt-3 font-semibold">– Engineering Manager, Samsung</p>
             </div>
             <div class="apple-block p-8 animate-fade-in">
                 <p class="text-[#d2d2d7] italic">“Their embedded systems greatly improved our operational efficiency.”</p>
-                <p class="text-right mt-3 font-semibold text-[#ffffff]">– Project Lead, Toyota</p>
+                <p class="text-right mt-3 font-semibold">– Project Lead, Toyota</p>
             </div>
             <div class="apple-block p-8 animate-fade-in">
                 <p class="text-[#d2d2d7] italic">“A reliable partner for our robotics and automation projects.”</p>
-                <p class="text-right mt-3 font-semibold text-[#ffffff]">– Operations Head, Phoenix Projects</p>
+                <p class="text-right mt-3 font-semibold">– Operations Head, Phoenix Projects</p>
             </div>
         </div>
         <div class="text-center mt-10">
@@ -305,15 +453,15 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="bg-[#1d1d1f] py-16 px-6 section-border animate-on-scroll">
+    <section id="contact" class="py-16 px-6 section-border animate-on-scroll">
         <div class="max-w-2xl mx-auto text-center">
-            <h3 class="text-3xl md:text-4xl font-bold mb-8 text-[#ffffff] animate-fade-in">Let’s Innovate Together</h3>
-            <p class="mb-8 text-[#d2d2d7] text-lg">Ready to advance with robotics, electronics, or automation? Contact us today.</p>
+            <h3 class="text-3xl md:text-4xl font-bold mb-8 animate-fade-in">Let’s Innovate Together</h3>
+            <p class="mb-8 text-lg text-[#d2d2d7]">Ready to advance with robotics, electronics, or automation? Contact us today.</p>
             <div class="apple-block p-8">
-                <div class="space-y-6">
-                    <input type="text" id="name" placeholder="Your Name" class="w-full p-3 bg-[#3a3a3c] border border-[#4a4a4c] rounded-md text-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#0a84ff]" required aria-label="Your Name">
-                    <input type="email" id="email" placeholder="Your Email" class="w-full p-3 bg-[#3a3a3c] border border-[#4a4a4c] rounded-md text-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#0a84ff]" required aria-label="Your Email">
-                    <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 bg-[#3a3a3c] border border-[#4a4a4c] rounded-md text-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#0a84ff]" required aria-label="Your Message"></textarea>
+                <form class="space-y-6">
+                    <input type="text" id="name" placeholder="Your Name" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a84ff]" required aria-label="Your Name">
+                    <input type="email" id="email" placeholder="Your Email" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a84ff]" required aria-label="Your Email">
+                    <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a84ff]" required aria-label="Your Message"></textarea>
                     <button id="contactSubmit" class="w-full apple-btn p-3 font-medium flex items-center justify-center" disabled aria-label="Send Message">
                         <span id="buttonText">Send Message</span>
                         <svg id="loadingSpinner" class="hidden animate-spin h-5 w-5 ml-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -322,10 +470,10 @@
                         </svg>
                     </button>
                     <p id="formMessage" class="text-sm text-[#d2d2d7] hidden"></p>
-                </div>
+                </form>
             </div>
-            <p class="font-medium mt-6 text-[#ffffff]">Email: <a href="mailto:contact@anuveshana.tech" class="text-[#0a84ff] hover:underline">contact@anuveshana.tech</a></p>
-            <p class="font-medium text-[#ffffff]">Phone: +91-XXXXXXXXXX</p>
+            <p class="font-medium mt-6">Email: <a href="mailto:contact@anuveshana.tech" class="text-[#0a84ff] hover:underline">contact@anuveshana.tech</a></p>
+            <p class="font-medium">Phone: +91-XXXXXXXXXX</p>
         </div>
     </section>
 
@@ -337,54 +485,66 @@
     </button>
 
     <!-- Footer -->
-    <footer class="bg-[#1d1d1f] border-t border-[#4a4a4c] text-[#d2d2d7] text-center p-6 text-sm">
+    <footer class="border-t border-[#4a4a4c] text-[#d2d2d7] text-center p-6 text-sm">
         <p>© 2025 Anuveshana Technologies. All rights reserved.</p>
     </footer>
 
     <!-- Scripts -->
     <script>
-        // Mobile Menu Toggle
         document.addEventListener('DOMContentLoaded', () => {
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const setTheme = (theme) => {
+                document.body.classList.toggle('light-mode', theme === 'light');
+                document.body.classList.toggle('dark-mode', theme === 'dark');
+                themeIcon.classList.toggle('moon-icon', theme === 'dark');
+                themeIcon.classList.toggle('sun-icon', theme === 'light');
+                themeIcon.innerHTML = theme === 'dark' 
+                    ? '<path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path>'
+                    : '<path d="M12 17a5 5 0 100-10 5 5 0 000 10zm0 2v3m0-17v-3m5 12h3m-17 0h-3m14.14 2.86l2.12 2.12M4.74 4.74l2.12 2.12m12.4 0l-2.12 2.12M4.74 19.26l2.12-2.12"></path>';
+                localStorage.setItem('theme', theme);
+            };
+            const initializeTheme = () => {
+                const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                setTheme(savedTheme);
+            };
+            initializeTheme();
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = localStorage.getItem('theme') === 'light' ? 'dark' : 'light';
+                setTheme(currentTheme);
+            });
+
+            // Mobile Menu Toggle
             const menuBtn = document.getElementById('menuBtn');
             const menuIcon = document.getElementById('menuIcon');
             const mobileMenu = document.getElementById('mobileMenu');
-
-            if (!menuBtn || !menuIcon || !mobileMenu) {
-                console.error('Mobile menu elements not found:', { menuBtn: !!menuBtn, menuIcon: !!menuIcon, mobileMenu: !!mobileMenu });
-                return;
-            }
-
             const toggleMenu = () => {
-                try {
-                    const isOpen = mobileMenu.classList.contains('open');
-                    mobileMenu.classList.toggle('open', !isOpen);
-                    menuIcon.textContent = isOpen ? '☰' : '✕';
-                    menuBtn.setAttribute('aria-label', isOpen ? 'Open mobile menu' : 'Close mobile menu');
-                    console.log('Mobile menu toggled:', { isOpen: !isOpen });
-                } catch (error) {
-                    console.error('Error toggling mobile menu:', error);
-                }
+                const isOpen = mobileMenu.classList.contains('open');
+                mobileMenu.classList.toggle('open', !isOpen);
+                menuIcon.textContent = isOpen ? '☰' : '✕';
+                menuBtn.setAttribute('aria-label', isOpen ? 'Open mobile menu' : 'Close mobile menu');
             };
-
-            menuBtn.addEventListener('click', toggleMenu);
-            menuBtn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                toggleMenu();
-            });
-
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('open');
-                    menuIcon.textContent = '☰';
-                    menuBtn.setAttribute('aria-label', 'Open mobile menu');
+            if (menuBtn && menuIcon && mobileMenu) {
+                menuBtn.addEventListener('click', toggleMenu);
+                menuBtn.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    toggleMenu();
                 });
-            });
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.remove('open');
+                        menuIcon.textContent = '☰';
+                        menuBtn.setAttribute('aria-label', 'Open mobile menu');
+                    });
+                });
+            }
 
             // Random Image Section
             const projectImages = [
-                { src: 'robotics-project.jpg', caption: 'Precision robotics for industrial automation.' },
-                { src: '3d-printing-project.jpg', caption: 'High-precision 3D printed medical prototype.' },
-                { src: 'electronics-project.jpg', caption: 'Smart IoT system for real-time monitoring.' },
+                { src: 'https://via.placeholder.com/600x400?text=Robotics+Project', caption: 'Precision robotics for industrial automation.' },
+                { src: 'https://via.placeholder.com/600x400?text=3D+Printing+Project', caption: 'High-precision 3D printed medical prototype.' },
+                { src: 'https://via.placeholder.com/600x400?text=Electronics+Project', caption: 'Smart IoT system for real-time monitoring.' },
             ];
             function setRandomImage() {
                 const randomIndex = Math.floor(Math.random() * projectImages.length);
@@ -443,7 +603,9 @@
             function showSlide(index) {
                 items.forEach((item, i) => {
                     item.classList.toggle('active', i === index);
+                    item.setAttribute('aria-hidden', i !== index);
                 });
+                carousel.setAttribute('aria-live', 'polite');
             }
 
             prevBtn.addEventListener('click', () => {
@@ -454,6 +616,14 @@
             nextBtn.addEventListener('click', () => {
                 currentIndex = (currentIndex + 1) % items.length;
                 showSlide(currentIndex);
+            });
+
+            carousel.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevBtn.click();
+                } else if (e.key === 'ArrowRight') {
+                    nextBtn.click();
+                }
             });
 
             setInterval(() => {

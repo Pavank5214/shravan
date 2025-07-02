@@ -9,205 +9,112 @@
     <title>Anuveshana Technologies | Innovation in Robotics</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
     <style>
+        :root {
+            --bg-primary: #f5f5f7;
+            --bg-secondary: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --accent: #0071e3;
+            --accent-hover: #005bb5;
+            --border: #d2d2d7;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1c2526;
+            --bg-secondary: #2a2e2e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #1e90ff;
+            --accent-hover: #4682b4;
+            --border: #444444;
+            --shadow: rgba(255, 255, 255, 0.1);
+        }
+
         html {
             scroll-behavior: smooth;
         }
+
         body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            position: relative;
-            min-height: 100vh;
-            overflow-x: hidden;
-            background: #1d1d1f;
-            color: #ffffff;
             transition: background 0.3s ease, color 0.3s ease;
-        }
-        body.light-mode {
-            background: #ffffff;
-            color: #1d1d1f;
-        }
-
-        /* Background with Stars and Mountains */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: linear-gradient(to bottom, #0a1a3b, #1d1d1f);
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%232c2c2e" fill-opacity="1" d="M0,192L48,176C96,160,192,128,288,138.7C384,149,480,203,576,213.3C672,224,768,192,864,181.3C960,171,1056,181,1152,192C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,0,320Z"></path></svg>');
-            background-size: cover;
-            background-position: bottom;
-        }
-        body.light-mode::before {
-            background: linear-gradient(to bottom, #87ceeb, #e0f7fa);
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23808080" fill-opacity="1" d="M0,192L48,176C96,160,192,128,288,138.7C384,149,480,203,576,213.3C672,224,768,192,864,181.3C960,171,1056,181,1152,192C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,0,320Z"></path></svg>');
-            background-size: cover;
-            background-position: bottom;
-        }
-
-        /* Falling Star Animation (Dark Mode Only) */
-        .shooting-star, .shooting-star2, .shooting-star3 {
-            position: fixed;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-            width: 2px;
-            height: 50px;
-            transform: rotate(-45deg);
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0;
-        }
-        body.dark-mode .shooting-star {
-            animation: shootingStar 2.5s ease-in infinite;
-            left: 15%;
-            animation-delay: 0.3s;
-        }
-        body.dark-mode .shooting-star2 {
-            animation: shootingStar 3s ease-in infinite;
-            left: 50%;
-            animation-delay: 1s;
-        }
-        body.dark-mode .shooting-star3 {
-            animation: shootingStar 2.8s ease-in infinite;
-            left: 85%;
-            animation-delay: 1.5s;
-        }
-        @keyframes shootingStar {
-            0% {
-                opacity: 0;
-                transform: translate(0, -100vh) rotate(-45deg);
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translate(70vw, 100vh) rotate(-45deg);
-            }
-        }
-
-        /* Theme-Specific Styles */
-        body.dark-mode .apple-block,
-        body.dark-mode .section-border {
-            background: #2c2c2e;
-        }
-        body.light-mode .apple-block,
-        body.light-mode .section-border {
-            background: #f5f5f7;
-        }
-        body.dark-mode .nav-link,
-        body.dark-mode h2,
-        body.dark-mode h3,
-        body.dark-mode h4,
-        body.dark-mode p:not(.text-[#d2d2d7]) {
-            color: #ffffff;
-        }
-        body.light-mode .nav-link,
-        body.light-mode h2,
-        body.light-mode h3,
-        body.light-mode h4,
-        body.light-mode p:not(.text-[#d2d2d7]) {
-            color: #1d1d1f;
-        }
-        body.dark-mode .tech-badge,
-        body.dark-mode .filter-btn {
-            background: #3a3a3c;
-        }
-        body.light-mode .tech-badge,
-        body.light-mode .filter-btn {
-            background: #e0e0e0;
-            color: #1d1d1f;
-        }
-        body.dark-mode .tech-badge:hover,
-        body.dark-mode .filter-btn:hover {
-            background: #4a4a4c;
-        }
-        body.light-mode .tech-badge:hover,
-        body.light-mode .filter-btn:hover {
-            background: #d0d0d0;
-        }
-        body.dark-mode #mobileMenu {
-            background: #2c2c2e;
-            border-color: #3a3a3c;
-        }
-        body.light-mode #mobileMenu {
-            background: #f5f5f7;
-            border-color: #d0d0d0;
-        }
-        body.dark-mode input,
-        body.dark-mode textarea {
-            background: #3a3a3c;
-            border-color: #4a4a4c;
-            color: #ffffff;
-        }
-        body.light-mode input,
-        body.light-mode textarea {
-            background: #ffffff;
-            border-color: #d0d0d0;
-            color: #1d1d1f;
-        }
-        body.dark-mode .header-sticky {
-            background: rgba(29, 29, 31, 0.8);
-        }
-        body.light-mode .header-sticky {
-            background: rgba(255, 255, 255, 0.8);
-        }
-        body.dark-mode #menuBtn,
-        body.dark-mode #menuIcon {
-            color: #ffffff;
-        }
-        body.light-mode #menuBtn,
-        body.light-mode #menuIcon {
-            color: #1d1d1f;
         }
 
         .apple-block {
+            background: var(--bg-secondary);
             border-radius: 18px;
             padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 16px;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
         }
+
         .apple-block:hover {
             transform: translateY(-4px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 16px var(--shadow);
         }
+
         .animate-fade-in {
             animation: fadeIn 1s ease-out;
         }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         .apple-btn {
-            background: #0a84ff;
+            background: var(--accent);
             color: #ffffff;
             border-radius: 30px;
             padding: 10px 20px;
             font-weight: 600;
-            transition: background 0.2s ease;
+            transition: background 0.2s ease, transform 0.2s ease;
         }
+
         .apple-btn:hover {
-            background: #0066cc;
+            background: var(--accent-hover);
+            transform: scale(1.05);
         }
+
+        .apple-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.3);
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+
         .carousel-item {
             transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
-        }
-        .carousel-item:not(.active) {
-            transform: translateX(100%);
+            position: absolute;
+            width: 100%;
             opacity: 0;
         }
+
         .carousel-item.active {
-            transform: translateX(0);
+            position: relative;
             opacity: 1;
+            transform: translateX(0);
         }
+
+        .carousel-item:not(.active) {
+            transform: translateX(100%);
+        }
+
+        .carousel-item img {
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
         .carousel-item:hover img {
             transform: scale(1.03);
             filter: brightness(1.05);
         }
+
         #backToTop {
             position: fixed;
             bottom: 20px;
@@ -215,175 +122,172 @@
             display: none;
             z-index: 1000;
         }
+
         .tech-badge {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
             border-radius: 20px;
             padding: 6px 14px;
             font-size: 0.9rem;
             font-weight: 500;
-            transition: background 0.2s ease;
-            margin: 4px;
+            transition: background 0.2s ease, transform 0.2s ease;
         }
+
+        .tech-badge:hover {
+            background: var(--border);
+            transform: scale(1.05);
+        }
+
         .section-border {
             border-radius: 18px;
-            padding: 24px;
+            background: var(--bg-secondary);
+            box-shadow: 0 2px 8px var(--shadow);
         }
+
         .header-sticky {
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
-            z-index: 1000;
         }
-        #mobileMenu {
-            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
+
+        [data-theme="dark"] .header-sticky {
+            background: rgba(0, 0, 0, 0.8);
         }
-        #mobileMenu.open {
-            max-height: 500px;
-            opacity: 1;
+
+        .mobile-menu {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
         }
-        #menuBtn {
-            z-index: 1010;
+
+        .mobile-menu.open {
+            transform: translateY(0);
         }
-        .nav-link {
-            transition: color 0.2s ease;
+
+        .image-placeholder {
+            background: var(--border);
+            animation: pulse 1.5s infinite;
         }
-        .nav-link:hover {
-            color: #0a84ff;
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
         }
-        .filter-btn {
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: background 0.2s ease;
-            margin: 4px;
+
+        input, textarea {
+            transition: background 0.3s ease, border 0.3s ease;
         }
-        .filter-btn.active, .filter-btn:hover {
-            background: #0a84ff;
-            color: #ffffff;
-        }
-        .random-image img {
-            transition: opacity 0.5s ease;
-        }
-        #theme-toggle svg {
-            width: 24px;
-            height: 24px;
+
+        input:focus, textarea:focus {
+            background: var(--bg-primary);
+            border-color: var(--accent);
         }
     </style>
+    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 </head>
-<body class="dark-mode">
-    <!-- Falling Stars -->
-    <div class="shooting-star"></div>
-    <div class="shooting-star2"></div>
-    <div class="shooting-star3"></div>
-
+<body>
     <!-- Header -->
-    <header class="header-sticky p-4 sticky top-0">
+    <header class="p-4 sticky top-0 z-10 header-sticky">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="/" class="text-xl md:text-2xl font-semibold" aria-label="Anuveshana Technologies Logo">Anuveshana Technologies</a>
-            <nav class="hidden md:flex space-x-8 text-base mx-auto" aria-label="Main navigation">
-                <a href="#services" class="nav-link" aria-label="Services">Services</a>
-                <a href="#projects" class="nav-link" aria-label="Projects">Projects</a>
-                <a href="#tech-stack" class="nav-link" aria-label="Tech Stack">Tech Stack</a>
-                <a href="#clients" class="nav-link" aria-label="Clients">Clients</a>
-                <a href="#reviews" class="nav-link" aria-label="Reviews">Reviews</a>
-                <a href="#contact" class="nav-link" aria-label="Contact">Contact</a>
+            <h1 class="text-xl md:text-2xl font-semibold" aria-label="Anuveshana Technologies Logo">Anuveshana Technologies</h1>
+            <nav class="hidden md:flex space-x-8 text-base" aria-label="Main navigation">
+                <a href="#services" class="hover:text-[var(--accent)] transition-colors">Services</a>
+                <a href="#projects" class="hover:text-[var(--accent)] transition-colors">Projects</a>
+                <a href="#tech-stack" class="hover:text-[var(--accent)] transition-colors">Tech Stack</a>
+                <a href="#clients" class="hover:text-[var(--accent)] transition-colors">Clients</a>
+                <a href="#reviews" class="hover:text-[var(--accent)] transition-colors">Reviews</a>
+                <a href="#contact" class="hover:text-[var(--accent)] transition-colors">Contact</a>
             </nav>
-            <div class="flex items-center gap-4">
-                <button id="theme-toggle" class="apple-btn p-2" aria-label="Toggle theme">
-                    <svg id="theme-icon" class="moon-icon" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path>
+            <div class="flex items-center space-x-4">
+                <button id="themeToggle" class="apple-btn p-2" aria-label="Toggle dark mode">
+                    <svg id="themeIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                     </svg>
                 </button>
-                <button id="menuBtn" class="md:hidden text-2xl focus:outline-none focus:ring-2 focus:ring-[#0a84ff] p-2" aria-label="Toggle mobile menu">
-                    <span id="menuIcon">☰</span>
+                <button id="menuBtn" class="md:hidden text-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" aria-label="Toggle mobile menu">
+                    ☰
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="border-b p-4 flex flex-col space-y-3 md:hidden">
-        <a href="#services" class="nav-link" aria-label="Services">Services</a>
-        <a href="#projects" class="nav-link" aria-label="Projects">Projects</a>
-        <a href="#tech-stack" class="nav-link" aria-label="Tech Stack">Tech Stack</a>
-        <a href="#clients" class="nav-link" aria-label="Clients">Clients</a>
-        <a href="#reviews" class="nav-link" aria-label="Reviews">Reviews</a>
-        <a href="#contact" class="nav-link" aria-label="Contact">Contact</a>
+    <div id="mobileMenu" class="hidden mobile-menu bg-[var(--bg-secondary)] border-b border-[var(--border)] p-4 flex flex-col space-y-3 md:hidden">
+        <a href="#services" class="hover:text-[var(--accent)] transition-colors">Services</a>
+        <a href="#projects" class="hover:text-[var(--accent)] transition-colors">Projects</a>
+        <a href="#tech-stack" class="hover:text-[var(--accent)] transition-colors">Tech Stack</a>
+        <a href="#clients" class="hover:text-[var(--accent)] transition-colors">Clients</a>
+        <a href="#reviews" class="hover:text-[var(--accent)] transition-colors">Reviews</a>
+        <a href="#contact" class="hover:text-[var(--accent)] transition-colors">Contact</a>
     </div>
 
     <!-- Hero Section -->
-    <section class="text-center py-20 bg-gradient-to-b from-transparent to-[#2c2c2e] px-6">
+    <section class="text-center py-20 bg-gradient-to-b from-[var(--bg-primary)] to-[var(--bg-secondary)] px-4">
         <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Innovation in Robotics</h2>
-        <p class="max-w-2xl mx-auto mb-8 text-lg text-[#d2d2d7] animate-fade-in">Transforming industries with advanced robotics, electronics, 3D printing, and automation solutions.</p>
+        <p class="max-w-2xl mx-auto mb-8 text-lg text-[var(--text-secondary)] animate-fade-in">Transforming industries with advanced robotics, electronics, 3D printing, and automation solutions.</p>
         <a href="#contact" class="inline-block apple-btn text-base font-medium shadow-md">Start Your Project</a>
     </section>
 
-    <!-- Random Project Image Section (Project Spotlight) -->
-    <section id="random-image" class="py-16 px-6 max-w-7xl mx-auto section-border animate-on-scroll mt-10">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Project Spotlight</h3>
-        <div class="apple-block p-6 text-center">
-            <img id="randomImage" src="https://via.placeholder.com/600x400?text=Robotics+Project" alt="Random Project Image" class="h-64 mx-auto mb-4 object-cover rounded-lg random-image" loading="lazy">
-            <p id="randomImageCaption" class="text-[#d2d2d7]">Explore our latest innovation in robotics.</p>
-        </div>
-    </section>
-
     <!-- Services Section -->
-    <section id="services" class="py-16 px-6 max-w-7xl mx-auto animate-on-scroll">
+    <section id="services" class="py-16 px-4 max-w-7xl mx-auto">
         <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Services</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="apple-block p-6 animate-fade-in">
                 <h4 class="text-xl font-semibold mb-3">3D Printing</h4>
-                <p class="text-[#d2d2d7]">High-precision prototyping and production using cutting-edge 3D printing technologies.</p>
+                <p class="text-[var(--text-secondary)]">High-precision prototyping and production using cutting-edge 3D printing technologies.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
                 <h4 class="text-xl font-semibold mb-3">Product Design</h4>
-                <p class="text-[#d2d2d7]">Comprehensive engineering from concept to market-ready solutions.</p>
+                <p class="text-[var(--text-secondary)]">Comprehensive engineering from concept to market-ready solutions.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
                 <h4 class="text-xl font-semibold mb-3">Industrial Design</h4>
-                <p class="text-[#d2d2d7]">Functional and aesthetic designs for next-generation products.</p>
+                <p class="text-[var(--text-secondary)]">Functional and aesthetic designs for next-generation products.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
                 <h4 class="text-xl font-semibold mb-3">Electronics</h4>
-                <p class="text-[#d2d2d7]">Smart, efficient embedded systems customized for your needs.</p>
+                <p class="text-[var(--text-secondary)]">Smart, efficient embedded systems customized for your needs.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
                 <h4 class="text-xl font-semibold mb-3">Robotics</h4>
-                <p class="text-[#d2d2d7]">Intelligent automation tackling complex industrial challenges.</p>
+                <p class="text-[var(--text-secondary)]">Intelligent automation tackling complex industrial challenges.</p>
             </div>
             <div class="apple-block p-6 animate-fade-in">
                 <h4 class="text-xl font-semibold mb-3">Software</h4>
-                <p class="text-[#d2d2d7]">Scalable platforms for web, mobile, and enterprise applications.</p>
+                <p class="text-[var(--text-secondary)]">Scalable platforms for web, mobile, and enterprise applications.</p>
             </div>
         </div>
     </section>
 
-    <!-- Project Showcase Section (Featured Projects) -->
-    <section id="projects" class="py-16 px-6 max-w-7xl mx-auto section-border animate-on-scroll">
+    <!-- Project Showcase Section -->
+    <section id="projects" class="py-16 px-4 max-w-7xl mx-auto section-border">
         <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Featured Projects</h3>
-        <div class="relative overflow-hidden">
-            <div id="carousel" class="flex" role="region" aria-label="Project carousel">
-                <div class="carousel-item active min-w-full">
+        <div class="carousel-container">
+            <div id="carousel" class="relative">
+                <div class="carousel-item active">
                     <div class="apple-block p-6 text-center">
-                        <img src="https://via.placeholder.com/600x400?text=Robotics+Arm" alt="Robotics Arm Project" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
+                        <div class="h-64 mx-auto mb-4 rounded-lg overflow-hidden">
+                            <img src="robotics-project.jpg" alt="Robotics Arm Project" class="h-full w-full object-cover" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
+                        </div>
                         <h4 class="text-xl font-semibold mb-2">Robotic Arm</h4>
-                        <p class="text-[#d2d2d7]">Precision automation boosting manufacturing efficiency.</p>
+                        <p class="text-[var(--text-secondary)]">Precision automation boosting manufacturing efficiency.</p>
                     </div>
                 </div>
-                <div class="carousel-item min-w-full">
+                <div class="carousel-item">
                     <div class="apple-block p-6 text-center">
-                        <img src="https://via.placeholder.com/600x400?text=3D+Printed+Device" alt="3D Printed Prototype" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
+                        <div class="h-64 mx-auto mb-4 rounded-lg overflow-hidden image-placeholder">
+                            <img src="3d-printing-project.jpg" alt="3D Printed Prototype" class="h-full w-full object-cover" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
+                        </div>
                         <h4 class="text-xl font-semibold mb-2">3D Printed Device</h4>
-                        <p class="text-[#d2d2d7]">High-precision prototype for medical applications.</p>
+                        <p class="text-[var(--text-secondary)]">High-precision prototype for medical applications.</p>
                     </div>
                 </div>
-                <div class="carousel-item min-w-full">
-                    <div class="apple-block p-6 text-center">
-                        <img src="https://via.placeholder.com/600x400?text=Smart+Embedded" alt="Embedded System" class="h-64 mx-auto mb-4 object-cover rounded-lg" loading="lazy">
-                        <h4 class="text-xl font-semibold mb-2">Smart Embedded</h4>
-                        <p class="text-[#d2d2d7]">IoT system for real-time factory monitoring.</p>
+                <div class="carousel-item">
+                <div class="apple-block p-6 text-center">
+                    <div class="h-64 mx-auto mb-4 rounded-lg overflow-hidden image-placeholder">
+                        <img src="electronics-project.jpg" alt="Embedded System" class="h-full w-full object-cover" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
                     </div>
+                    <h4 class="text-xl font-semibold mb-2">Smart Embedded</h4>
+                    <p class="text-[var(--text-secondary)]">IoT system for real-time factory monitoring.</p>
                 </div>
             </div>
             <button id="prevBtn" class="absolute top-1/2 left-4 transform -translate-y-1/2 apple-btn p-2" aria-label="Previous project">
@@ -396,72 +300,85 @@
     </section>
 
     <!-- Tech Stack Section -->
-    <section id="tech-stack" class="py-16 px-6 max-w-7xl mx-auto section-border animate-on-scroll mt-10">
+    <section id="tech-stack" class="py-16 px-4 max-w-7xl mx-auto section-border">
         <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Tech Stack</h3>
-        <div class="flex justify-center gap-6 mb-8">
-            <button class="filter-btn active" data-filter="all" aria-label="Show all technologies">All</button>
-            <button class="filter-btn" data-filter="programming" aria-label="Show programming technologies">Programming</button>
-            <button class="filter-btn" data-filter="hardware" aria-label="Show hardware technologies">Hardware</button>
-            <button class="filter-btn" data-filter="software" aria-label="Show software technologies">Software</button>
-        </div>
-        <div id="techList" class="flex flex-wrap justify-center gap-6">
-            <span class="tech-badge" data-category="programming">Python</span>
-            <span class="tech-badge" data-category="programming">C++</span>
-            <span class="tech-badge" data-category="software">ROS</span>
-            <span class="tech-badge" data-category="hardware">Arduino</span>
-            <span class="tech-badge" data-category="hardware">Raspberry Pi</span>
-            <span class="tech-badge" data-category="software">SolidWorks</span>
-            <span class="tech-badge" data-category="software">Fusion 360</span>
-            <span class="tech-badge" data-category="software">React</span>
-            <span class="tech-badge" data-category="software">Node.js</span>
-            <span class="tech-badge" data-category="software">TensorFlow</span>
+        <div class="flex flex-wrap justify-center gap-4">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">C++</span>
+            <span class="tech-badge">ROS</span>
+            <span class="tech-badge">Arduino</span>
+            <span class="tech-badge">Raspberry Pi</span>
+            <span class="tech-badge">SolidWorks</span>
+            <span class="tech-badge">Fusion 360</span>
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">Node.js</span>
+            <span class="tech-badge">TensorFlow</span>
         </div>
     </section>
 
     <!-- Clients Section -->
-    <section id="clients" class="py-16 px-6 section-border animate-on-scroll">
+    <section id="clients" class="py-16 px-4 section-border">
         <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Partners</h3>
-        <div class="flex flex-wrap justify-center items-center gap-12">
-            <img src="https://via.placeholder.com/150x50?text=Samsung" alt="Samsung logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
-            <img src="https://via.placeholder.com/150x50?text=Toyota" alt="Toyota logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
-            <img src="https://via.placeholder.com/150x50?text=AUSA" alt="AUSA Medical Devices logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
-            <img src="https://via.placeholder.com/150x50?text=Carclo" alt="Carclo logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
-            <img src="https://via.placeholder.com/150x50?text=Phoenix" alt="Phoenix Projects logo" class="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy">
+        <div class="flex flex-wrap justify-center items-center gap-8">
+            <div class="h-12 md:h-16 image-placeholder">
+                <img src="samsung-logo.png" alt="Samsung logo" class="h-full object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
+            </div>
+            <div class="h-12 md:h-16 image-placeholder">
+                <img src="toyota-logo.png" alt="Toyota logo" class="h-full object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
+            </div>
+            <div class="h-12 md:h-16 image-placeholder">
+                <img src="ausa-logo.png" alt="AUSA Medical Devices logo" class="h-full object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
+            </div>
+            <div class="h-12 md:h-16 image-placeholder">
+                <img src="carclo-logo.png" alt="Carclo logo" class="h-full object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
+            </div>
+            <div class="h-12 md:h-16 image-placeholder">
+                <img src="phoenix-logo.png" alt="Phoenix Projects logo" class="h-full object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
+            </div>
         </div>
     </section>
 
     <!-- Reviews Section -->
-    <section id="reviews" class="py-16 px-6 max-w-5xl mx-auto animate-on-scroll">
+    <section id="reviews" class="py-16 px-4 max-w-5xl mx-auto">
         <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Testimonials</h3>
-        <div class="space-y-10">
+        <div class="space-y-8">
             <div class="apple-block p-8 animate-fade-in">
-                <p class="text-[#d2d2d7] italic">“Anuveshana’s 3D printing expertise significantly reduced our prototyping time.”</p>
+                <p class="text-[var(--text-secondary)] italic">“Anuveshana’s 3D printing expertise significantly reduced our prototyping time.”</p>
                 <p class="text-right mt-3 font-semibold">– Engineering Manager, Samsung</p>
             </div>
             <div class="apple-block p-8 animate-fade-in">
-                <p class="text-[#d2d2d7] italic">“Their embedded systems greatly improved our operational efficiency.”</p>
+                <p class="text-[var(--text-secondary)] italic">“Their embedded systems greatly improved our operational efficiency.”</p>
                 <p class="text-right mt-3 font-semibold">– Project Lead, Toyota</p>
             </div>
             <div class="apple-block p-8 animate-fade-in">
-                <p class="text-[#d2d2d7] italic">“A reliable partner for our robotics and automation projects.”</p>
+                <p class="text-[var(--text-secondary)] italic">“A reliable partner for our robotics and automation projects.”</p>
                 <p class="text-right mt-3 font-semibold">– Operations Head, Phoenix Projects</p>
             </div>
         </div>
         <div class="text-center mt-10">
-            <a href="https://www.google.com/search?q=Anuveshana+Technologies+reviews" target="_blank" rel="noopener noreferrer" class="text-[#0a84ff] hover:underline transition-colors">More Reviews on Google</a>
+            <a href="https://www.google.com/search?q=Anuveshana+Technologies+reviews" target="_blank" rel="noopener noreferrer" class="text-[var(--accent)] hover:underline transition-colors">More Reviews on Google</a>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 px-6 section-border animate-on-scroll">
+    <section id="contact" class="py-16 px-4 section-border">
         <div class="max-w-2xl mx-auto text-center">
             <h3 class="text-3xl md:text-4xl font-bold mb-8 animate-fade-in">Let’s Innovate Together</h3>
-            <p class="mb-8 text-lg text-[#d2d2d7]">Ready to advance with robotics, electronics, or automation? Contact us today.</p>
+            <p class="mb-8 text-[var(--text-secondary)] text-lg">Ready to advance with robotics, electronics, or automation? Contact us today.</p>
             <div class="apple-block p-8">
-                <form class="space-y-6">
-                    <input type="text" id="name" placeholder="Your Name" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a84ff]" required aria-label="Your Name">
-                    <input type="email" id="email" placeholder="Your Email" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a84ff]" required aria-label="Your Email">
-                    <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a84ff]" required aria-label="Your Message"></textarea>
+                <div class="space-y-4">
+                    <div class="relative">
+                        <input type="text" id="name" placeholder="Your Name" class="w-full p-3 bg-[var(--bg-primary)] border border-[var(--border)] rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Name">
+                        <span id="nameError" class="text-sm text-red-600 hidden absolute -bottom-6 left-0"></span>
+                    </div>
+                    <div class="relative">
+                        <input type="email" id="email" placeholder="Your Email" class="w-full p-3 bg-[var(--bg-primary)] border border-[var(--border)] rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Email">
+                        <span id="emailError" class="text-sm text-red-600 hidden absolute -bottom-6 left-0"></span>
+                    </div>
+                    <div class="relative">
+                        <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 bg-[var(--bg-primary)] border border-[var(--border)] rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Message"></textarea>
+                        <span id="messageError" class="text-sm text-red-600 hidden absolute -bottom-6 left-0"></span>
+                    </div>
                     <button id="contactSubmit" class="w-full apple-btn p-3 font-medium flex items-center justify-center" disabled aria-label="Send Message">
                         <span id="buttonText">Send Message</span>
                         <svg id="loadingSpinner" class="hidden animate-spin h-5 w-5 ml-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -469,10 +386,10 @@
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
                         </svg>
                     </button>
-                    <p id="formMessage" class="text-sm text-[#d2d2d7] hidden"></p>
-                </form>
+                    <p id="formMessage" class="text-sm text-[var(--text-secondary)] hidden"></p>
+                </div>
             </div>
-            <p class="font-medium mt-6">Email: <a href="mailto:contact@anuveshana.tech" class="text-[#0a84ff] hover:underline">contact@anuveshana.tech</a></p>
+            <p class="font-medium mt-6">Email: <a href="mailto:contact@anuveshana.tech" class="text-[var(--accent)] hover:underline">contact@anuveshana.tech</a></p>
             <p class="font-medium">Phone: +91-XXXXXXXXXX</p>
         </div>
     </section>
@@ -485,206 +402,142 @@
     </button>
 
     <!-- Footer -->
-    <footer class="border-t border-[#4a4a4c] text-[#d2d2d7] text-center p-6 text-sm">
+    <footer class="border-t border-[var(--border)] text-[var(--text-secondary)] text-center p-6 text-sm">
         <p>© 2025 Anuveshana Technologies. All rights reserved.</p>
     </footer>
 
     <!-- Scripts -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Theme Toggle
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeIcon = document.getElementById('theme-icon');
-            const setTheme = (theme) => {
-                document.body.classList.toggle('light-mode', theme === 'light');
-                document.body.classList.toggle('dark-mode', theme === 'dark');
-                themeIcon.classList.toggle('moon-icon', theme === 'dark');
-                themeIcon.classList.toggle('sun-icon', theme === 'light');
-                themeIcon.innerHTML = theme === 'dark' 
-                    ? '<path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path>'
-                    : '<path d="M12 17a5 5 0 100-10 5 5 0 000 10zm0 2v3m0-17v-3m5 12h3m-17 0h-3m14.14 2.86l2.12 2.12M4.74 4.74l2.12 2.12m12.4 0l-2.12 2.12M4.74 19.26l2.12-2.12"></path>';
-                localStorage.setItem('theme', theme);
-            };
-            const initializeTheme = () => {
-                const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-                setTheme(savedTheme);
-            };
-            initializeTheme();
-            themeToggle.addEventListener('click', () => {
-                const currentTheme = localStorage.getItem('theme') === 'light' ? 'dark' : 'light';
-                setTheme(currentTheme);
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeIcon.innerHTML = theme === 'dark' ? 
+                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path>' : 
+                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
+            themeToggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+        };
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            setTheme(currentTheme === 'light' ? 'dark' : 'light');
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden', !isHidden);
+            mobileMenu.classList.toggle('open', isHidden);
+            menuBtn.textContent = isHidden ? '✕' : '☰';
+            menuBtn.setAttribute('aria-label', isHidden ? 'Close mobile menu' : '_toggle mobile menu');
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Carousel Functionality
+        const carousel = document.getElementById('carousel');
+        const items = carousel.querySelectorAll('.carousel-item');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            items.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
             });
+        }
 
-            // Mobile Menu Toggle
-            const menuBtn = document.getElementById('menuBtn');
-            const menuIcon = document.getElementById('menuIcon');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const toggleMenu = () => {
-                const isOpen = mobileMenu.classList.contains('open');
-                mobileMenu.classList.toggle('open', !isOpen);
-                menuIcon.textContent = isOpen ? '☰' : '✕';
-                menuBtn.setAttribute('aria-label', isOpen ? 'Open mobile menu' : 'Close mobile menu');
-            };
-            if (menuBtn && menuIcon && mobileMenu) {
-                menuBtn.addEventListener('click', toggleMenu);
-                menuBtn.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    toggleMenu();
-                });
-                mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMenu.classList.remove('open');
-                        menuIcon.textContent = '☰';
-                        menuBtn.setAttribute('aria-label', 'Open mobile menu');
-                    });
-                });
-            }
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            showSlide(currentIndex);
+        });
 
-            // Random Image Section
-            const projectImages = [
-                { src: 'https://via.placeholder.com/600x400?text=Robotics+Project', caption: 'Precision robotics for industrial automation.' },
-                { src: 'https://via.placeholder.com/600x400?text=3D+Printing+Project', caption: 'High-precision 3D printed medical prototype.' },
-                { src: 'https://via.placeholder.com/600x400?text=Electronics+Project', caption: 'Smart IoT system for real-time monitoring.' },
-            ];
-            function setRandomImage() {
-                const randomIndex = Math.floor(Math.random() * projectImages.length);
-                const randomImage = document.getElementById('randomImage');
-                const randomImageCaption = document.getElementById('randomImageCaption');
-                randomImage.src = projectImages[randomIndex].src;
-                randomImage.alt = projectImages[randomIndex].caption;
-                randomImageCaption.textContent = projectImages[randomIndex].caption;
-            }
-            setRandomImage();
-            setInterval(setRandomImage, 10000);
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % items.length;
+            showSlide(currentIndex);
+        });
 
-            // Scroll-Triggered Animations
-            const animateSections = document.querySelectorAll('.animate-on-scroll');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-fade-in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            animateSections.forEach(section => observer.observe(section));
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % items.length;
+            showSlide(currentIndex);
+        }, 5000);
 
-            // Tech Stack Filter
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const techBadges = document.querySelectorAll('.tech-badge');
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const filter = button.getAttribute('data-filter');
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    techBadges.forEach(badge => {
-                        const category = badge.getAttribute('data-category');
-                        badge.style.display = (filter === 'all' || category === filter) ? 'inline-block' : 'none';
-                    });
-                });
-            });
+        // Contact Form Handling
+        const contactSubmit = document.getElementById('contactSubmit');
+        const buttonText = document.getElementById('buttonText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const formMessage = document.getElementById('formMessage');
+        const inputs = [
+            { element: document.getElementById('name'), error: document.getElementById('nameError') },
+            { element: document.getElementById('email'), error: document.getElementById('emailError') },
+            { element: document.getElementById('message'), error: document.getElementById('messageError') }
+        ];
 
-            // Back to Top Button
-            const backToTop = document.getElementById('backToTop');
-            window.addEventListener('scroll', () => {
-                backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-            });
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // Carousel Functionality
-            const carousel = document.getElementById('carousel');
-            const items = carousel.querySelectorAll('.carousel-item');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            let currentIndex = 0;
-
-            function showSlide(index) {
-                items.forEach((item, i) => {
-                    item.classList.toggle('active', i === index);
-                    item.setAttribute('aria-hidden', i !== index);
-                });
-                carousel.setAttribute('aria-live', 'polite');
-            }
-
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + items.length) % items.length;
-                showSlide(currentIndex);
-            });
-
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % items.length;
-                showSlide(currentIndex);
-            });
-
-            carousel.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') {
-                    prevBtn.click();
-                } else if (e.key === 'ArrowRight') {
-                    nextBtn.click();
-                }
-            });
-
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % items.length;
-                showSlide(currentIndex);
-            }, 5000);
-
-            // Contact Form Handling
-            const contactSubmit = document.getElementById('contactSubmit');
-            const buttonText = document.getElementById('buttonText');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            const formMessage = document.getElementById('formMessage');
-            const inputs = [document.getElementById('name'), document.getElementById('email'), document.getElementById('message')];
-
-            inputs.forEach(input => {
-                input.addEventListener('input', () => {
-                    const allFilled = inputs.every(input => input.value.trim() !== '');
-                    contactSubmit.disabled = !allFilled;
-                    contactSubmit.classList.toggle('opacity-50', !allFilled);
-                });
-            });
-
-            contactSubmit.addEventListener('click', async (e) => {
-                e.preventDefault();
-                const name = document.getElementById('name').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const message = document.getElementById('message').value.trim();
-
-                if (name && email && message) {
-                    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                        buttonText.textContent = 'Sending...';
-                        loadingSpinner.classList.remove('hidden');
-                        contactSubmit.disabled = true;
-                        contactSubmit.classList.add('opacity-50');
-
-                        await new Promise(resolve => setTimeout(resolve, 1500));
-
-                        formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
-                        formMessage.classList.remove('hidden', 'text-red-600');
-                        formMessage.classList.add('text-green-600');
-                        inputs.forEach(input => (input.value = ''));
-
-                        buttonText.textContent = 'Send Message';
-                        loadingSpinner.classList.add('hidden');
-                        contactSubmit.disabled = false;
-                        contactSubmit.classList.remove('opacity-50');
-                    } else {
-                        formMessage.textContent = 'Please enter a valid email address.';
-                        formMessage.classList.remove('hidden', 'text-green-600');
-                        formMessage.classList.add('text-red-600');
-                    }
+        function validateForm() {
+            let isValid = true;
+            inputs.forEach(({ element, error }) => {
+                const value = element.value.trim();
+                if (!value) {
+                    error.textContent = `${element.placeholder} is required`;
+                    error.classList.remove('hidden');
+                    isValid = false;
+                } else if (element.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                    error.textContent = 'Please enter a valid email address';
+                    error.classList.remove('hidden');
+                    isValid = false;
                 } else {
-                    formMessage.textContent = 'Please fill out all fields.';
-                    formMessage.classList.remove('hidden', 'text-green-600');
-                    formMessage.classList.add('text-red-600');
+                    error.classList.add('hidden');
                 }
+            });
+            contactSubmit.disabled = !isValid;
+            contactSubmit.classList.toggle('opacity-50', !isValid);
+            return isValid;
+        }
+
+        inputs.forEach(({ element }) => {
+            element.addEventListener('input', validateForm);
+            element.addEventListener('blur', validateForm);
+        });
+
+        contactSubmit.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (validateForm()) {
+                buttonText.textContent = 'Sending...';
+                loadingSpinner.classList.remove('hidden');
+                contactSubmit.disabled = true;
+                contactSubmit.classList.add('opacity-50');
+
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
+                formMessage.classList.remove('hidden', 'text-red-600');
+                formMessage.classList.add('text-green-600');
+                inputs.forEach(({ element }) => (element.value = ''));
+
+                buttonText.textContent = 'Send Message';
+                loadingSpinner.classList.add('hidden');
+                contactSubmit.disabled = false;
+                contactSubmit.classList.remove('opacity-50');
 
                 setTimeout(() => {
                     formMessage.classList.add('hidden');
                 }, 5000);
-            });
+            }
         });
     </script>
 </body>

@@ -119,7 +119,7 @@
 
         #backToTop {
             position: fixed;
-            bottom: 20px;
+            bottom: 90px;
             right: 20px;
             display: none;
             z-index: 1000;
@@ -164,45 +164,49 @@
         }
 
         .mobile-menu {
-            transform: translateX(-100%);
+            transform: translateX(100%);
             transition: transform 0.3s ease-in-out;
             background: var(--bg-secondary);
-            border-right: 1px solid var(--border);
-            z-index: 999;
+            border-left: 1px solid var(--border);
+            z-index: 1000;
             position: fixed;
             top: 0;
-            left: 0;
+            right: 0;
             height: 100%;
-            width: 75%;
-            max-width: 300px;
-            padding: 1rem;
+            width: 80%;
+            max-width: 320px;
+            padding: 1.5rem;
         }
 
         .mobile-menu.open {
             transform: translateX(0);
         }
 
-        .mobile-menu.floating {
+        #menuOverlay {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            height: auto;
             width: 100%;
-            max-width: none;
-            transform: translateX(0);
-            box-shadow: 0 2px 8px var(--shadow);
-            border-right: none;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #menuOverlay.active {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         @media (max-width: 768px) {
-            .mobile-menu.floating {
-                display: flex;
-            }
-
             .mobile-menu a {
-                font-size: 1.1rem;
-                padding: 0.75rem 0;
+                font-size: 1.2rem;
+                padding: 1rem 0;
+                display: block;
+                min-height: 48px;
+                line-height: 1.5;
             }
         }
 
@@ -242,12 +246,12 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 1000;
+            z-index: 1001;
             background: var(--accent);
             color: #ffffff;
             border-radius: 50%;
-            width: 56px;
-            height: 56px;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -276,7 +280,32 @@
         }
 
         #fabMenu:not(.hidden) {
-            animation: pulse-fab 2s infinite;
+            animation: pulse-fab 3s infinite;
+        }
+
+        #fabMenu::after {
+            content: 'Menu';
+            position: absolute;
+            right: 70px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        #fabMenu:hover::after,
+        #fabMenu:focus::after {
+            opacity: 1;
+        }
+
+        @media (min-width: 769px) {
+            #fabMenu {
+                display: none;
+            }
         }
     </style>
     <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
@@ -308,7 +337,7 @@
     </header>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden mobile-menu p-4 flex flex-col space-y-4 md:hidden">
+    <div id="mobileMenu" class="hidden mobile-menu flex flex-col space-y-4" aria-hidden="true">
         <a href="#services" class="hover:text-[var(--accent)] transition-colors">Services</a>
         <a href="#projects" class="hover:text-[var(--accent)] transition-colors">Projects</a>
         <a href="#tech-stack" class="hover:text-[var(--accent)] transition-colors">Tech Stack</a>
@@ -317,8 +346,11 @@
         <a href="#contact" class="hover:text-[var(--accent)] transition-colors">Contact</a>
     </div>
 
+    <!-- Menu Overlay -->
+    <div id="menuOverlay" class="hidden" aria-hidden="true"></div>
+
     <!-- Floating Action Button for Mobile Menu -->
-    <button id="fabMenu" class="hidden md:hidden" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobileMenu">
+    <button id="fabMenu" class="md:hidden" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobileMenu">
         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
@@ -369,7 +401,8 @@
             <div id="carousel" class="relative">
                 <div class="carousel-item active">
                     <div class="apple-block p-6 text-center">
-                        <div class="h-64 mx-auto mb-4 rounded-lg overflow-hidden image-placeholder">
+                        <div class="h-64 mx-auto 
+                        auto mb-4 rounded-lg overflow-hidden image-placeholder">
                             <img src="robotics-project.jpg" alt="Robotics Arm Project" class="h-full w-full object-cover" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
                         </div>
                         <h4 class="text-xl font-semibold mb-2">Robotic Arm</h4>
@@ -534,28 +567,30 @@
         const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         setTheme(savedTheme);
 
-        // Mobile Menu Toggle and Floating Behavior
+        // Mobile Menu Toggle
         const menuBtn = document.getElementById('menuBtn');
         const fabMenu = document.getElementById('fabMenu');
         const mobileMenu = document.getElementById('mobileMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
         let isMenuOpen = false;
 
         function toggleMenu() {
             isMenuOpen = !isMenuOpen;
             mobileMenu.classList.toggle('hidden', !isMenuOpen);
             mobileMenu.classList.toggle('open', isMenuOpen);
+            menuOverlay.classList.toggle('hidden', !isMenuOpen);
+            menuOverlay.classList.toggle('active', isMenuOpen);
             menuBtn.textContent = isMenuOpen ? '✕' : '☰';
             menuBtn.setAttribute('aria-label', isMenuOpen ? 'Close mobile menu' : 'Open mobile menu');
             menuBtn.setAttribute('aria-expanded', isMenuOpen);
             fabMenu.classList.toggle('hidden', isMenuOpen);
             fabMenu.setAttribute('aria-expanded', isMenuOpen);
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('floating');
-            }
+            mobileMenu.setAttribute('aria-hidden', !isMenuOpen);
         }
 
         menuBtn.addEventListener('click', toggleMenu);
         fabMenu.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
 
         // Smooth scroll for menu links
         mobileMenu.querySelectorAll('a').forEach(link => {
@@ -570,42 +605,15 @@
             });
         });
 
-        // Floating navbar and FAB behavior on scroll for mobile
-        window.addEventListener('scroll', () => {
-            const isMobile = window.innerWidth <= 768;
-            const scrollPosition = window.scrollY + window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-            const isAtBottom = scrollPosition >= documentHeight - 10;
-            const isAtTop = window.scrollY <= 100;
-
-            if (isMobile) {
-                if (isAtBottom && !isMenuOpen) {
-                    mobileMenu.classList.remove('hidden');
-                    mobileMenu.classList.add('floating', 'open');
-                    menuBtn.textContent = '✕';
-                    menuBtn.setAttribute('aria-label', 'Close mobile menu');
-                    menuBtn.setAttribute('aria-expanded', 'true');
-                    fabMenu.classList.add('hidden');
-                    isMenuOpen = true;
-                } else if ((isAtTop || !isAtBottom) && mobileMenu.classList.contains('floating') && !isMenuOpen) {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('floating', 'open');
-                    menuBtn.textContent = '☰';
-                    menuBtn.setAttribute('aria-label', 'Open mobile menu');
-                    menuBtn.setAttribute('aria-expanded', 'false');
-                    fabMenu.classList.toggle('hidden', isAtTop);
-                    isMenuOpen = false;
-                } else {
-                    fabMenu.classList.toggle('hidden', isAtTop || isMenuOpen);
-                }
-            }
-        });
-
         // Back to Top Button
         const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+            if (window.innerWidth <= 768) {
+                fabMenu.classList.toggle('hidden', isMenuOpen);
+            }
         });
+
         backToTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });

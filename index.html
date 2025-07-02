@@ -144,6 +144,223 @@
             border-radius: 18px;
             background: var(--bg-secondary);
             box-shadow: 0 2px 8px var(--shadow);
+            transition: background 0.3s ease;
+        }
+
+        .header-sticky {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        [data-theme="dark"] .header-sticky {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+        }
+
+        .mobile-menu {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            z-index: 999;
+        }
+
+        .mobile-menu.open {
+            transform: translateY(0);
+        }
+
+        .mobile-menu.floating {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            transform: translateY(0);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu.floating {
+                display: flex;
+            }
+        }
+
+        .image-placeholder
+
+System: It looks like your message was cut off. You mentioned wanting gaps between the "Featured Projects," "Our Tech Stack," and "Our Partners" sections, and I see that the previous response was truncated. I'll complete the update by providing the full HTML with the requested gaps, retaining the floating navigation bar for mobile devices, the enhanced dark theme, and the fixed form validation. I'll also ensure the `.image-placeholder` CSS class is properly closed and all sections are correctly spaced.
+
+### Changes Made:
+1. **Gaps Between Sections**:
+   - Increased vertical padding for `#projects`, `#tech-stack`, and `#clients` sections from `py-16` to `py-24` to add more space between them.
+   - Ensured consistent `max-w-7xl mx-auto` containers for balanced layout.
+   - Added a slight margin (`my-8`) to the section containers to enhance visual separation.
+
+2. **Retained Features**:
+   - Floating navigation bar on mobile when scrolling to the page's end.
+   - Dark theme with high-contrast colors (`#121212` for primary background, `#3b82f6` for accents).
+   - Fixed form validation with accessible error messages and real-time feedback.
+   - Corrected the `backdrop-filter` typo in the dark mode header CSS.
+
+3. **Additional Fixes**:
+   - Completed the `.image-placeholder` CSS class with proper animation and styling.
+   - Ensured all sections transition smoothly with the dark theme.
+   - Added `aria-expanded` to the mobile menu toggle for better accessibility.
+
+Below is the complete updated website code with these changes, using the same `artifact_id` to reflect the update to the previous artifact.
+
+<xaiArtifact artifact_id="2d30d699-6c83-4b71-a37f-e9cd32f184dd" artifact_version_id="ebc88c86-c59a-4b34-8778-40f6b94824a2" title="index.html" contentType="text/html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Anuveshana Technologies pioneers robotics, electronics, 3D printing, and automation solutions for cutting-edge industries.">
+    <meta name="keywords" content="robotics, 3D printing, electronics, embedded systems, automation, software development">
+    <meta name="author" content="Anuveshana Technologies">
+    <title>Anuveshana Technologies | Innovation in Robotics</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-primary: #f5f5f7;
+            --bg-secondary: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --accent: #0071e3;
+            --accent-hover: #005bb5;
+            --border: #d2d2d7;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --error: #ef4444;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #e5e7eb;
+            --text-secondary: #9ca3af;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #374151;
+            --shadow: rgba(255, 255, 255, 0.05);
+            --error: #f87171;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .apple-block {
+            background: var(--bg-secondary);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        .apple-block:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px var(--shadow);
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .apple-btn {
+            background: var(--accent);
+            color: #ffffff;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .apple-btn:hover {
+            background: var(--accent-hover);
+            transform: scale(1.05);
+        }
+
+        .apple-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-item {
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+        }
+
+        .carousel-item.active {
+            position: relative;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .carousel-item:not(.active) {
+            transform: translateX(100%);
+        }
+
+        .carousel-item img {
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.03);
+            filter: brightness(1.05);
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .tech-badge {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .tech-badge:hover {
+            background: var(--border);
+            transform: scale(1.05);
+        }
+
+        .section-border {
+            border-radius: 18px;
+            background: var(--bg-secondary);
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: background 0.3s ease;
+        }
+
+        .section-container {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
 
         .header-sticky {
@@ -237,7 +454,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                     </svg>
                 </button>
-                <button id="menuBtn" class="md:hidden text-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" aria-label="Toggle mobile menu">
+                <button id="menuBtn" class="md:hidden text-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" aria-label="Toggle mobile menu" aria-expanded="false">
                     ☰
                 </button>
             </div>
@@ -262,7 +479,7 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 px-4 max-w-7xl mx-auto">
+    <section id="services" class="py-16 px-4 max-w-7xl mx-auto section-container">
         <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Services</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="apple-block p-6 animate-fade-in">
@@ -293,7 +510,7 @@
     </section>
 
     <!-- Project Showcase Section -->
-    <section id="projects" class="py-16 px-4 max-w-7xl mx-auto section-border">
+    <section id="projects" class="py-24 px-4 max-w-7xl mx-auto section-border section-container">
         <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Featured Projects</h3>
         <div class="carousel-container">
             <div id="carousel" class="relative">
@@ -335,7 +552,7 @@
     </section>
 
     <!-- Tech Stack Section -->
-    <section id="tech-stack" class="py-16 px-4 max-w-7xl mx-auto section-border">
+    <section id="tech-stack" class="py-24 px-4 max-w-7xl mx-auto section-border section-container">
         <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Tech Stack</h3>
         <div class="flex flex-wrap justify-center gap-4">
             <span class="tech-badge">Python</span>
@@ -352,7 +569,7 @@
     </section>
 
     <!-- Clients Section -->
-    <section id="clients" class="py-16 px-4 section-border">
+    <section id="clients" class="py-24 px-4 section-border section-container">
         <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Partners</h3>
         <div class="flex flex-wrap justify-center items-center gap-8">
             <div class="h-12 md:h-16 image-placeholder">
@@ -374,7 +591,7 @@
     </section>
 
     <!-- Reviews Section -->
-    <section id="reviews" class="py-16 px-4 max-w-5xl mx-auto">
+    <section id="reviews" class="py-16 px-4 max-w-5xl mx-auto section-container">
         <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Testimonials</h3>
         <div class="space-y-8">
             <div class="apple-block p-8 animate-fade-in">
@@ -396,7 +613,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 px-4 section-border">
+    <section id="contact" class="py-16 px-4 section-border section-container">
         <div class="max-w-2xl mx-auto text-center">
             <h3 class="text-3xl md:text-4xl font-bold mb-8 animate-fade-in">Let’s Innovate Together</h3>
             <p class="mb-8 text-[var(--text-secondary)] text-lg">Ready to advance with robotics, electronics, or automation? Contact us today.</p>
@@ -475,6 +692,7 @@
             mobileMenu.classList.toggle('open', isMenuOpen);
             menuBtn.textContent = isMenuOpen ? '✕' : '☰';
             menuBtn.setAttribute('aria-label', isMenuOpen ? 'Close mobile menu' : 'Open mobile menu');
+            menuBtn.setAttribute('aria-expanded', isMenuOpen);
             if (isMenuOpen) {
                 mobileMenu.classList.remove('floating');
             }
@@ -492,12 +710,14 @@
                 mobileMenu.classList.add('floating', 'open');
                 menuBtn.textContent = '✕';
                 menuBtn.setAttribute('aria-label', 'Close mobile menu');
+                menuBtn.setAttribute('aria-expanded', 'true');
                 isMenuOpen = true;
             } else if (isMobile && !isAtBottom && mobileMenu.classList.contains('floating')) {
                 mobileMenu.classList.add('hidden');
                 mobileMenu.classList.remove('floating', 'open');
                 menuBtn.textContent = '☰';
                 menuBtn.setAttribute('aria-label', 'Open mobile menu');
+                menuBtn.setAttribute('aria-expanded', 'false');
                 isMenuOpen = false;
             }
         });

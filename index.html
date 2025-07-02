@@ -147,217 +147,6 @@
             transition: background 0.3s ease;
         }
 
-        .header-sticky {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            transition: background 0.3s ease, backdrop-filter 0.3s ease;
-        }
-
-        [data-theme="dark"] .header-sticky {
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
-        }
-
-        .mobile-menu {
-            transform: translateY(-100%);
-            transition: transform 0.3s ease-in-out;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-            z-index: 999;
-        }
-
-        .mobile-menu.open {
-            transform: translateY(0);
-        }
-
-        .mobile-menu.floating {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            transform: translateY(0);
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu.floating {
-                display: flex;
-            }
-        }
-
-        .image-placeholder
-
-System: It looks like your message was cut off. You mentioned wanting gaps between the "Featured Projects," "Our Tech Stack," and "Our Partners" sections, and I see that the previous response was truncated. I'll complete the update by providing the full HTML with the requested gaps, retaining the floating navigation bar for mobile devices, the enhanced dark theme, and the fixed form validation. I'll also ensure the `.image-placeholder` CSS class is properly closed and all sections are correctly spaced.
-
-### Changes Made:
-1. **Gaps Between Sections**:
-   - Increased vertical padding for `#projects`, `#tech-stack`, and `#clients` sections from `py-16` to `py-24` to add more space between them.
-   - Ensured consistent `max-w-7xl mx-auto` containers for balanced layout.
-   - Added a slight margin (`my-8`) to the section containers to enhance visual separation.
-
-2. **Retained Features**:
-   - Floating navigation bar on mobile when scrolling to the page's end.
-   - Dark theme with high-contrast colors (`#121212` for primary background, `#3b82f6` for accents).
-   - Fixed form validation with accessible error messages and real-time feedback.
-   - Corrected the `backdrop-filter` typo in the dark mode header CSS.
-
-3. **Additional Fixes**:
-   - Completed the `.image-placeholder` CSS class with proper animation and styling.
-   - Ensured all sections transition smoothly with the dark theme.
-   - Added `aria-expanded` to the mobile menu toggle for better accessibility.
-
-Below is the complete updated website code with these changes, using the same `artifact_id` to reflect the update to the previous artifact.
-
-<xaiArtifact artifact_id="2d30d699-6c83-4b71-a37f-e9cd32f184dd" artifact_version_id="ebc88c86-c59a-4b34-8778-40f6b94824a2" title="index.html" contentType="text/html">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Anuveshana Technologies pioneers robotics, electronics, 3D printing, and automation solutions for cutting-edge industries.">
-    <meta name="keywords" content="robotics, 3D printing, electronics, embedded systems, automation, software development">
-    <meta name="author" content="Anuveshana Technologies">
-    <title>Anuveshana Technologies | Innovation in Robotics</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --bg-primary: #f5f5f7;
-            --bg-secondary: #ffffff;
-            --text-primary: #1d1d1f;
-            --text-secondary: #86868b;
-            --accent: #0071e3;
-            --accent-hover: #005bb5;
-            --border: #d2d2d7;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --error: #ef4444;
-        }
-
-        [data-theme="dark"] {
-            --bg-primary: #121212;
-            --bg-secondary: #1e1e1e;
-            --text-primary: #e5e7eb;
-            --text-secondary: #9ca3af;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --border: #374151;
-            --shadow: rgba(255, 255, 255, 0.05);
-            --error: #f87171;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        .apple-block {
-            background: var(--bg-secondary);
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 4px 12px var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-        }
-
-        .apple-block:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 16px var(--shadow);
-        }
-
-        .animate-fade-in {
-            animation: fadeIn 1s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .apple-btn {
-            background: var(--accent);
-            color: #ffffff;
-            border-radius: 30px;
-            padding: 10px 20px;
-            font-weight: 600;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-
-        .apple-btn:hover {
-            background: var(--accent-hover);
-            transform: scale(1.05);
-        }
-
-        .apple-btn:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-        }
-
-        .carousel-container {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .carousel-item {
-            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-        }
-
-        .carousel-item.active {
-            position: relative;
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .carousel-item:not(.active) {
-            transform: translateX(100%);
-        }
-
-        .carousel-item img {
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .carousel-item:hover img {
-            transform: scale(1.03);
-            filter: brightness(1.05);
-        }
-
-        #backToTop {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none;
-            z-index: 1000;
-        }
-
-        .tech-badge {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-
-        .tech-badge:hover {
-            background: var(--border);
-            transform: scale(1.05);
-        }
-
-        .section-border {
-            border-radius: 18px;
-            background: var(--bg-secondary);
-            box-shadow: 0 2px 8px var(--shadow);
-            transition: background 0.3s ease;
-        }
-
         .section-container {
             margin-top: 2rem;
             margin-bottom: 2rem;
@@ -375,15 +164,22 @@ Below is the complete updated website code with these changes, using the same `a
         }
 
         .mobile-menu {
-            transform: translateY(-100%);
+            transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
             background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
             z-index: 999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 75%;
+            max-width: 300px;
+            padding: 1rem;
         }
 
         .mobile-menu.open {
-            transform: translateY(0);
+            transform: translateX(0);
         }
 
         .mobile-menu.floating {
@@ -391,13 +187,22 @@ Below is the complete updated website code with these changes, using the same `a
             top: 0;
             left: 0;
             right: 0;
-            transform: translateY(0);
+            height: auto;
+            width: 100%;
+            max-width: none;
+            transform: translateX(0);
             box-shadow: 0 2px 8px var(--shadow);
+            border-right: none;
         }
 
         @media (max-width: 768px) {
             .mobile-menu.floating {
                 display: flex;
+            }
+
+            .mobile-menu a {
+                font-size: 1.1rem;
+                padding: 0.75rem 0;
             }
         }
 
@@ -432,6 +237,47 @@ Below is the complete updated website code with these changes, using the same `a
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        #fabMenu {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--accent);
+            color: #ffffff;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        #fabMenu:hover {
+            transform: scale(1.1);
+        }
+
+        #fabMenu:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        #fabMenu.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-fab {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        #fabMenu:not(.hidden) {
+            animation: pulse-fab 2s infinite;
+        }
     </style>
     <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 </head>
@@ -454,7 +300,7 @@ Below is the complete updated website code with these changes, using the same `a
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                     </svg>
                 </button>
-                <button id="menuBtn" class="md:hidden text-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" aria-label="Toggle mobile menu" aria-expanded="false">
+                <button id="menuBtn" class="md:hidden text-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobileMenu">
                     ☰
                 </button>
             </div>
@@ -462,7 +308,7 @@ Below is the complete updated website code with these changes, using the same `a
     </header>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden mobile-menu p-4 flex flex-col space-y-3 md:hidden">
+    <div id="mobileMenu" class="hidden mobile-menu p-4 flex flex-col space-y-4 md:hidden">
         <a href="#services" class="hover:text-[var(--accent)] transition-colors">Services</a>
         <a href="#projects" class="hover:text-[var(--accent)] transition-colors">Projects</a>
         <a href="#tech-stack" class="hover:text-[var(--accent)] transition-colors">Tech Stack</a>
@@ -470,6 +316,13 @@ Below is the complete updated website code with these changes, using the same `a
         <a href="#reviews" class="hover:text-[var(--accent)] transition-colors">Reviews</a>
         <a href="#contact" class="hover:text-[var(--accent)] transition-colors">Contact</a>
     </div>
+
+    <!-- Floating Action Button for Mobile Menu -->
+    <button id="fabMenu" class="hidden md:hidden" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
 
     <!-- Hero Section -->
     <section class="text-center py-20 bg-gradient-to-b from-[var(--bg-primary)] to-[var(--bg-secondary)] px-4">
@@ -683,42 +536,68 @@ Below is the complete updated website code with these changes, using the same `a
 
         // Mobile Menu Toggle and Floating Behavior
         const menuBtn = document.getElementById('menuBtn');
+        const fabMenu = document.getElementById('fabMenu');
         const mobileMenu = document.getElementById('mobileMenu');
         let isMenuOpen = false;
 
-        menuBtn.addEventListener('click', () => {
+        function toggleMenu() {
             isMenuOpen = !isMenuOpen;
             mobileMenu.classList.toggle('hidden', !isMenuOpen);
             mobileMenu.classList.toggle('open', isMenuOpen);
             menuBtn.textContent = isMenuOpen ? '✕' : '☰';
             menuBtn.setAttribute('aria-label', isMenuOpen ? 'Close mobile menu' : 'Open mobile menu');
             menuBtn.setAttribute('aria-expanded', isMenuOpen);
+            fabMenu.classList.toggle('hidden', isMenuOpen);
+            fabMenu.setAttribute('aria-expanded', isMenuOpen);
             if (isMenuOpen) {
                 mobileMenu.classList.remove('floating');
             }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        fabMenu.addEventListener('click', toggleMenu);
+
+        // Smooth scroll for menu links
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    toggleMenu();
+                }
+            });
         });
 
-        // Floating navbar on scroll for mobile
+        // Floating navbar and FAB behavior on scroll for mobile
         window.addEventListener('scroll', () => {
             const isMobile = window.innerWidth <= 768;
             const scrollPosition = window.scrollY + window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight;
             const isAtBottom = scrollPosition >= documentHeight - 10;
+            const isAtTop = window.scrollY <= 100;
 
-            if (isMobile && isAtBottom && !isMenuOpen) {
-                mobileMenu.classList.remove('hidden');
-                mobileMenu.classList.add('floating', 'open');
-                menuBtn.textContent = '✕';
-                menuBtn.setAttribute('aria-label', 'Close mobile menu');
-                menuBtn.setAttribute('aria-expanded', 'true');
-                isMenuOpen = true;
-            } else if (isMobile && !isAtBottom && mobileMenu.classList.contains('floating')) {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('floating', 'open');
-                menuBtn.textContent = '☰';
-                menuBtn.setAttribute('aria-label', 'Open mobile menu');
-                menuBtn.setAttribute('aria-expanded', 'false');
-                isMenuOpen = false;
+            if (isMobile) {
+                if (isAtBottom && !isMenuOpen) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('floating', 'open');
+                    menuBtn.textContent = '✕';
+                    menuBtn.setAttribute('aria-label', 'Close mobile menu');
+                    menuBtn.setAttribute('aria-expanded', 'true');
+                    fabMenu.classList.add('hidden');
+                    isMenuOpen = true;
+                } else if ((isAtTop || !isAtBottom) && mobileMenu.classList.contains('floating') && !isMenuOpen) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('floating', 'open');
+                    menuBtn.textContent = '☰';
+                    menuBtn.setAttribute('aria-label', 'Open mobile menu');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                    fabMenu.classList.toggle('hidden', isAtTop);
+                    isMenuOpen = false;
+                } else {
+                    fabMenu.classList.toggle('hidden', isAtTop || isMenuOpen);
+                }
             }
         });
 

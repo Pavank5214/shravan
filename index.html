@@ -19,17 +19,19 @@
             --accent-hover: #005bb5;
             --border: #d2d2d7;
             --shadow: rgba(0, 0, 0, 0.1);
+            --error: #ef4444;
         }
 
         [data-theme="dark"] {
-            --bg-primary: #1c2526;
-            --bg-secondary: #2a2e2e;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --accent: #1e90ff;
-            --accent-hover: #4682b4;
-            --border: #444444;
-            --shadow: rgba(255, 255, 255, 0.1);
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #e5e7eb;
+            --text-secondary: #9ca3af;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #374151;
+            --shadow: rgba(255, 255, 255, 0.05);
+            --error: #f87171;
         }
 
         html {
@@ -81,7 +83,7 @@
 
         .apple-btn:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.3);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
         }
 
         .carousel-container {
@@ -145,21 +147,41 @@
         }
 
         .header-sticky {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
         }
 
         [data-theme="dark"] .header-sticky {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
         }
 
         .mobile-menu {
             transform: translateY(-100%);
             transition: transform 0.3s ease-in-out;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            z-index: 999;
         }
 
         .mobile-menu.open {
             transform: translateY(0);
+        }
+
+        .mobile-menu.floating {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            transform: translateY(0);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu.floating {
+                display: flex;
+            }
         }
 
         .image-placeholder {
@@ -174,12 +196,24 @@
         }
 
         input, textarea {
-            transition: background 0.3s ease, border 0.3s ease;
+            transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
         }
 
         input:focus, textarea:focus {
-            background: var(--bg-primary);
+            background: var(--bg-secondary);
             border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .error-message {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
     <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
@@ -211,7 +245,7 @@
     </header>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden mobile-menu bg-[var(--bg-secondary)] border-b border-[var(--border)] p-4 flex flex-col space-y-3 md:hidden">
+    <div id="mobileMenu" class="hidden mobile-menu p-4 flex flex-col space-y-3 md:hidden">
         <a href="#services" class="hover:text-[var(--accent)] transition-colors">Services</a>
         <a href="#projects" class="hover:text-[var(--accent)] transition-colors">Projects</a>
         <a href="#tech-stack" class="hover:text-[var(--accent)] transition-colors">Tech Stack</a>
@@ -265,7 +299,7 @@
             <div id="carousel" class="relative">
                 <div class="carousel-item active">
                     <div class="apple-block p-6 text-center">
-                        <div class="h-64 mx-auto mb-4 rounded-lg overflow-hidden">
+                        <div class="h-64 mx-auto mb-4 rounded-lg overflow-hidden image-placeholder">
                             <img src="robotics-project.jpg" alt="Robotics Arm Project" class="h-full w-full object-cover" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
                         </div>
                         <h4 class="text-xl font-semibold mb-2">Robotic Arm</h4>
@@ -282,12 +316,13 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                <div class="apple-block p-6 text-center">
-                    <div class="h-64 mx-auto mb-4 rounded-lg overflow-hidden image-placeholder">
-                        <img src="electronics-project.jpg" alt="Embedded System" class="h-full w-full object-cover" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
+                    <div class="apple-block p-6 text-center">
+                        <div class="h-64 mx-auto mb-4 rounded-lg overflow-hidden image-placeholder">
+                            <img src="electronics-project.jpg" alt="Embedded System" class="h-full w-full object-cover" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2">Smart Embedded</h4>
+                        <p class="text-[var(--text-secondary)]">IoT system for real-time factory monitoring.</p>
                     </div>
-                    <h4 class="text-xl font-semibold mb-2">Smart Embedded</h4>
-                    <p class="text-[var(--text-secondary)]">IoT system for real-time factory monitoring.</p>
                 </div>
             </div>
             <button id="prevBtn" class="absolute top-1/2 left-4 transform -translate-y-1/2 apple-btn p-2" aria-label="Previous project">
@@ -366,18 +401,18 @@
             <h3 class="text-3xl md:text-4xl font-bold mb-8 animate-fade-in">Let’s Innovate Together</h3>
             <p class="mb-8 text-[var(--text-secondary)] text-lg">Ready to advance with robotics, electronics, or automation? Contact us today.</p>
             <div class="apple-block p-8">
-                <div class="space-y-4">
+                <div class="space-y-6">
                     <div class="relative">
-                        <input type="text" id="name" placeholder="Your Name" class="w-full p-3 bg-[var(--bg-primary)] border border-[var(--border)] rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Name">
-                        <span id="nameError" class="text-sm text-red-600 hidden absolute -bottom-6 left-0"></span>
+                        <input type="text" id="name" placeholder="Your Name" class="w-full p-3 rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Name" aria-describedby="nameError">
+                        <span id="nameError" class="text-sm text-[var(--error)] hidden mt-1 block error-message"></span>
                     </div>
                     <div class="relative">
-                        <input type="email" id="email" placeholder="Your Email" class="w-full p-3 bg-[var(--bg-primary)] border border-[var(--border)] rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Email">
-                        <span id="emailError" class="text-sm text-red-600 hidden absolute -bottom-6 left-0"></span>
+                        <input type="email" id="email" placeholder="Your Email" class="w-full p-3 rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Email" aria-describedby="emailError">
+                        <span id="emailError" class="text-sm text-[var(--error)] hidden mt-1 block error-message"></span>
                     </div>
                     <div class="relative">
-                        <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 bg-[var(--bg-primary)] border border-[var(--border)] rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Message"></textarea>
-                        <span id="messageError" class="text-sm text-red-600 hidden absolute -bottom-6 left-0"></span>
+                        <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Message" aria-describedby="messageError"></textarea>
+                        <span id="messageError" class="text-sm text-[var(--error)] hidden mt-1 block error-message"></span>
                     </div>
                     <button id="contactSubmit" class="w-full apple-btn p-3 font-medium flex items-center justify-center" disabled aria-label="Send Message">
                         <span id="buttonText">Send Message</span>
@@ -386,7 +421,7 @@
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
                         </svg>
                     </button>
-                    <p id="formMessage" class="text-sm text-[var(--text-secondary)] hidden"></p>
+                    <p id="formMessage" class="text-sm text-[var(--text-secondary)] hidden mt-4"></p>
                 </div>
             </div>
             <p class="font-medium mt-6">Email: <a href="mailto:contact@anuveshana.tech" class="text-[var(--accent)] hover:underline">contact@anuveshana.tech</a></p>
@@ -429,15 +464,42 @@
         const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         setTheme(savedTheme);
 
-        // Mobile Menu Toggle
+        // Mobile Menu Toggle and Floating Behavior
         const menuBtn = document.getElementById('menuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
+        let isMenuOpen = false;
+
         menuBtn.addEventListener('click', () => {
-            const isHidden = mobileMenu.classList.contains('hidden');
-            mobileMenu.classList.toggle('hidden', !isHidden);
-            mobileMenu.classList.toggle('open', isHidden);
-            menuBtn.textContent = isHidden ? '✕' : '☰';
-            menuBtn.setAttribute('aria-label', isHidden ? 'Close mobile menu' : '_toggle mobile menu');
+            isMenuOpen = !isMenuOpen;
+            mobileMenu.classList.toggle('hidden', !isMenuOpen);
+            mobileMenu.classList.toggle('open', isMenuOpen);
+            menuBtn.textContent = isMenuOpen ? '✕' : '☰';
+            menuBtn.setAttribute('aria-label', isMenuOpen ? 'Close mobile menu' : 'Open mobile menu');
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('floating');
+            }
+        });
+
+        // Floating navbar on scroll for mobile
+        window.addEventListener('scroll', () => {
+            const isMobile = window.innerWidth <= 768;
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const isAtBottom = scrollPosition >= documentHeight - 10;
+
+            if (isMobile && isAtBottom && !isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('floating', 'open');
+                menuBtn.textContent = '✕';
+                menuBtn.setAttribute('aria-label', 'Close mobile menu');
+                isMenuOpen = true;
+            } else if (isMobile && !isAtBottom && mobileMenu.classList.contains('floating')) {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('floating', 'open');
+                menuBtn.textContent = '☰';
+                menuBtn.setAttribute('aria-label', 'Open mobile menu');
+                isMenuOpen = false;
+            }
         });
 
         // Back to Top Button
@@ -483,25 +545,28 @@
         const loadingSpinner = document.getElementById('loadingSpinner');
         const formMessage = document.getElementById('formMessage');
         const inputs = [
-            { element: document.getElementById('name'), error: document.getElementById('nameError') },
-            { element: document.getElementById('email'), error: document.getElementById('emailError') },
-            { element: document.getElementById('message'), error: document.getElementById('messageError') }
+            { element: document.getElementById('name'), error: document.getElementById('nameError'), name: 'Name' },
+            { element: document.getElementById('email'), error: document.getElementById('emailError'), name: 'Email' },
+            { element: document.getElementById('message'), error: document.getElementById('messageError'), name: 'Message' }
         ];
 
         function validateForm() {
             let isValid = true;
-            inputs.forEach(({ element, error }) => {
+            inputs.forEach(({ element, error, name }) => {
                 const value = element.value.trim();
                 if (!value) {
-                    error.textContent = `${element.placeholder} is required`;
+                    error.textContent = `${name} is required`;
                     error.classList.remove('hidden');
+                    element.setAttribute('aria-invalid', 'true');
                     isValid = false;
                 } else if (element.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
                     error.textContent = 'Please enter a valid email address';
                     error.classList.remove('hidden');
+                    element.setAttribute('aria-invalid', 'true');
                     isValid = false;
                 } else {
                     error.classList.add('hidden');
+                    element.setAttribute('aria-invalid', 'false');
                 }
             });
             contactSubmit.disabled = !isValid;
@@ -525,9 +590,13 @@
                 await new Promise(resolve => setTimeout(resolve, 1500));
 
                 formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
-                formMessage.classList.remove('hidden', 'text-red-600');
+                formMessage.classList.remove('hidden', 'text-[var(--error)]');
                 formMessage.classList.add('text-green-600');
-                inputs.forEach(({ element }) => (element.value = ''));
+                inputs.forEach(({ element, error }) => {
+                    element.value = '';
+                    error.classList.add('hidden');
+                    element.setAttribute('aria-invalid', 'false');
+                });
 
                 buttonText.textContent = 'Send Message';
                 loadingSpinner.classList.add('hidden');

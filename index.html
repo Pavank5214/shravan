@@ -144,11 +144,32 @@
 
     /* Hero Section */
     #home {
-      background: linear-gradient(to right, #007bff, #004aad); /* Makenica’s blue gradient */
-      color: #ffffff;
-      padding: clamp(3rem, 8vw, 5rem) 0;
-      text-align: center;
-    }
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#home video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.home-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(3rem, 8vw, 5rem);
+}
+
     #home h2 {
       font-size: clamp(1.75rem, 5vw, 2.5rem);
       font-weight: 700;
@@ -783,6 +804,7 @@
   </style>
 </head>
 <body>
+  
   <!-- Header -->
   <header>
     <div class="container">
@@ -803,15 +825,22 @@
       </nav>
     </div>
   </header>
+  
 
   <!-- Hero Section -->
   <section id="home" role="banner">
+    <video autoplay muted loop playsinline id="homeVideo">
+      <source src="video3.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
     <div class="container">
       <h2>Precision 3D Printing Solutions</h2>
       <p>Anuveshana Technologies delivers innovative 3D printing and manufacturing for rapid prototyping and production. Get instant quotes today.</p>
       <button aria-label="Get instant quote">Get Instant Quote</button>
     </div>
   </section>
+
+  
 
   <!-- Services Section -->
   <section id="services">

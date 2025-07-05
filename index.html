@@ -1013,11 +1013,19 @@
   <section id="upload">
     <div class="container">
       <h2>Upload Your 3D Model</h2>
-      <p>Upload STL, OBJ, or other 3D files to receive an instant quote and start production.</p>
+      <p>Upload STL, OBJ, or other 3D files to receive an instant quote and startwasser production.</p>
       <div class="upload-box">
-        <input type="file" accept=".stl,.obj" disabled aria-label="Upload 3D model file">
-        <button aria-label="Upload and get quote">Upload & Quote</button>
-        <p>*File upload is for demo purposes only.</p>
+        <form id="uploadForm">
+          <input type="text" id="uploadName" placeholder="Your Name" aria-label="Your name" required>
+          <input type="tel" id="uploadPhone" placeholder="Your Phone Number" aria-label="Your phone number" required pattern="[0-9]{10}">
+          <input type="email" id="uploadEmail" placeholder="Your Email" aria-label="Your email" required>
+          <input type="file" id="modelFile" accept=".stl,.obj" aria-label="Upload 3D model file" required>
+          <input type="hidden" id="fileUrl" name="fileUrl">
+          <input type="hidden" id="fileSize" name="fileSize">
+          <button type="submit" aria-label="Upload and get quote">Upload & Quote</button>
+          <p id="uploadError" class="error">Please fill all required fields correctly.</p>
+          <p id="uploadSuccess" class="success">File uploaded successfully! We'll send you a quote soon.</p>
+        </form>
       </div>
     </div>
   </section>
@@ -1035,13 +1043,19 @@
     <div class="container">
       <h2>Contact Us</h2>
       <div class="contact-form">
-        <input type="text" placeholder="Your Name" aria-label="Your name">
-        <input type="email" placeholder="Your Email" aria-label="Your email">
-        <textarea placeholder="Your Message or Project Details" aria-label="Your message"></textarea>
-        <button aria-label="Send message">Send Message</button>
+        <form id="contactForm" action="https://formspree.io/f/mqaboqky" method="POST">
+          <input type="text" id="contactName" name="name" placeholder="Your Name" aria-label="Your name" required>
+          <input type="tel" id="contactPhone" name="phone" placeholder="Your Phone Number" aria-label="Your phone number" required pattern="[0-9]{10}">
+          <input type="email" id="contactEmail" name="email" placeholder="Your Email" aria-label="Your email" required>
+          <textarea id="contactMessage" name="message" placeholder="Your Message or Project Details" aria-label="Your message" rows="5"></textarea>
+          <button type="submit" aria-label="Send message">Send Message</button>
+          <p id="contactError" class="error">Please fill all required fields correctly.</p>
+          <p id="contactSuccess" class="success">Message sent successfully! We'll get back to you soon.</p>
+        </form>
       </div>
     </div>
   </section>
+
 
   <!-- Footer -->
   <footer role="contentinfo">
@@ -1058,5 +1072,126 @@
 
   <!-- Back-to-Top Button -->
   <a href="#home" class="back-to-top show" aria-label="Back to top">↑</a>
+  <!-- JavaScript with Formspree and FileStack -->
+  <script src="https://cdn.filestack.com/filestack-js/3.x.x/filestack.min.js"></script>
+  <script>
+    // Initialize FileStack client
+    const filestackClient = filestack.init('A6rVXdC6NTr6NHFjI107Xz');
+
+    // File Upload Form Handling
+    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('uploadName').value.trim();
+      const phone = document.getElementById('uploadPhone').value.trim();
+      const email = document.getElementById('uploadEmail').value.trim();
+      const file = document.getElementById('modelFile').files[0];
+      const fileUrlInput = document.getElementById('fileUrl');
+      const fileSizeInput = document.getElementById('fileSize');
+      const error = document.getElementById('uploadError');
+      const success = document.getElementById('uploadSuccess');
+      
+      // Client-side validation
+      if (!name || !phone.match(/^[0-9]{10}$/) || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        error.textContent = 'Please fill all required fields correctly.';
+        error.style.display = 'block';
+        success.style.display = 'none';
+        return;
+      }
+      
+      if (!file) {
+        error.textContent = 'Please select a file to upload.';
+        error.style.display = 'block';
+        success.style.display = 'none';
+        return;
+      }
+
+      try {
+        // Upload file to FileStack
+        const response = await filestackClient.upload(file);
+        const fileUrl = response.url;
+        const fileSize = (file.size / 1024).toFixed(2) + ' KB';
+        
+        // Set hidden inputs for Formspree
+        fileUrlInput.value = fileUrl;
+        fileSizeInput.value = fileSize;
+        
+        // Submit to Formspree
+        const formData = new FormData(this);
+        const responseFormspree = await fetch('https://formspree.io/f/xzzgqeyq', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (responseFormspree.ok) {
+          error.style.display = 'none';
+          success.style.display = 'block';
+          this.reset();
+        } else {
+          throw new Error('Formspree submission failed');
+        }
+      } catch (err) {
+        console.error('Error:', err);
+        error.textContent = 'Error uploading file or submitting form.';
+        error.style.display = 'block';
+        success.style.display = 'none';
+      }
+    });
+
+    // Contact Form Handling (Formspree handles directly)
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('contactName').value.trim();
+      const phone = document.getElementById('contactPhone').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const error = document.getElementById('contactError');
+      const success = document.getElementById('contactSuccess');
+      
+      // Client-side validation
+      if (!name || !phone.match(/^[0-9]{10}$/) || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        error.style.display = 'block';
+        success.style.display = 'none';
+        return;
+      }
+      
+      try {
+        const formData = new FormData(this);
+        const response = await fetch(this.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          error.style.display = 'none';
+          success.style.display = 'block';
+          this.reset();
+        } else {
+          throw new Error('Formspree submission failed');
+        }
+      } catch (err) {
+        console.error('Error:', err);
+        error.textContent = 'Error sending message.';
+        error.style.display = 'block';
+        success.style.display = 'none';
+      }
+    });
+
+    // Back-to-Top Button Visibility
+    window.addEventListener('scroll', () => {
+      const backToTop = document.querySelector('.back-to-top');
+      if (window.scrollY > 300) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+  </script>
 </body>
 </html>

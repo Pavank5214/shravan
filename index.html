@@ -1,720 +1,617 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Anuveshana Technologies pioneers robotics, electronics, 3D printing, and automation solutions for cutting-edge industries.">
-    <meta name="keywords" content="robotics, 3D printing, electronics, embedded systems, automation, software development">
-    <meta name="author" content="Anuveshana Technologies">
-    <title>Anuveshana Technologies | Innovation in Robotics</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --bg-primary: #f5f5f7;
-            --bg-secondary: #ffffff;
-            --text-primary: #1d1d1f;
-            --text-secondary: #86868b;
-            --accent: #0071e3;
-            --accent-hover: #005bb5;
-            --border: #d2d2d7;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --error: #ef4444;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anuveshana Technologies - 3D Printing & Manufacturing</title>
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      background-color: #ffffff; /* Makenica’s white */
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
 
-        [data-theme="dark"] {
-            --bg-primary: #121212;
-            --bg-secondary: #1e1e1e;
-            --text-primary: #e5e7eb;
-            --text-secondary: #9ca3af;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --border: #374151;
-            --shadow: rgba(255, 255, 255, 0.05);
-            --error: #f87171;
-        }
+    /* Header and Navigation */
+    header {
+      background-color: #0a1a2f; /* Imaginarium’s navy */
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      font-size: clamp(1.25rem, 4vw, 1.5rem);
+      font-weight: bold;
+    }
+    header nav {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+    }
+    header nav a:hover {
+      color: #ff6200; /* Imaginarium’s orange */
+    }
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #e5e7eb;
+    }
+    #menu-toggle {
+      display: none;
+    }
+    #menu-toggle:checked ~ nav {
+      display: flex;
+    }
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      header nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #0a1a2f;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      header nav a {
+        font-size: clamp(0.9rem, 3vw, 1rem);
+        padding: 0.75rem;
+        text-align: center;
+      }
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    /* Hero Section */
+    #home {
+      background: linear-gradient(to right, #007bff, #004aad); /* Makenica’s blue gradient */
+      color: white;
+      padding: clamp(3rem, 8vw, 5rem) 0;
+      text-align: center;
+    }
+    #home h2 {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: bold;
+      margin-bottom: 1rem;
+      animation: fadeIn 1s ease-in-out;
+    }
+    #home p {
+      font-size: clamp(0.95rem, 3vw, 1.1rem);
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+    #home button {
+      background-color: #ff6200; /* Imaginarium’s orange */
+      color: white;
+      font-weight: bold;
+      padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1.5rem, 4vw, 2rem);
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    #home button:hover {
+      background-color: #e55a00;
+      transform: scale(1.05);
+    }
 
-        body {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
+    /* Services Section */
+    #services {
+      padding: clamp(2rem, 6vw, 3rem) 0;
+      background-color: #f8f9fa; /* Makenica’s light gray */
+    }
+    #services h2 {
+      text-align: center;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: bold;
+      margin-bottom: 2rem;
+      color: #0a1a2f;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .service-card h3 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+      color: #007bff; /* Makenica’s blue */
+    }
+    .service-card p {
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    }
 
-        .apple-block {
-            background: var(--bg-secondary);
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 4px 12px var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-        }
+    /* Industries Served Section */
+    #industries {
+      padding: clamp(2rem, 6vw, 3rem) 0;
+      background-color: #ffffff*.
+    }
+    #industries h2 {
+      text-align: center;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: bold;
+      margin-bottom: 2rem;
+      color: #0a1a2f;
+    }
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .industry-card {
+      background-color: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+    .industry-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .industry-card h3 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+      color: #ff6200; /* Imaginarium’s orange */
+    }
+    .industry-card p {
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    }
 
-        .apple-block:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 16px var(--shadow);
-        }
+    /* Testimonials Section */
+    #testimonials {
+      padding: clamp(2rem, 6vw, 3rem) 0;
+      background-color: #e9ecef; /* Makenica’s gray */
+      text-align: center;
+    }
+    #testimonials h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: bold;
+      margin-bottom: 2rem;
+      color: #0a1a2f;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .testimonial-card {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .testimonial-card p {
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      margin-bottom: 0.75rem;
+      font-style: italic;
+    }
+    .testimonial-card h4 {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      font-weight: bold;
+      color: #007bff; /* Makenica’s blue */
+    }
 
-        .animate-fade-in {
-            animation: fadeIn 1s ease-out;
-        }
+    /* File Upload Section */
+    #upload {
+      padding: clamp(2rem, 6vw, 3rem) 0;
+      background-color: #e9ecef;
+      text-align: center;
+    }
+    #upload h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #0a1a2f;
+    }
+    #upload p {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      max-width: 500px;
+      margin: 0 auto 1.5rem;
+    }
+    .upload-box {
+      max-width: 450px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .upload-box input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px dashed #007bff; /* Makenica’s dashed border */
+      border-radius: 6px;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    }
+    .upload-box button {
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+      padding: clamp(0.5rem, 2vw, 0.6rem) clamp(1.2rem, 3vw, 1.5rem);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .upload-box button:hover {
+      background-color: #0057b8;
+    }
+    .upload-box p {
+      font-size: clamp(0.8rem, 2vw, 0.85rem);
+      color: #6c757d; /* Makenica’s gray */
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    /* About Section */
+    #about {
+      padding: clamp(2rem, 6vw, 3rem) 0;
+      background-color: #ffffff;
+      text-align: center;
+    }
+    #about h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #0a1a2f;
+    }
+    #about p {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-        .apple-btn {
-            background: var(--accent);
-            color: #ffffff;
-            border-radius: 30px;
-            padding: 10px 20px;
-            font-weight: 600;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
+    /* Contact Section */
+    #contact {
+      padding: clamp(2rem, 6vw, 3rem) 0;
+      background-color: #e9ecef;
+    }
+    #contact h2 {
+      text-align: center;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: bold;
+      margin-bottom: 2rem;
+      color: #0a1a2f;
+    }
+    .contact-form {
+      max-width: 450px;
+      margin: 0 auto;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+    }
+    .contact-form textarea {
+      height: 120px;
+    }
+    .contact-form button {
+      background-color: #ff6200;
+      color: white;
+      font-weight: bold;
+      padding: clamp(0.5rem, 2vw, 0.6rem) clamp(1.2rem, 3vw, 1.5rem);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .contact-form button:hover {
+      background-color: #e55a00;
+    }
 
-        .apple-btn:hover {
-            background: var(--accent-hover);
-            transform: scale(1.05);
-        }
+    /* Footer */
+    footer {
+      background-color: #0a1a2f;
+      color: white;
+      padding: clamp(1rem, 4vw, 1.5rem) 0;
+      text-align: center;
+    }
+    footer p {
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+    }
+    footer a {
+      color: #93c5fd;
+      text-decoration: none;
+      margin: 0 0.5rem;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #ff6200;
+    }
 
-        .apple-btn:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-        }
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .carousel-container {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .carousel-item {
-            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-        }
-
-        .carousel-item.active {
-            position: relative;
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .carousel-item:not(.active) {
-            transform: translateX(100%);
-        }
-
-        .carousel-item img {
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .carousel-item:hover img {
-            transform: scale(1.03);
-            filter: brightness(1.05);
-        }
-
-        #backToTop {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            display: none;
-            z-index: 1000;
-        }
-
-        .tech-badge {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-
-        .tech-badge:hover {
-            background: var(--border);
-            transform: scale(1.05);
-        }
-
-        .section-border {
-            border-radius: 18px;
-            background: var(--bg-secondary);
-            box-shadow: 0 2px 8px var(--shadow);
-            transition: background 0.3s ease;
-        }
-
-        .section-container {
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .header-sticky {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            transition: background 0.3s ease, backdrop-filter 0.3s ease;
-        }
-
-        [data-theme="dark"] .header-sticky {
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
-        }
-
-        .mobile-menu {
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
-            background: var(--bg-secondary);
-            border-left: 1px solid var(--border);
-            z-index: 1000;
-            position: fixed;
-            top: 0;
-            right: 0;
-            height: 100%;
-            width: 80%;
-            max-width: 320px;
-            padding: 1.5rem;
-        }
-
-        .mobile-menu.open {
-            transform: translateX(0);
-        }
-
-        #menuOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        #menuOverlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu a {
-                font-size: 1.2rem;
-                padding: 1rem 0;
-                display: block;
-                min-height: 48px;
-                line-height: 1.5;
-            }
-        }
-
-        .image-placeholder {
-            background: var(--border);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
-        }
-
-        input, textarea {
-            transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-        }
-
-        input:focus, textarea:focus {
-            background: var(--bg-secondary);
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-        }
-
-        .error-message {
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        #fabMenu {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1001;
-            background: var(--accent);
-            color: #ffffff;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px var(--shadow);
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        #fabMenu:hover {
-            transform: scale(1.1);
-        }
-
-        #fabMenu:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-        }
-
-        #fabMenu.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        @keyframes pulse-fab {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        #fabMenu:not(.hidden) {
-            animation: pulse-fab 3s infinite;
-        }
-
-        #fabMenu::after {
-            content: 'Menu';
-            position: absolute;
-            right: 70px;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            pointer-events: none;
-        }
-
-        #fabMenu:hover::after,
-        #fabMenu:focus::after {
-            opacity: 1;
-        }
-
-        @media (min-width: 769px) {
-            #fabMenu {
-                display: none;
-            }
-        }
-    </style>
-    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      #home h2 {
+        font-size: clamp(1.5rem, 4.5vw, 2.25rem);
+      }
+      #home p {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+      }
+      #services h2, #industries h2, #testimonials h2, #upload h2, #about h2, #contact h2 {
+        font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+      }
+      .services-grid, .industries-grid, .testimonials-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+    }
+    @media (max-width: 768px) {
+      header .container {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      #home {
+        padding: clamp(2rem, 6vw, 3rem) 0;
+      }
+      #home h2 {
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+      }
+      #home p {
+        font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+        padding: 0 1rem;
+      }
+      #home button {
+        padding: clamp(0.4rem, 1.5vw, 0.5rem) clamp(1rem, 3vw, 1.5rem);
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
+      }
+      #services, #industries, #testimonials, #upload, #about, #contact {
+        padding: clamp(1.5rem, 5vw, 2rem) 0;
+      }
+      #services h2, #industries h2, #testimonials h2, #upload h2, #about h2, #contact h2 {
+        font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+      }
+      .services-grid, .industries-grid, .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+      .upload-box, .contact-form {
+        max-width: 90%;
+      }
+      .service-card, .industry-card, .testimonial-card {
+        padding: 1rem;
+      }
+      .service-card h3, .industry-card h3, .testimonial-card h4 {
+        font-size: clamp(1rem, 2.5vw, 1.1rem);
+      }
+      .service-card p, .industry-card p, .testimonial-card p {
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
+      }
+    }
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: clamp(1rem, 3.5vw, 1.25rem);
+      }
+      #home h2 {
+        font-size: clamp(1rem, 3.5vw, 1.5rem);
+      }
+      #home p {
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
+      }
+      #home button {
+        padding: clamp(0.3rem, 1vw, 0.4rem) clamp(0.8rem, 2.5vw, 1.2rem);
+        font-size: clamp(0.75rem, 2vw, 0.85rem);
+      }
+      .upload-box input, .contact-form input, .contact-form textarea {
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
+      }
+      .upload-box button, .contact-form button {
+        padding: clamp(0.3rem, 1vw, 0.5rem) clamp(0.8rem, 2.5vw, 1.2rem);
+        font-size: clamp(0.75rem, 2vw, 0.85rem);
+      }
+      footer p, footer a {
+        font-size: clamp(0.75rem, 2vw, 0.85rem);
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="p-4 sticky top-0 z-10 header-sticky">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl md:text-2xl font-semibold" aria-label="Anuveshana Technologies Logo">Anuveshana Technologies</h1>
-            <nav class="hidden md:flex space-x-8 text-base" aria-label="Main navigation">
-                <a href="#services" class="hover:text-[var(--accent)] transition-colors">Services</a>
-                <a href="#projects" class="hover:text-[var(--accent)] transition-colors">Projects</a>
-                <a href="#tech-stack" class="hover:text-[var(--accent)] transition-colors">Tech Stack</a>
-                <a href="#clients" class="hover:text-[var(--accent)] transition-colors">Clients</a>
-                <a href="#reviews" class="hover:text-[var(--accent)] transition-colors">Reviews</a>
-                <a href="#contact" class="hover:text-[var(--accent)] transition-colors">Contact</a>
-            </nav>
-            <div class="flex items-center space-x-4">
-                <button id="themeToggle" class="apple-btn p-2" aria-label="Toggle dark mode">
-                    <svg id="themeIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
-                </button>
-                <button id="menuBtn" class="md:hidden text-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobileMenu">
-                    ☰
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden mobile-menu flex flex-col space-y-4" aria-hidden="true">
-        <a href="#services" class="hover:text-[var(--accent)] transition-colors">Services</a>
-        <a href="#projects" class="hover:text-[var(--accent)] transition-colors">Projects</a>
-        <a href="#tech-stack" class="hover:text-[var(--accent)] transition-colors">Tech Stack</a>
-        <a href="#clients" class="hover:text-[var(--accent)] transition-colors">Clients</a>
-        <a href="#reviews" class="hover:text-[var(--accent)] transition-colors">Reviews</a>
-        <a href="#contact" class="hover:text-[var(--accent)] transition-colors">Contact</a>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1>Anuveshana Technologies</h1>
+      <label class="hamburger" for="menu-toggle">☰</label>
+      <input type="checkbox" id="menu-toggle">
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#industries">Industries</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#upload">Upload Design</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- Menu Overlay -->
-    <div id="menuOverlay" class="hidden" aria-hidden="true"></div>
+  <!-- Hero Section -->
+  <section id="home">
+    <div class="container">
+      <h2>Precision 3D Printing Solutions</h2>
+      <p>Anuveshana Technologies delivers innovative 3D printing and manufacturing for rapid prototyping and production. Get instant quotes today.</p>
+      <button>Get Instant Quote</button>
+    </div>
+  </section>
 
-    <!-- Floating Action Button for Mobile Menu -->
-    <button id="fabMenu" class="md:hidden" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobileMenu">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-    </button>
-
-    <!-- Hero Section -->
-    <section class="text-center py-20 bg-gradient-to-b from-[var(--bg-primary)] to-[var(--bg-secondary)] px-4">
-        <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Innovation in Robotics</h2>
-        <p class="max-w-2xl mx-auto mb-8 text-lg text-[var(--text-secondary)] animate-fade-in">Transforming industries with advanced robotics, electronics, 3D printing, and automation solutions.</p>
-        <a href="#contact" class="inline-block apple-btn text-base font-medium shadow-md">Start Your Project</a>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-16 px-4 max-w-7xl mx-auto section-container">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Services</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3">3D Printing</h4>
-                <p class="text-[var(--text-secondary)]">High-precision prototyping and production using cutting-edge 3D printing technologies.</p>
-            </div>
-            <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3">Product Design</h4>
-                <p class="text-[var(--text-secondary)]">Comprehensive engineering from concept to market-ready solutions.</p>
-            </div>
-            <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3">Industrial Design</h4>
-                <p class="text-[var(--text-secondary)]">Functional and aesthetic designs for next-generation products.</p>
-            </div>
-            <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3">Electronics</h4>
-                <p class="text-[var(--text-secondary)]">Smart, efficient embedded systems customized for your needs.</p>
-            </div>
-            <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3">Robotics</h4>
-                <p class="text-[var(--text-secondary)]">Intelligent automation tackling complex industrial challenges.</p>
-            </div>
-            <div class="apple-block p-6 animate-fade-in">
-                <h4 class="text-xl font-semibold mb-3">Software</h4>
-                <p class="text-[var(--text-secondary)]">Scalable platforms for web, mobile, and enterprise applications.</p>
-            </div>
+  <!-- Services Section -->
+  <section id="services">
+    <div class="container">
+      <h2>Our Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Rapid Prototyping</h3>
+          <p>High-quality prototypes for automotive, aerospace, and medical industries, delivered with speed and precision.</p>
         </div>
-    </section>
-
-    <!-- Project Showcase Section -->
-    <section id="projects" class="py-24 px-4 max-w-7xl mx-auto section-border section-container">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Featured Projects</h3>
-        <div class="carousel-container">
-            <div id="carousel" class="relative">
-                <div class="carousel-item active">
-                    <div class="apple-block p-6 text-center">
-                        <div class="h-64 mx-auto 
-                        auto mb-4 rounded-lg overflow-hidden image-placeholder">
-                            <img src="robotics-project.jpg" alt="Robotics Arm Project" class="h-full w-full object-cover" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
-                        </div>
-                        <h4 class="text-xl font-semibold mb-2">Robotic Arm</h4>
-                        <p class="text-[var(--text-secondary)]">Precision automation boosting manufacturing efficiency.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="apple-block p-6 text-center">
-                        <div class="h-64 mx-auto mb-4 rounded-lg overflow-hidden image-placeholder">
-                            <img src="3d-printing-project.jpg" alt="3D Printed Prototype" class="h-full w-full object-cover" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
-                        </div>
-                        <h4 class="text-xl font-semibold mb-2">3D Printed Device</h4>
-                        <p class="text-[var(--text-secondary)]">High-precision prototype for medical applications.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="apple-block p-6 text-center">
-                        <div class="h-64 mx-auto mb-4 rounded-lg overflow-hidden image-placeholder">
-                            <img src="electronics-project.jpg" alt="Embedded System" class="h-full w-full object-cover" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
-                        </div>
-                        <h4 class="text-xl font-semibold mb-2">Smart Embedded</h4>
-                        <p class="text-[var(--text-secondary)]">IoT system for real-time factory monitoring.</p>
-                    </div>
-                </div>
-            </div>
-            <button id="prevBtn" class="absolute top-1/2 left-4 transform -translate-y-1/2 apple-btn p-2" aria-label="Previous project">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-            </button>
-            <button id="nextBtn" class="absolute top-1/2 right-4 transform -translate-y-1/2 apple-btn p-2" aria-label="Next project">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </button>
+        <div class="service-card">
+          <h3>Precision 3D Printing</h3>
+          <p>Advanced SLA, SLS, and metal 3D printing for intricate designs and durable components.</p>
         </div>
-    </section>
-
-    <!-- Tech Stack Section -->
-    <section id="tech-stack" class="py-24 px-4 max-w-7xl mx-auto section-border section-container">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Tech Stack</h3>
-        <div class="flex flex-wrap justify-center gap-4">
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">C++</span>
-            <span class="tech-badge">ROS</span>
-            <span class="tech-badge">Arduino</span>
-            <span class="tech-badge">Raspberry Pi</span>
-            <span class="tech-badge">SolidWorks</span>
-            <span class="tech-badge">Fusion 360</span>
-            <span class="tech-badge">React</span>
-            <span class="tech-badge">Node.js</span>
-            <span class="tech-badge">TensorFlow</span>
+        <div class="service-card">
+          <h3>Custom Manufacturing</h3>
+          <p>Tailored solutions for jewelry, healthcare, and engineering applications with a focus on quality.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Clients Section -->
-    <section id="clients" class="py-24 px-4 section-border section-container">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Our Partners</h3>
-        <div class="flex flex-wrap justify-center items-center gap-8">
-            <div class="h-12 md:h-16 image-placeholder">
-                <img src="samsung-logo.png" alt="Samsung logo" class="h-full object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
-            </div>
-            <div class="h-12 md:h-16 image-placeholder">
-                <img src="toyota-logo.png" alt="Toyota logo" class="h-full object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
-            </div>
-            <div class="h-12 md:h-16 image-placeholder">
-                <img src="ausa-logo.png" alt="AUSA Medical Devices logo" class="h-full object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
-            </div>
-            <div class="h-12 md:h-16 image-placeholder">
-                <img src="carclo-logo.png" alt="Carclo logo" class="h-full object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
-            </div>
-            <div class="h-12 md:h-16 image-placeholder">
-                <img src="phoenix-logo.png" alt="Phoenix Projects logo" class="h-full object-contain opacity-70 hover:opacity-100 transition-all" loading="lazy" onload="this.parentElement.classList.remove('image-placeholder')">
-            </div>
+  <!-- Industries Served Section -->
+  <section id="industries">
+    <div class="container">
+      <h2>Industries We Serve</h2>
+      <div class="industries-grid">
+        <div class="industry-card">
+          <h3>Automotive</h3>
+          <p>Prototypes and functional parts for automotive design and production.</p>
         </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section id="reviews" class="py-16 px-4 max-w-5xl mx-auto section-container">
-        <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in">Testimonials</h3>
-        <div class="space-y-8">
-            <div class="apple-block p-8 animate-fade-in">
-                <p class="text-[var(--text-secondary)] italic">“Anuveshana’s 3D printing expertise significantly reduced our prototyping time.”</p>
-                <p class="text-right mt-3 font-semibold">– Engineering Manager, Samsung</p>
-            </div>
-            <div class="apple-block p-8 animate-fade-in">
-                <p class="text-[var(--text-secondary)] italic">“Their embedded systems greatly improved our operational efficiency.”</p>
-                <p class="text-right mt-3 font-semibold">– Project Lead, Toyota</p>
-            </div>
-            <div class="apple-block p-8 animate-fade-in">
-                <p class="text-[var(--text-secondary)] italic">“A reliable partner for our robotics and automation projects.”</p>
-                <p class="text-right mt-3 font-semibold">– Operations Head, Phoenix Projects</p>
-            </div>
+        <div class="industry-card">
+          <h3>Healthcare</h3>
+          <p>Custom medical devices and anatomical models with high precision.</p>
         </div>
-        <div class="text-center mt-10">
-            <a href="https://www.google.com/search?q=Anuveshana+Technologies+reviews" target="_blank" rel="noopener noreferrer" class="text-[var(--accent)] hover:underline transition-colors">More Reviews on Google</a>
+        <div class="industry-card">
+          <h3>Jewelry</h3>
+          <p>Intricate designs and casting patterns for jewelry manufacturing.</p>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 px-4 section-border section-container">
-        <div class="max-w-2xl mx-auto text-center">
-            <h3 class="text-3xl md:text-4xl font-bold mb-8 animate-fade-in">Let’s Innovate Together</h3>
-            <p class="mb-8 text-[var(--text-secondary)] text-lg">Ready to advance with robotics, electronics, or automation? Contact us today.</p>
-            <div class="apple-block p-8">
-                <div class="space-y-6">
-                    <div class="relative">
-                        <input type="text" id="name" placeholder="Your Name" class="w-full p-3 rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Name" aria-describedby="nameError">
-                        <span id="nameError" class="text-sm text-[var(--error)] hidden mt-1 block error-message"></span>
-                    </div>
-                    <div class="relative">
-                        <input type="email" id="email" placeholder="Your Email" class="w-full p-3 rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Email" aria-describedby="emailError">
-                        <span id="emailError" class="text-sm text-[var(--error)] hidden mt-1 block error-message"></span>
-                    </div>
-                    <div class="relative">
-                        <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 rounded-md text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" required aria-label="Your Message" aria-describedby="messageError"></textarea>
-                        <span id="messageError" class="text-sm text-[var(--error)] hidden mt-1 block error-message"></span>
-                    </div>
-                    <button id="contactSubmit" class="w-full apple-btn p-3 font-medium flex items-center justify-center" disabled aria-label="Send Message">
-                        <span id="buttonText">Send Message</span>
-                        <svg id="loadingSpinner" class="hidden animate-spin h-5 w-5 ml-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-                        </svg>
-                    </button>
-                    <p id="formMessage" class="text-sm text-[var(--text-secondary)] hidden mt-4"></p>
-                </div>
-            </div>
-            <p class="font-medium mt-6">Email: <a href="mailto:contact@anuveshana.tech" class="text-[var(--accent)] hover:underline">contact@anuveshana.tech</a></p>
-            <p class="font-medium">Phone: +91-XXXXXXXXXX</p>
+        <div class="industry-card">
+          <h3>Aerospace</h3>
+          <p>Lightweight, high-strength components for aerospace applications.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="apple-btn p-3 shadow-md" aria-label="Back to top">
-        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
-        </svg>
-    </button>
+  <!-- Testimonials Section -->
+  <section id="testimonials">
+    <div class="container">
+      <h2>What Our Clients Say</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p>"Anuveshana delivered our prototypes on time with exceptional quality. Their service is top-notch!"</p>
+          <h4>Rahul Sharma, Startup Founder</h4>
+        </div>
+        <div class="testimonial-card">
+          <p>"The precision of their 3D printing helped us create complex medical models efficiently."</p>
+          <h4>Dr. Priya Menon, Healthcare Innovator</h4>
+        </div>
+        <div class="testimonial-card">
+          <p>"Their custom solutions transformed our jewelry design process. Highly recommend!"</p>
+          <h4>Anita Desai, Jewelry Designer</h4>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-[var(--border)] text-[var(--text-secondary)] text-center p-6 text-sm">
-        <p>© 2025 Anuveshana Technologies. All rights reserved.</p>
-    </footer>
+  <!-- File Upload Section -->
+  <section id="upload">
+    <div class="container">
+      <h2>Upload Your 3D Model</h2>
+      <p>Upload STL, OBJ, or other 3D files to receive an instant quote and start production.</p>
+      <div class="upload-box">
+        <input type="file" accept=".stl,.obj" disabled>
+        <button>Upload & Quote</button>
+        <p>*File upload is for demo purposes only.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Scripts -->
-    <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const setTheme = (theme) => {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            themeIcon.innerHTML = theme === 'dark' ? 
-                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path>' : 
-                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
-            themeToggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
-        };
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2>About Anuveshana Technologies</h2>
+      <p>We provide cutting-edge 3D printing and manufacturing solutions, serving industries worldwide with precision, speed, and affordability.</p>
+    </div>
+  </section>
 
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-            setTheme(currentTheme === 'light' ? 'dark' : 'light');
-        });
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <div class="contact-form">
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+        <textarea placeholder="Your Message or Project Details"></textarea>
+        <button>Send Message</button>
+      </div>
+    </div>
+  </section>
 
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        setTheme(savedTheme);
-
-        // Mobile Menu Toggle
-        const menuBtn = document.getElementById('menuBtn');
-        const fabMenu = document.getElementById('fabMenu');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuOverlay = document.getElementById('menuOverlay');
-        let isMenuOpen = false;
-
-        function toggleMenu() {
-            isMenuOpen = !isMenuOpen;
-            mobileMenu.classList.toggle('hidden', !isMenuOpen);
-            mobileMenu.classList.toggle('open', isMenuOpen);
-            menuOverlay.classList.toggle('hidden', !isMenuOpen);
-            menuOverlay.classList.toggle('active', isMenuOpen);
-            menuBtn.textContent = isMenuOpen ? '✕' : '☰';
-            menuBtn.setAttribute('aria-label', isMenuOpen ? 'Close mobile menu' : 'Open mobile menu');
-            menuBtn.setAttribute('aria-expanded', isMenuOpen);
-            fabMenu.classList.toggle('hidden', isMenuOpen);
-            fabMenu.setAttribute('aria-expanded', isMenuOpen);
-            mobileMenu.setAttribute('aria-hidden', !isMenuOpen);
-        }
-
-        menuBtn.addEventListener('click', toggleMenu);
-        fabMenu.addEventListener('click', toggleMenu);
-        menuOverlay.addEventListener('click', toggleMenu);
-
-        // Smooth scroll for menu links
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                    toggleMenu();
-                }
-            });
-        });
-
-        // Back to Top Button
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-            if (window.innerWidth <= 768) {
-                fabMenu.classList.toggle('hidden', isMenuOpen);
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Carousel Functionality
-        const carousel = document.getElementById('carousel');
-        const items = carousel.querySelectorAll('.carousel-item');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        let currentIndex = 0;
-
-        function showSlide(index) {
-            items.forEach((item, i) => {
-                item.classList.toggle('active', i === index);
-            });
-        }
-
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + items.length) % items.length;
-            showSlide(currentIndex);
-        });
-
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % items.length;
-            showSlide(currentIndex);
-        });
-
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % items.length;
-            showSlide(currentIndex);
-        }, 5000);
-
-        // Contact Form Handling
-        const contactSubmit = document.getElementById('contactSubmit');
-        const buttonText = document.getElementById('buttonText');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        const formMessage = document.getElementById('formMessage');
-        const inputs = [
-            { element: document.getElementById('name'), error: document.getElementById('nameError'), name: 'Name' },
-            { element: document.getElementById('email'), error: document.getElementById('emailError'), name: 'Email' },
-            { element: document.getElementById('message'), error: document.getElementById('messageError'), name: 'Message' }
-        ];
-
-        function validateForm() {
-            let isValid = true;
-            inputs.forEach(({ element, error, name }) => {
-                const value = element.value.trim();
-                if (!value) {
-                    error.textContent = `${name} is required`;
-                    error.classList.remove('hidden');
-                    element.setAttribute('aria-invalid', 'true');
-                    isValid = false;
-                } else if (element.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                    error.textContent = 'Please enter a valid email address';
-                    error.classList.remove('hidden');
-                    element.setAttribute('aria-invalid', 'true');
-                    isValid = false;
-                } else {
-                    error.classList.add('hidden');
-                    element.setAttribute('aria-invalid', 'false');
-                }
-            });
-            contactSubmit.disabled = !isValid;
-            contactSubmit.classList.toggle('opacity-50', !isValid);
-            return isValid;
-        }
-
-        inputs.forEach(({ element }) => {
-            element.addEventListener('input', validateForm);
-            element.addEventListener('blur', validateForm);
-        });
-
-        contactSubmit.addEventListener('click', async (e) => {
-            e.preventDefault();
-            if (validateForm()) {
-                buttonText.textContent = 'Sending...';
-                loadingSpinner.classList.remove('hidden');
-                contactSubmit.disabled = true;
-                contactSubmit.classList.add('opacity-50');
-
-                await new Promise(resolve => setTimeout(resolve, 1500));
-
-                formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
-                formMessage.classList.remove('hidden', 'text-[var(--error)]');
-                formMessage.classList.add('text-green-600');
-                inputs.forEach(({ element, error }) => {
-                    element.value = '';
-                    error.classList.add('hidden');
-                    element.setAttribute('aria-invalid', 'false');
-                });
-
-                buttonText.textContent = 'Send Message';
-                loadingSpinner.classList.add('hidden');
-                contactSubmit.disabled = false;
-                contactSubmit.classList.remove('opacity-50');
-
-                setTimeout(() => {
-                    formMessage.classList.add('hidden');
-                }, 5000);
-            }
-        });
-    </script>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Anuveshana Technologies. All rights reserved.</p>
+      <div>
+        <a href="#services">Services</a>
+        <a href="#industries">Industries</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#upload">Upload Design</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

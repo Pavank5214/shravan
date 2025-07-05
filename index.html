@@ -11,8 +11,11 @@
       padding: 0;
       box-sizing: border-box;
     }
+    html {
+      scroll-behavior: smooth; /* Smooth scrolling for navigation */
+    }
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, Helvetica, sans-serif; /* Approximates Roboto/Open Sans */
       line-height: 1.6;
       background-color: #ffffff; /* Makenica’s white */
       color: #333;
@@ -26,7 +29,7 @@
     /* Header and Navigation */
     header {
       background-color: #0a1a2f; /* Imaginarium’s navy */
-      color: white;
+      color: #e5e7eb; /* Imaginarium’s white text */
       padding: 1rem 0;
       position: sticky;
       top: 0;
@@ -39,24 +42,36 @@
       align-items: center;
       flex-wrap: wrap;
     }
-    header h1 {
-      font-size: clamp(1.25rem, 4vw, 1.5rem);
-      font-weight: bold;
+    header .logo-text {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    header .logo img {
+      max-width: 75px; /* Reduced by 50% from 150px */
+      height: auto;
+      vertical-align: middle;
+    }
+    header .text {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      font-weight: 700;
+      color: #e5e7eb;
     }
     header nav {
       display: flex;
-      gap: 0.75rem;
+      gap: 1rem;
       flex-wrap: wrap;
     }
     header nav a {
       color: #e5e7eb;
       text-decoration: none;
-      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
-      padding: 0.5rem;
-      transition: color 0.3s ease;
+      font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+      padding: 0.5rem 0.75rem;
+      transition: color 0.3s ease, background-color 0.3s ease;
     }
     header nav a:hover {
       color: #ff6200; /* Imaginarium’s orange */
+      background-color: rgba(255, 98, 0, 0.1);
     }
     /* Hamburger Menu */
     .hamburger {
@@ -64,6 +79,7 @@
       font-size: 1.5rem;
       cursor: pointer;
       color: #e5e7eb;
+      padding: 0.5rem;
     }
     #menu-toggle {
       display: none;
@@ -75,6 +91,17 @@
       .hamburger {
         display: block;
       }
+      header .logo img {
+        max-width: 60px; /* Adjusted for tablet/mobile */
+      }
+      header .text {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+      }
+      header .logo-text {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
       header nav {
         display: none;
         flex-direction: column;
@@ -85,24 +112,42 @@
         background-color: #0a1a2f;
         padding: 1rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.3s ease-in-out;
       }
       header nav a {
         font-size: clamp(0.9rem, 3vw, 1rem);
         padding: 0.75rem;
         text-align: center;
+        width: 100%;
+        border-bottom: 1px solid rgba(229, 231, 235, 0.2);
       }
+      header nav a:last-child {
+        border-bottom: none;
+      }
+    }
+    @media (max-width: 480px) {
+      header .logo img {
+        max-width: 45px; /* Further reduced for small screens */
+      }
+      header .text {
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
+      }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Hero Section */
     #home {
       background: linear-gradient(to right, #007bff, #004aad); /* Makenica’s blue gradient */
-      color: white;
+      color: #ffffff;
       padding: clamp(3rem, 8vw, 5rem) 0;
       text-align: center;
     }
     #home h2 {
       font-size: clamp(1.75rem, 5vw, 2.5rem);
-      font-weight: bold;
+      font-weight: 700;
       margin-bottom: 1rem;
       animation: fadeIn 1s ease-in-out;
     }
@@ -113,8 +158,8 @@
     }
     #home button {
       background-color: #ff6200; /* Imaginarium’s orange */
-      color: white;
-      font-weight: bold;
+      color: #ffffff;
+      font-weight: 600;
       padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1.5rem, 4vw, 2rem);
       border: none;
       border-radius: 25px;
@@ -134,7 +179,7 @@
     #services h2 {
       text-align: center;
       font-size: clamp(1.5rem, 4vw, 2rem);
-      font-weight: bold;
+      font-weight: 700;
       margin-bottom: 2rem;
       color: #0a1a2f;
     }
@@ -156,23 +201,24 @@
     }
     .service-card h3 {
       font-size: clamp(1.1rem, 3vw, 1.2rem);
-      font-weight: bold;
+      font-weight: 600;
       margin-bottom: 0.75rem;
       color: #007bff; /* Makenica’s blue */
     }
     .service-card p {
       font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      color: #6c757d; /* Makenica’s gray */
     }
 
     /* Industries Served Section */
     #industries {
       padding: clamp(2rem, 6vw, 3rem) 0;
-      background-color: #ffffff*.
+      background-color: #ffffff;
     }
     #industries h2 {
       text-align: center;
       font-size: clamp(1.5rem, 4vw, 2rem);
-      font-weight: bold;
+      font-weight: 700;
       margin-bottom: 2rem;
       color: #0a1a2f;
     }
@@ -195,23 +241,63 @@
     }
     .industry-card h3 {
       font-size: clamp(1.1rem, 3vw, 1.2rem);
-      font-weight: bold;
+      font-weight: 600;
       margin-bottom: 0.75rem;
       color: #ff6200; /* Imaginarium’s orange */
     }
     .industry-card p {
       font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      color: #6c757d;
+    }
+
+    /* Process Overview Section */
+    #process {
+      padding: clamp(2rem, 6vw, 3rem) 0;
+      background-color: #e9ecef;
+      text-align: center;
+    }
+    #process h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #0a1a2f;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .process-card {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .process-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .process-card h3 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #007bff;
+    }
+    .process-card p {
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      color: #6c757d;
     }
 
     /* Testimonials Section */
     #testimonials {
       padding: clamp(2rem, 6vw, 3rem) 0;
-      background-color: #e9ecef; /* Makenica’s gray */
+      background-color: #f8f9fa;
       text-align: center;
     }
     #testimonials h2 {
       font-size: clamp(1.5rem, 4vw, 2rem);
-      font-weight: bold;
+      font-weight: 700;
       margin-bottom: 2rem;
       color: #0a1a2f;
     }
@@ -235,11 +321,171 @@
       font-size: clamp(0.85rem, 2.5vw, 0.95rem);
       margin-bottom: 0.75rem;
       font-style: italic;
+      color: #6c757d;
     }
     .testimonial-card h4 {
       font-size: clamp(0.9rem, 2.5vw, 1rem);
-      font-weight: bold;
-      color: #007bff; /* Makenica’s blue */
+      font-weight: 600;
+      color: #007bff;
+    }
+
+    /* Gallery Section */
+    #gallery {
+      padding: clamp(2rem, 6vw, 3rem) 0;
+      background-color: #ffffff;
+      text-align: center;
+    }
+    #gallery h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #0a1a2f;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .gallery-card {
+      background-color: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+    .gallery-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .gallery-card h3 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #ff6200;
+    }
+    .gallery-card p {
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      color: #6c757d;
+    }
+
+    /* Blog Preview Section */
+    #blog {
+      padding: clamp(2rem, 6vw, 3rem) 0;
+      background-color: #e9ecef;
+      text-align: center;
+    }
+    #blog h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #0a1a2f;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .blog-card {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .blog-card h3 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #007bff;
+    }
+    .blog-card p {
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      color: #6c757d;
+    }
+
+    /* Material Showcase Section */
+    #materials {
+      padding: clamp(2rem, 6vw, 3rem) 0;
+      background-color: #ffffff;
+      text-align: center;
+    }
+    #materials h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #0a1a2f;
+    }
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .material-card {
+      background-color: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+    .material-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .material-card h3 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #ff6200;
+    }
+    .material-card p {
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      color: #6c757d;
+    }
+
+    /* Video Section */
+    #videos {
+      padding: clamp(2rem, 6vw, 3rem) 0;
+      background-color: #e9ecef;
+      text-align: center;
+    }
+    #videos h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #0a1a2f;
+    }
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .video-card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .video-card video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .video-card h3 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      font-weight: 600;
+      margin: 0.75rem;
+      color: #007bff;
     }
 
     /* File Upload Section */
@@ -250,7 +496,7 @@
     }
     #upload h2 {
       font-size: clamp(1.5rem, 4vw, 2rem);
-      font-weight: bold;
+      font-weight: 700;
       margin-bottom: 1rem;
       color: #0a1a2f;
     }
@@ -258,6 +504,7 @@
       font-size: clamp(0.9rem, 2.5vw, 1rem);
       max-width: 500px;
       margin: 0 auto 1.5rem;
+      color: #6c757d;
     }
     .upload-box {
       max-width: 450px;
@@ -277,20 +524,21 @@
     }
     .upload-box button {
       background-color: #007bff;
-      color: white;
-      font-weight: bold;
+      color: #ffffff;
+      font-weight: 600;
       padding: clamp(0.5rem, 2vw, 0.6rem) clamp(1.2rem, 3vw, 1.5rem);
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .upload-box button:hover {
       background-color: #0057b8;
+      transform: scale(1.05);
     }
     .upload-box p {
       font-size: clamp(0.8rem, 2vw, 0.85rem);
-      color: #6c757d; /* Makenica’s gray */
+      color: #6c757d;
     }
 
     /* About Section */
@@ -301,7 +549,7 @@
     }
     #about h2 {
       font-size: clamp(1.5rem, 4vw, 2rem);
-      font-weight: bold;
+      font-weight: 700;
       margin-bottom: 1rem;
       color: #0a1a2f;
     }
@@ -309,6 +557,7 @@
       font-size: clamp(0.9rem, 2.5vw, 1rem);
       max-width: 600px;
       margin: 0 auto;
+      color: #6c757d;
     }
 
     /* Contact Section */
@@ -319,7 +568,7 @@
     #contact h2 {
       text-align: center;
       font-size: clamp(1.5rem, 4vw, 2rem);
-      font-weight: bold;
+      font-weight: 700;
       margin-bottom: 2rem;
       color: #0a1a2f;
     }
@@ -348,22 +597,52 @@
     }
     .contact-form button {
       background-color: #ff6200;
-      color: white;
-      font-weight: bold;
+      color: #ffffff;
+      font-weight: 600;
       padding: clamp(0.5rem, 2vw, 0.6rem) clamp(1.2rem, 3vw, 1.5rem);
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .contact-form button:hover {
       background-color: #e55a00;
+      transform: scale(1.05);
+    }
+
+    /* Back-to-Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff6200;
+      color: #ffffff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
+      z-index: 100;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .back-to-top:hover {
+      background-color: #e55a00;
+      transform: scale(1.1);
     }
 
     /* Footer */
     footer {
       background-color: #0a1a2f;
-      color: white;
+      color: #e5e7eb;
       padding: clamp(1rem, 4vw, 1.5rem) 0;
       text-align: center;
     }
@@ -395,17 +674,26 @@
       #home p {
         font-size: clamp(0.9rem, 2.5vw, 1rem);
       }
-      #services h2, #industries h2, #testimonials h2, #upload h2, #about h2, #contact h2 {
+      #services h2, #industries h2, #process h2, #testimonials h2, #gallery h2, #blog h2, #materials h2, #videos h2, #upload h2, #about h2, #contact h2 {
         font-size: clamp(1.25rem, 3.5vw, 1.75rem);
       }
-      .services-grid, .industries-grid, .testimonials-grid {
+      .services-grid, .industries-grid, .process-grid, .testimonials-grid, .gallery-grid, .blog-grid, .materials-grid, .videos-grid {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+      .video-card video {
+        max-width: 100%;
       }
     }
     @media (max-width: 768px) {
       header .container {
         flex-direction: row;
         justify-content: space-between;
+      }
+      header .logo img {
+        max-width: 60px;
+      }
+      header .text {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
       }
       #home {
         padding: clamp(2rem, 6vw, 3rem) 0;
@@ -421,31 +709,43 @@
         padding: clamp(0.4rem, 1.5vw, 0.5rem) clamp(1rem, 3vw, 1.5rem);
         font-size: clamp(0.8rem, 2vw, 0.9rem);
       }
-      #services, #industries, #testimonials, #upload, #about, #contact {
+      #services, #industries, #process, #testimonials, #gallery, #blog, #materials, #videos, #upload, #about, #contact {
         padding: clamp(1.5rem, 5vw, 2rem) 0;
       }
-      #services h2, #industries h2, #testimonials h2, #upload h2, #about h2, #contact h2 {
+      #services h2, #industries h2, #process h2, #testimonials h2, #gallery h2, #blog h2, #materials h2, #videos h2, #upload h2, #about h2, #contact h2 {
         font-size: clamp(1.25rem, 3.5vw, 1.5rem);
       }
-      .services-grid, .industries-grid, .testimonials-grid {
+      .services-grid, .industries-grid, .process-grid, .testimonials-grid, .gallery-grid, .blog-grid, .materials-grid, .videos-grid {
         grid-template-columns: 1fr;
       }
       .upload-box, .contact-form {
         max-width: 90%;
       }
-      .service-card, .industry-card, .testimonial-card {
+      .service-card, .industry-card, .process-card, .testimonial-card, .gallery-card, .blog-card, .material-card, .video-card {
         padding: 1rem;
       }
-      .service-card h3, .industry-card h3, .testimonial-card h4 {
+      .service-card h3, .industry-card h3, .process-card h3, .testimonial-card h4, .gallery-card h3, .blog-card h3, .material-card h3, .video-card h3 {
         font-size: clamp(1rem, 2.5vw, 1.1rem);
       }
-      .service-card p, .industry-card p, .testimonial-card p {
+      .service-card p, .industry-card p, .process-card p, .testimonial-card p, .gallery-card p, .blog-card p, .material-card p {
         font-size: clamp(0.8rem, 2vw, 0.9rem);
+      }
+      .video-card video {
+        max-width: 100%;
+        height: auto;
+      }
+      .back-to-top {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
       }
     }
     @media (max-width: 480px) {
-      header h1 {
-        font-size: clamp(1rem, 3.5vw, 1.25rem);
+      header .logo img {
+        max-width: 45px;
+      }
+      header .text {
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
       }
       #home h2 {
         font-size: clamp(1rem, 3.5vw, 1.5rem);
@@ -468,20 +768,37 @@
         font-size: clamp(0.75rem, 2vw, 0.85rem);
       }
     }
+    /* Back-to-Top Visibility */
+    @media (min-height: 600px) {
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
     <div class="container">
-      <h1>Anuveshana Technologies</h1>
-      <label class="hamburger" for="menu-toggle">☰</label>
-      <input type="checkbox" id="menu-toggle">
-      <nav>
+      <div class="logo-text">
+        <div class="logo">
+          <img src="logo.png" alt="Anuveshana Technologies Logo" aria-label="Anuveshana Technologies Logo">
+        </div>
+        <div class="text">Anuveshana Technologies</div>
+      </div>
+      <label class="hamburger" for="menu-toggle" aria-label="Toggle navigation">☰</label>
+      <input type="checkbox" id="menu-toggle" aria-hidden="true">
+      <nav role="navigation">
         <a href="#home">Home</a>
         <a href="#services">Services</a>
         <a href="#industries">Industries</a>
+        <a href="#process">Process</a>
         <a href="#testimonials">Testimonials</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#blog">Blog</a>
+        <a href="#materials">Materials</a>
+        <a href="#videos">Videos</a>
         <a href="#upload">Upload Design</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
@@ -490,11 +807,11 @@
   </header>
 
   <!-- Hero Section -->
-  <section id="home">
+  <section id="home" role="banner">
     <div class="container">
       <h2>Precision 3D Printing Solutions</h2>
       <p>Anuveshana Technologies delivers innovative 3D printing and manufacturing for rapid prototyping and production. Get instant quotes today.</p>
-      <button>Get Instant Quote</button>
+      <button aria-label="Get instant quote">Get Instant Quote</button>
     </div>
   </section>
 
@@ -544,6 +861,31 @@
     </div>
   </section>
 
+  <!-- Process Overview Section -->
+  <section id="process">
+    <div class="container">
+      <h2>Our 3D Printing Process</h2>
+      <div class="process-grid">
+        <div class="process-card">
+          <h3>1. Upload Design</h3>
+          <p>Submit your STL or OBJ files through our secure platform.</p>
+        </div>
+        <div class="process-card">
+          <h3>2. Instant Quote</h3>
+          <p>Receive a detailed quote tailored to your project needs.</p>
+        </div>
+        <div class="process-card">
+          <h3>3. Production</h3>
+          <p>We manufacture your parts with precision and speed.</p>
+        </div>
+        <div class="process-card">
+          <h3>4. Delivery</h3>
+          <p>Get your high-quality components delivered on time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Testimonials Section -->
   <section id="testimonials">
     <div class="container">
@@ -565,14 +907,111 @@
     </div>
   </section>
 
+  <!-- Gallery Section -->
+  <section id="gallery">
+    <div class="container">
+      <h2>Our Work</h2>
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <h3>Automotive Prototype</h3>
+          <p>High-precision prototype for automotive component testing.</p>
+        </div>
+        <div class="gallery-card">
+          <h3>Medical Model</h3>
+          <p>Detailed anatomical model for surgical planning.</p>
+        </div>
+        <div class="gallery-card">
+          <h3>Jewelry Design</h3>
+          <p>Intricate 3D-printed jewelry piece for casting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Preview Section -->
+  <section id="blog">
+    <div class="container">
+      <h2>Latest Insights</h2>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <h3>Advancements in 3D Printing</h3>
+          <p>Explore the latest trends in 3D printing technology for rapid prototyping.</p>
+        </div>
+        <div class="blog-card">
+          <h3>Choosing the Right Material</h3>
+          <p>Learn how to select materials for your 3D printing projects.</p>
+        </div>
+        <div class="blog-card">
+          <h3>3D Printing in Healthcare</h3>
+          <p>Discover how 3D printing is revolutionizing medical applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Material Showcase Section -->
+  <section id="materials">
+    <div class="container">
+      <h2>Material Options</h2>
+      <div class="materials-grid">
+        <div class="material-card">
+          <h3>PLA</h3>
+          <p>Eco-friendly, cost-effective material for prototyping.</p>
+        </div>
+        <div class="material-card">
+          <h3>ABS</h3>
+          <p>Durable plastic for functional parts and engineering.</p>
+        </div>
+        <div class="material-card">
+          <h3>Resin</h3>
+          <p>High-detail material for intricate designs and jewelry.</p>
+        </div>
+        <div class="material-card">
+          <h3>Metal</h3>
+          <p>Strong, lightweight alloys for aerospace and automotive.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section id="videos">
+    <div class="container">
+      <h2>Our Video Showcase</h2>
+      <div class="videos-grid">
+        <div class="video-card">
+          <video controls aria-label="Video of 3D printing process">
+            <source src="https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <h3>3D Printing Process</h3>
+        </div>
+        <div class="video-card">
+          <video controls aria-label="Video of automotive prototyping">
+            <source src="https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <h3>Automotive Prototyping</h3>
+        </div>
+        <div class="video-card">
+          <video controls aria-label="Video of jewelry design">
+            <source src="https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <h3>Jewelry Design Process</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- File Upload Section -->
   <section id="upload">
     <div class="container">
       <h2>Upload Your 3D Model</h2>
       <p>Upload STL, OBJ, or other 3D files to receive an instant quote and start production.</p>
       <div class="upload-box">
-        <input type="file" accept=".stl,.obj" disabled>
-        <button>Upload & Quote</button>
+        <input type="file" accept=".stl,.obj" disabled aria-label="Upload 3D model file">
+        <button aria-label="Upload and get quote">Upload & Quote</button>
         <p>*File upload is for demo purposes only.</p>
       </div>
     </div>
@@ -591,27 +1030,35 @@
     <div class="container">
       <h2>Contact Us</h2>
       <div class="contact-form">
-        <input type="text" placeholder="Your Name">
-        <input type="email" placeholder="Your Email">
-        <textarea placeholder="Your Message or Project Details"></textarea>
-        <button>Send Message</button>
+        <input type="text" placeholder="Your Name" aria-label="Your name">
+        <input type="email" placeholder="Your Email" aria-label="Your email">
+        <textarea placeholder="Your Message or Project Details" aria-label="Your message"></textarea>
+        <button aria-label="Send message">Send Message</button>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer role="contentinfo">
     <div class="container">
       <p>© 2025 Anuveshana Technologies. All rights reserved.</p>
       <div>
         <a href="#services">Services</a>
         <a href="#industries">Industries</a>
+        <a href="#process">Process</a>
         <a href="#testimonials">Testimonials</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#blog">Blog</a>
+        <a href="#materials">Materials</a>
+        <a href="#videos">Videos</a>
         <a href="#upload">Upload Design</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
   </footer>
+
+  <!-- Back-to-Top Button -->
+  <a href="#home" class="back-to-top show" aria-label="Back to top">↑</a>
 </body>
 </html>

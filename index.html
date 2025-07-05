@@ -40,12 +40,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
     }
     header .logo-text {
       display: flex;
       align-items: center;
       gap: 1rem;
+      max-width: 70%; /* Prevent overflow on mobile */
     }
     header .logo img {
       max-width: 75px; /* Reduced by 50% from 150px */
@@ -53,9 +53,12 @@
       vertical-align: middle;
     }
     header .text {
-      font-size: clamp(1.17rem, 3.25vw, 1.25rem);
+      font-size: clamp(1rem, 3vw, 1.25rem);
       font-weight: 700;
       color: #e5e7eb;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
     header nav {
       display: flex;
@@ -91,17 +94,17 @@
       .hamburger {
         display: block;
       }
-      header .logo img {
-        max-width: 60px; /* Adjusted for tablet/mobile */
-      }
-      header .text {
-        font-size: clamp(1.17rem, 3.25vw, 1.3rem);
+      header .container {
+        flex-direction: column;
+        align-items: stretch;
       }
       header .logo-text {
-        flex-direction: row;
-        align-items: center;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         justify-content: center;
+        margin-bottom: 0.5rem;
+      }
+      header .text {
+        font-size: clamp(1.17rem, 3.25vw, 1.3rem); /* 30% increase */
       }
       header nav {
         display: none;
@@ -131,7 +134,7 @@
         max-width: 45px; /* Further reduced for small screens */
       }
       header .text {
-        font-size: clamp(0.8rem, 2vw, 0.9rem);
+        font-size: clamp(1.04rem, 2.6vw, 1.17rem); /* 30% increase */
       }
     }
     @keyframes slideIn {
@@ -728,55 +731,38 @@
     }
     @media (max-width: 768px) {
       header .container {
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: stretch;
       }
-      header .logo img {
-        max-width: 60px;
+      header .logo-text {
+        flex-wrap: nowrap;
+        justify-content: center;
+        margin-bottom: 0.5rem;
       }
       header .text {
-        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        font-size: clamp(1.17rem, 3.25vw, 1.3rem); /* 30% increase */
       }
-      #home {
-        padding: clamp(2rem, 6vw, 3rem) 0;
-      }
-      #home h2 {
-        font-size: clamp(1.25rem, 4vw, 1.75rem);
-      }
-      #home p {
-        font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-        padding: 0 1rem;
-      }
-      #home button {
-        padding: clamp(0.4rem, 1.5vw, 0.5rem) clamp(1rem, 3vw, 1.5rem);
-        font-size: clamp(0.8rem, 2vw, 0.9rem);
-      }
-      #services, #industries, #process, #testimonials, #gallery, #blog, #materials, #videos, #images, #upload, #about, #contact {
-        padding: clamp(1.5rem, 5vw, 2rem) 0;
-      }
-      .services-grid, .industries-grid, .process-grid, .testimonials-grid, .gallery-grid, .blog-grid, .materials-grid, .videos-grid, .images-grid {
-        grid-template-columns: 1fr;
-      }
-      .upload-box, .contact-form {
-        max-width: 90%;
-      }
-      .service-card, .industry-card, .process-card, .testimonial-card, .gallery-card, .blog-card, .material-card, .video-card, .image-card {
+      header nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #0a1a2f;
         padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.3s ease-in-out;
       }
-      .service-card h3, .industry-card h3, .process-card h3, .testimonial-card h4, .gallery-card h3, .blog-card h3, .material-card h3, .video-card h3, .image-card h3 {
-        font-size: clamp(1rem, 2.5vw, 1.1rem);
+      header nav a {
+        font-size: clamp(0.9rem, 3vw, 1rem);
+        padding: 0.75rem;
+        text-align: center;
+        width: 100%;
+        border-bottom: 1px solid rgba(229, 231, 235, 0.2);
       }
-      .service-card p, .industry-card p, .process-card p, .testimonial-card p, .gallery-card p, .blog-card p, .material-card p {
-        font-size: clamp(0.8rem, 2vw, 0.9rem);
-      }
-      .video-card video, .image-card img {
-        max-width: 100%;
-        height: auto;
-      }
-      .back-to-top {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
+      header nav a:last-child {
+        border-bottom: none;
       }
     }
     @media (max-width: 480px) {
@@ -784,27 +770,7 @@
         max-width: 45px;
       }
       header .text {
-        font-size: clamp(0.8rem, 2vw, 0.9rem);
-      }
-      #home h2 {
-        font-size: clamp(1rem, 3.5vw, 1.5rem);
-      }
-      #home p {
-        font-size: clamp(0.8rem, 2vw, 0.9rem);
-      }
-      #home button {
-        padding: clamp(0.3rem, 1vw, 0.4rem) clamp(0.8rem, 2.5vw, 1.2rem);
-        font-size: clamp(0.75rem, 2vw, 0.85rem);
-      }
-      .upload-box input, .contact-form input, .contact-form textarea {
-        font-size: clamp(0.8rem, 2vw, 0.9rem);
-      }
-      .upload-box button, .contact-form button {
-        padding: clamp(0.3rem, 1vw, 0.5rem) clamp(0.8rem, 2.5vw, 1.2rem);
-        font-size: clamp(0.75rem, 2vw, 0.85rem);
-      }
-      footer p, footer a {
-        font-size: clamp(0.75rem, 2vw, 0.85rem);
+        font-size: clamp(1.04rem, 2.6vw, 1.17rem); /* 30% increase */
       }
     }
     /* Back-to-Top Visibility */

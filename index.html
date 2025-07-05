@@ -95,13 +95,13 @@
         display: block;
       }
       header .container {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
       }
       header .logo-text {
         flex-wrap: nowrap;
-        justify-content: center;
-        margin-bottom: 0.5rem;
+        justify-content: flex-start;
       }
       header .text {
         font-size: clamp(1.17rem, 3.25vw, 1.3rem); /* 30% increase */
@@ -731,13 +731,13 @@
     }
     @media (max-width: 768px) {
       header .container {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
       }
       header .logo-text {
         flex-wrap: nowrap;
-        justify-content: center;
-        margin-bottom: 0.5rem;
+        justify-content: flex-start;
       }
       header .text {
         font-size: clamp(1.17rem, 3.25vw, 1.3rem); /* 30% increase */
@@ -797,14 +797,6 @@
       <nav role="navigation">
         <a href="#home">Home</a>
         <a href="#services">Services</a>
-        <a href="#industries">Industries</a>
-        <a href="#process">Process</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#blog">Blog</a>
-        <a href="#materials">Materials</a>
-        <a href="#videos">Videos</a>
-        <a href="#images">Images</a>
         <a href="#upload">Upload Design</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
@@ -981,13 +973,13 @@
   </section>
 
   <!-- Video Section -->
-  <section id="videos">
+<section id="videos">
     <div class="container">
       <h2>Our Video Showcase</h2>
       <div class="videos-grid">
         <div class="video-card">
-          <video controls aria-label="Video of 3D printing process">
-            <source src="https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+          <video controls autoplay muted loop playsinline aria-label="Video of 3D printing process">
+            <source src="video1.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
           <h3>3D Printing Process</h3>
@@ -995,23 +987,23 @@
       </div>
     </div>
   </section>
-
+  
   <!-- Images Section -->
   <section id="images">
     <div class="container">
       <h2>Our Image Gallery</h2>
       <div class="images-grid">
         <div class="image-card">
-          <img src="https://via.placeholder.com/300x200" alt="Automotive Prototype Image" aria-label="Automotive Prototype Image">
-          <h3>Automotive Prototype</h3>
+          <img src="image1.jpg" alt="Automotive Prototype Image" aria-label="Automotive Prototype Image">
+          <h3>-----</h3>
         </div>
         <div class="image-card">
-          <img src="https://via.placeholder.com/300x200" alt="Medical Model Image" aria-label="Medical Model Image">
-          <h3>Medical Model</h3>
+          <img src="image5.jpg" alt="Medical Model Image" aria-label="Medical Model Image">
+          <h3>-----</h3>
         </div>
         <div class="image-card">
-          <img src="https://via.placeholder.com/300x200" alt="Jewelry Design Image" aria-label="Jewelry Design Image">
-          <h3>Jewelry Design</h3>
+          <img src="image3.jpg" alt="Jewelry Design Image" aria-label="Jewelry Design Image">
+          <h3>-----</h3>
         </div>
       </div>
     </div>
@@ -1057,14 +1049,6 @@
       <p>© 2025 Anuveshana Technologies. All rights reserved.</p>
       <div>
         <a href="#services">Services</a>
-        <a href="#industries">Industries</a>
-        <a href="#process">Process</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#blog">Blog</a>
-        <a href="#materials">Materials</a>
-        <a href="#videos">Videos</a>
-        <a href="#images">Images</a>
         <a href="#upload">Upload Design</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
